@@ -1,3 +1,5 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/features/login/ui/email_and_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -54,7 +56,7 @@ class LoginEmailScreen extends StatelessWidget {
                       buttonText: "Login",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        // validateThenDoLogin(context);
+                        context.pushReplacementNamed(Routes.homeScreen);
                       },
                     ),
                   ],

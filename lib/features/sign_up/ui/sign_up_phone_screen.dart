@@ -1,3 +1,5 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/features/sign_up/ui/widgets/sign_up_phone_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +50,7 @@ class SignupPhoneScreen extends StatelessWidget {
                       buttonText: "Create Account",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        //validateThenDoSignup(context);
+                        //context.pushReplacementNamed(Routes.homeScreen);
                       },
                     ),
                     verticalSpace(16),

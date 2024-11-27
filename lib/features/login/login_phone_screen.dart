@@ -1,3 +1,5 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/features/login/ui/phone_and_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,7 +36,7 @@ class LoginPhoneScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Log in with Phone',
+                  'Log in with Phone ',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
@@ -55,6 +57,7 @@ class LoginPhoneScreen extends StatelessWidget {
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
                         // validateThenDoLogin(context);
+                        context.pushReplacementNamed(Routes.homeScreen);
                       },
                     ),
                   ],

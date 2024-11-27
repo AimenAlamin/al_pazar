@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../features/sign_up/onboarding_signup_screen.dart';
 import '../../features/sign_up/ui/sign_up_email_screen.dart';
 import '../../features/sign_up/ui/sign_up_phone_screen.dart';
+import '../../features/home/home.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
@@ -38,6 +39,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const SignupPhoneScreen(),
         );
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => const homePage());
 
       // case Routes.loginScreen:
       //   return MaterialPageRoute(

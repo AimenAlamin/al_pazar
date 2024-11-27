@@ -5,5 +5,5 @@ class Routes {
   static const String onBoardingSignupScreen = '/onBoardingSignupScreen';
   static const String signUpEmailScreen = '/signUpEmailScreen';
   static const String signUpPhoneScreen = '/signUpPhoneScreen';
-  static const String homeScreen = '/homeScreen';
+  static const String homeScreen = '/homePage';
 }
