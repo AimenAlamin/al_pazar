@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/app_regex.dart';
 import '../../../../core/helpers/spacing.dart';
 
-class EmailAndPassword extends StatefulWidget {
-  const EmailAndPassword({super.key});
+class PhoneAndPassword extends StatefulWidget {
+  const PhoneAndPassword({super.key});
 
   @override
-  State<EmailAndPassword> createState() => _EmailAndPasswordState();
+  State<PhoneAndPassword> createState() => _EmailAndPasswordState();
 }
 
-class _EmailAndPasswordState extends State<EmailAndPassword> {
+class _EmailAndPasswordState extends State<PhoneAndPassword> {
   bool isObscureText = true;
 
   bool hasLowercase = false;
@@ -50,12 +50,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
       child: Column(
         children: [
           AppTextFormField(
-            hintText: 'Email',
+            hintText: 'Phone Number',
+            keyboardType: TextInputType.phone,
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
                   !AppRegex.isEmailValid(value)) {
-                return 'Please enter a valid email';
+                return 'Please enter a valid number that starts with +90';
               }
             },
             //controller: context.read<LoginCubit>().emailController,

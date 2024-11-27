@@ -1,5 +1,7 @@
 import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/features/login/login_screen.dart';
+import 'package:al_pazar/features/login/login_email_screen.dart';
+import 'package:al_pazar/features/login/login_phone_screen.dart';
+import 'package:al_pazar/features/login/onboarding_login_screen.dart';
 import 'package:al_pazar/features/sign_up/ui/sign_up_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +11,23 @@ class AppRouter {
     //final arguments = settings.arguments;
 
     switch (settings.name) {
-      case Routes.loginScreen:
+      case Routes.onBoardingLoginScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
+          builder: (_) => const OnBoardingLoginScreen(),
         );
-      case Routes.signUpScreen:
+      case Routes.onBoardingSignupScreen:
         return MaterialPageRoute(
-          builder: (_) => const SignupScreen(),
+          builder: (_) => const OnBoardingSignupScreen(),
         );
+      case Routes.loginEmailScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LoginEmailScreen(),
+        );
+      case Routes.loginPhoneScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPhoneScreen(),
+        );
+
       // case Routes.loginScreen:
       //   return MaterialPageRoute(
       //     builder: (_) => BlocProvider(

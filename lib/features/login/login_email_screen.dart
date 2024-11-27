@@ -5,11 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/helpers/spacing.dart';
 import '../../core/theming/styles.dart';
 import '../../core/theming/widgets/app_text_button.dart';
-import 'ui/dont_have_account.dart';
-import 'ui/terms_and_conditions_text.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginEmailScreen extends StatelessWidget {
+  const LoginEmailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +19,29 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome Back',
-                  style: TextStyles.font24BlueBold,
+                // Back button at the top
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.arrow_back, color: Colors.black),
+                      onPressed: () {
+                        Navigator.pop(
+                            context); // Go back to the previous screen
+                      },
+                    ),
+                  ],
                 ),
-                verticalSpace(8),
+
+                // Screen title
                 Text(
-                  'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
-                  style: TextStyles.font14GrayRegular,
+                  'Log in with Email',
+                  style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
                 Column(
                   children: [
                     const EmailAndPassword(),
-                    verticalSpace(24),
+                    verticalSpace(34),
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Text(
@@ -50,11 +57,6 @@ class LoginScreen extends StatelessWidget {
                         // validateThenDoLogin(context);
                       },
                     ),
-                    verticalSpace(16),
-                    const TermsAndConditionsText(),
-                    verticalSpace(60),
-                    const DontHaveAccountText(),
-                    //const LoginBlocListener(),
                   ],
                 ),
               ],

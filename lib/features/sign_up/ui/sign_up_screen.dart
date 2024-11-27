@@ -8,8 +8,8 @@ import '../../../core/theming/widgets/app_text_button.dart';
 import '../../login/ui/terms_and_conditions_text.dart';
 import 'widgets/already_have_account_text.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class OnBoardingSignupScreen extends StatelessWidget {
+  const OnBoardingSignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
