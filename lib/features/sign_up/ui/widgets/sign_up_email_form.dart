@@ -4,14 +4,14 @@ import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
 import 'package:al_pazar/features/login/ui/password_validations.dart';
 import 'package:flutter/material.dart';
 
-class SignupForm extends StatefulWidget {
-  const SignupForm({super.key});
+class SignupEmailForm extends StatefulWidget {
+  const SignupEmailForm({super.key});
 
   @override
-  State<SignupForm> createState() => _SignupFormState();
+  State<SignupEmailForm> createState() => _SignupFormState();
 }
 
-class _SignupFormState extends State<SignupForm> {
+class _SignupFormState extends State<SignupEmailForm> {
   bool isPasswordObscureText = true;
   bool isPasswordConfirmationObscureText = true;
 

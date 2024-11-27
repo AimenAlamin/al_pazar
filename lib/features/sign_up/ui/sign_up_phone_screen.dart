@@ -1,13 +1,15 @@
-import 'package:al_pazar/features/login/ui/phone_and_password.dart';
+import 'package:al_pazar/features/sign_up/ui/widgets/sign_up_phone_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/helpers/spacing.dart';
-import '../../core/theming/styles.dart';
-import '../../core/theming/widgets/app_text_button.dart';
+import '../../../core/helpers/spacing.dart';
+import '../../../core/theming/styles.dart';
+import '../../../core/theming/widgets/app_text_button.dart';
+import '../../login/ui/terms_and_conditions_text.dart';
+import 'widgets/already_have_account_text.dart';
 
-class LoginPhoneScreen extends StatelessWidget {
-  const LoginPhoneScreen({super.key});
+class SignupPhoneScreen extends StatelessWidget {
+  const SignupPhoneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,29 +36,26 @@ class LoginPhoneScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Log in with Phone',
+                  'Sign up with Phone',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
                 Column(
                   children: [
-                    const PhoneAndPassword(),
-                    verticalSpace(24),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyles.font13BlueRegular,
-                      ),
-                    ),
+                    const SignupPhoneForm(),
                     verticalSpace(40),
                     AppTextButton(
-                      buttonText: "Login",
+                      buttonText: "Create Account",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        // validateThenDoLogin(context);
+                        //validateThenDoSignup(context);
                       },
                     ),
+                    verticalSpace(16),
+                    const TermsAndConditionsText(),
+                    verticalSpace(30),
+                    const AlreadyHaveAccountText(),
+                    //const SignupBlocListener(),
                   ],
                 ),
               ],
