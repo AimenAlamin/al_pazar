@@ -1,5 +1,8 @@
 import 'package:al_pazar/core/theming/colors.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:al_pazar/features/account/Account.dart';
 
 // ignore: camel_case_types
 class homePage extends StatefulWidget {
@@ -16,7 +19,7 @@ class _homePageState extends State<homePage> {
     const Text("Home"),
     const Text("favorite"),
     const Text("Chat"),
-    const Text("Account")
+    accountPage(),
   ];
 
   @override
