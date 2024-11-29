@@ -1,15 +1,15 @@
-import 'package:al_pazar/features/sign_up/ui/widgets/sign_up_email_form.dart';
+import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/sign_up_phone_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/helpers/spacing.dart';
-import '../../../core/theming/styles.dart';
-import '../../../core/theming/widgets/app_text_button.dart';
+import '../../../../../core/helpers/spacing.dart';
+import '../../../../../core/theming/styles.dart';
+import '../../../../../core/theming/widgets/app_text_button.dart';
 import '../../login/ui/terms_and_conditions_text.dart';
 import 'widgets/already_have_account_text.dart';
 
-class SignupEmailScreen extends StatelessWidget {
-  const SignupEmailScreen({super.key});
+class SignupPhoneScreen extends StatelessWidget {
+  const SignupPhoneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +36,13 @@ class SignupEmailScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Sign up with Email',
+                  'Sign up with Phone',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
                 Column(
                   children: [
-                    const SignupEmailForm(),
+                    const SignupPhoneForm(),
                     verticalSpace(40),
                     AppTextButton(
                       buttonText: "Create Account",

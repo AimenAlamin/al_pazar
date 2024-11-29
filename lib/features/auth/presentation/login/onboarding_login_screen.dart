@@ -2,10 +2,10 @@ import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../core/helpers/spacing.dart';
-import '../../core/routing/routes.dart';
-import '../../core/theming/styles.dart';
-import '../../core/theming/widgets/app_text_button.dart';
+import '../../../../core/helpers/spacing.dart';
+import '../../../../core/routing/routes.dart';
+import '../../../../core/theming/styles.dart';
+import '../../../../core/theming/widgets/app_text_button.dart';
 import 'ui/dont_have_account.dart';
 import 'ui/terms_and_conditions_text.dart';
 

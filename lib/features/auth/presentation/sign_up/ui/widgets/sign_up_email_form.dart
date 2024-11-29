@@ -1,17 +1,17 @@
 import 'package:al_pazar/core/helpers/app_regex.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
-import 'package:al_pazar/features/login/ui/password_validations.dart';
+import 'package:al_pazar/features/auth/presentation/login/ui/password_validations.dart';
 import 'package:flutter/material.dart';
 
-class SignupPhoneForm extends StatefulWidget {
-  const SignupPhoneForm({super.key});
+class SignupEmailForm extends StatefulWidget {
+  const SignupEmailForm({super.key});
 
   @override
-  State<SignupPhoneForm> createState() => _SignupFormState();
+  State<SignupEmailForm> createState() => _SignupFormState();
 }
 
-class _SignupFormState extends State<SignupPhoneForm> {
+class _SignupFormState extends State<SignupEmailForm> {
   bool isPasswordObscureText = true;
   bool isPasswordConfirmationObscureText = true;
 
@@ -72,13 +72,12 @@ class _SignupFormState extends State<SignupPhoneForm> {
           // ),
           verticalSpace(18),
           AppTextFormField(
-            keyboardType: TextInputType.phone,
-            hintText: 'Phone',
+            hintText: 'Email',
             validator: (value) {
               if (value == null ||
                   value.isEmpty ||
-                  !AppRegex.isPhoneNumberValid(value)) {
-                return 'Please enter a valid phone number that starts with +90';
+                  !AppRegex.isEmailValid(value)) {
+                return 'Please enter a valid email';
               }
             },
             // controller: context.read<SignupCubit>().emailController,

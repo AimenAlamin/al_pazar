@@ -1,12 +1,12 @@
 import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/features/login/login_email_screen.dart';
-import 'package:al_pazar/features/login/login_phone_screen.dart';
-import 'package:al_pazar/features/login/onboarding_login_screen.dart';
+import 'package:al_pazar/features/auth/presentation/login/login_email_screen.dart';
+import 'package:al_pazar/features/auth/presentation/login/login_phone_screen.dart';
+import 'package:al_pazar/features/auth/presentation/login/onboarding_login_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/sign_up/onboarding_signup_screen.dart';
-import '../../features/sign_up/ui/sign_up_email_screen.dart';
-import '../../features/sign_up/ui/sign_up_phone_screen.dart';
+import '../../features/auth/presentation/sign_up/onboarding_signup_screen.dart';
+import '../../features/auth/presentation/sign_up/ui/sign_up_email_screen.dart';
+import '../../features/auth/presentation/sign_up/ui/sign_up_phone_screen.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
