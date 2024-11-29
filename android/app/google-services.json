@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "256002788432",
+    "project_id": "kibzar-ea8f8",
+    "storage_bucket": "kibzar-ea8f8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256002788432:android:5df9e1576c724850365555",
+        "android_client_info": {
+          "package_name": "com.example.al_pazar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSQFK4g1tizl0yuuN9Z43xJNtN6QJ7xwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
