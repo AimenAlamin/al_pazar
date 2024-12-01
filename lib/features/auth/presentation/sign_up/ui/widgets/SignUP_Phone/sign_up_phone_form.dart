@@ -1,7 +1,7 @@
 import 'package:al_pazar/core/helpers/app_regex.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
-import 'package:al_pazar/features/auth/presentation/login/ui/password_validations.dart';
+import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/password_validations.dart';
 import 'package:flutter/material.dart';
 
 class SignupPhoneForm extends StatefulWidget {

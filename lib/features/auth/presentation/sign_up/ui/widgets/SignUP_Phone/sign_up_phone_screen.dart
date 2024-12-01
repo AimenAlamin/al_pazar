@@ -1,12 +1,12 @@
-import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/sign_up_phone_form.dart';
+import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/SignUP_Phone/sign_up_phone_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/styles.dart';
-import '../../../../../core/theming/widgets/app_text_button.dart';
-import '../../login/ui/terms_and_conditions_text.dart';
-import 'widgets/already_have_account_text.dart';
+import '../../../../../../../core/helpers/spacing.dart';
+import '../../../../../../../core/theming/styles.dart';
+import '../../../../../../../core/theming/widgets/app_text_button.dart';
+import '../../../../login/ui/terms_and_conditions_text.dart';
+import '../already_have_account_text.dart';
 
 class SignupPhoneScreen extends StatelessWidget {
   const SignupPhoneScreen({super.key});

@@ -24,7 +24,7 @@ class FirebaseAuthService {
         throw CustomException(message: 'The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         throw CustomException(
-            message: 'The account already exists for that email.');
+            message: 'Account with this email already registered.');
       } else if (e.code == 'network-request-failed') {
         throw CustomException(
             message: 'Please check your internet connection and try again.');

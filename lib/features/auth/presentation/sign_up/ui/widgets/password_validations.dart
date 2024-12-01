@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/helpers/spacing.dart';
-import '../../../../../../core/theming/colors.dart';
-import '../../../../../../core/theming/styles.dart';
+import '../../../../../../../core/helpers/spacing.dart';
+import '../../../../../../../core/theming/colors.dart';
+import '../../../../../../../core/theming/styles.dart';
 
 class PasswordValidations extends StatelessWidget {
   final bool hasLowerCase;
@@ -49,7 +49,7 @@ class PasswordValidations extends StatelessWidget {
           text,
           style: TextStyles.font13DarkBlueRegular.copyWith(
             decoration: hasValidated ? TextDecoration.lineThrough : null,
-            decorationColor: Colors.green,
+            decorationColor: const Color.fromARGB(255, 76, 145, 76),
             decorationThickness: 2,
             color: hasValidated ? ColorsManager.gray : ColorsManager.darkBlue,
           ),

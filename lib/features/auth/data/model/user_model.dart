@@ -1,20 +1,52 @@
-import 'package:al_pazar/features/auth/domain/entity/user_entity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../domain/entity/user_entity.dart';
 
 class UserModel extends UserEntity {
-  UserModel(
-      {required super.name, //here we extend the UserEntity class and we have pass to it the model "using super"
-      required super.uId,
-      super.email,
-      super.phoneNumber});
+  //here we extend the UserEntity class and we have pass to it the model "using super"
+  UserModel({
+    required super.name,
+    super.email,
+    super.phone,
+    required super.uId,
+  });
 
+  //here we create a factory constructor to fetch the firebase user to our model
   factory UserModel.fromFirebaseUser(User user) {
-    //here we create a factory constructor to fetch the firebase user to our model
     return UserModel(
-      name: user.displayName!,
+      name: user.displayName ?? '',
+      email: user.email, // For email-based login
+      phone: user.phoneNumber, // For phone-based login
       uId: user.uid,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
     );
+  }
+
+  // From JSON
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      name: json['name'],
+      email: json['email'],
+      phone: json['phone'],
+      uId: json['uId'],
+    );
+  }
+
+  // From Entity
+  factory UserModel.fromEntity(UserEntity user) {
+    return UserModel(
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
+      uId: user.uId,
+    );
+  }
+
+  // To Map
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'uId': uId,
+    };
   }
 }

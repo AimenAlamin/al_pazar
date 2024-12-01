@@ -1,12 +1,15 @@
-import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/sign_up_email_form.dart';
+import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
+import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/SignUp_Email/sign_up_email_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/helpers/spacing.dart';
-import '../../../../../core/theming/styles.dart';
-import '../../../../../core/theming/widgets/app_text_button.dart';
-import '../../login/ui/terms_and_conditions_text.dart';
-import 'widgets/already_have_account_text.dart';
+import '../../../../../../../core/helpers/spacing.dart';
+import '../../../../../../../core/theming/styles.dart';
+import '../../../../../../../core/theming/widgets/app_text_button.dart';
+import '../../../../login/ui/terms_and_conditions_text.dart';
+import '../already_have_account_text.dart';
+import 'sign_up_email_listener.dart';
 
 class SignupEmailScreen extends StatelessWidget {
   const SignupEmailScreen({super.key});
@@ -48,14 +51,14 @@ class SignupEmailScreen extends StatelessWidget {
                       buttonText: "Create Account",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        //validateThenDoSignup(context);
+                        validateThenDoSignupEmail(context);
                       },
                     ),
                     verticalSpace(16),
                     const TermsAndConditionsText(),
                     verticalSpace(30),
                     const AlreadyHaveAccountText(),
-                    //const SignupBlocListener(),
+                    const SignUpEmailBlocListener(),
                   ],
                 ),
               ],
@@ -64,5 +67,11 @@ class SignupEmailScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void validateThenDoSignupEmail(BuildContext context) {
+    if (context.read<SignUpEmailCubit>().formKey.currentState!.validate()) {
+      context.read<SignUpEmailCubit>().signUpWithEmailAndPassword();
+    }
   }
 }

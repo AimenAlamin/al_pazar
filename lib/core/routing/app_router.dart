@@ -1,4 +1,5 @@
 import 'package:al_pazar/core/routing/routes.dart';
+import 'package:al_pazar/features/auth/presentation/home/home_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/login_email_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/login_phone_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/onboarding_login_screen.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 
 import '../../features/auth/domain/repo/auth_repo.dart';
 import '../../features/auth/presentation/sign_up/onboarding_signup_screen.dart';
-import '../../features/auth/presentation/sign_up/ui/sign_up_email_screen.dart';
-import '../../features/auth/presentation/sign_up/ui/sign_up_phone_screen.dart';
+import '../../features/auth/presentation/sign_up/ui/widgets/SignUp_Email/sign_up_email_screen.dart';
+import '../../features/auth/presentation/sign_up/ui/widgets/SignUP_Phone/sign_up_phone_screen.dart';
 import '../services/dependency_injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -44,6 +45,10 @@ class AppRouter {
       case Routes.signUpPhoneScreen:
         return MaterialPageRoute(
           builder: (_) => const SignupPhoneScreen(),
+        );
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
         );
 
       // case Routes.loginScreen:
