@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'core/routing/app_router.dart';
+import 'core/services/dependency_injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +12,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // To fix texts being hidden bug in flutter_screenutil in release mode.
-
+  setuGetIt();
   runApp(PazarApp(
     appRouter: AppRouter(),
   ));
