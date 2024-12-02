@@ -1,13 +1,13 @@
-import 'package:al_pazar/features/auth/presentation/login/ui/email_and_password.dart';
+import 'package:al_pazar/features/auth/presentation/login/ui/loginPhone/phone_and_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/helpers/spacing.dart';
-import '../../../../core/theming/styles.dart';
-import '../../../../core/theming/widgets/app_text_button.dart';
+import '../../../../../../core/helpers/spacing.dart';
+import '../../../../../../core/theming/styles.dart';
+import '../../../../../../core/theming/widgets/app_text_button.dart';
 
-class LoginEmailScreen extends StatelessWidget {
-  const LoginEmailScreen({super.key});
+class LoginPhoneScreen extends StatelessWidget {
+  const LoginPhoneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,14 @@ class LoginEmailScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Log in with Email',
+                  'Log in with Phone',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
                 Column(
                   children: [
-                    const EmailAndPassword(),
-                    verticalSpace(34),
+                    const PhoneAndPassword(),
+                    verticalSpace(24),
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Text(

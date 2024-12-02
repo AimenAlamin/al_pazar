@@ -1,7 +1,8 @@
 import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/features/auth/presentation/home/home_screen.dart';
-import 'package:al_pazar/features/auth/presentation/login/login_email_screen.dart';
-import 'package:al_pazar/features/auth/presentation/login/login_phone_screen.dart';
+import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
+import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
+import 'package:al_pazar/features/auth/presentation/login/ui/loginPhone/login_phone_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/onboarding_login_screen.dart';
 import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +30,10 @@ class AppRouter {
         );
       case Routes.loginEmailScreen:
         return MaterialPageRoute(
-          builder: (_) => const LoginEmailScreen(),
-        );
-      case Routes.loginPhoneScreen:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPhoneScreen(),
+          builder: (_) => BlocProvider(
+            create: (context) => LoginEmailCubit(getIt<AuthRepo>()),
+            child: const LoginEmailScreen(),
+          ),
         );
       case Routes.signUpEmailScreen:
         return MaterialPageRoute(
@@ -45,6 +45,10 @@ class AppRouter {
       case Routes.signUpPhoneScreen:
         return MaterialPageRoute(
           builder: (_) => const SignupPhoneScreen(),
+        );
+      case Routes.loginPhoneScreen:
+        return MaterialPageRoute(
+          builder: (_) => const LoginPhoneScreen(),
         );
       case Routes.homeScreen:
         return MaterialPageRoute(

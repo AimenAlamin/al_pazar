@@ -14,6 +14,7 @@ class SignUpEmailCubit extends Cubit<SignUpEmailState> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  //creating the cubit method which is triggered in the UI
   Future<void> signUpWithEmailAndPassword() async {
     emit(SignUpEmailLoading());
     final result = await authRepo.createUserWithEmailAndPassword(
@@ -23,14 +24,4 @@ class SignUpEmailCubit extends Cubit<SignUpEmailState> {
       (userEntity) => emit(SignUpEmailSuccess(userEntity: userEntity)),
     );
   }
-  // Future<void> createUserWithEmailAndPassword(
-  //     String email, String password, String name) async {
-  //   emit(SignUpEmailLoading());
-  //   final result =
-  //       await authRepo.createUserWithEmailAndPassword(email, password, name);
-  //   result.fold(
-  //     (failure) => emit(SignUpEmailFailure(message: failure.message)),
-  //     (userEntity) => emit(SignUpEmailSuccess(userEntity: userEntity)),
-  //   );
-  // }
 }

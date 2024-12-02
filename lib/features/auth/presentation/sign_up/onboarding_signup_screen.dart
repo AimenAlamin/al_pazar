@@ -7,7 +7,7 @@ import '../../../../../core/theming/styles.dart';
 import '../../../../../core/theming/widgets/app_text_button.dart';
 
 import '../../../../core/routing/routes.dart';
-import '../login/ui/terms_and_conditions_text.dart';
+import '../login/ui/widgets/terms_and_conditions_text.dart';
 import 'ui/widgets/already_have_account_text.dart';
 
 class OnBoardingSignupScreen extends StatelessWidget {

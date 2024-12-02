@@ -7,4 +7,6 @@ abstract class AuthRepo {
   //here we create the AuthRepo contract, making it general so we can use it with any authentication service
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name);
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
+      String email, String password);
 }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_pazar/core/errors/exception.dart';
 import 'package:al_pazar/core/errors/failure.dart';
 
@@ -27,10 +29,43 @@ class AuthRepoImpl extends AuthRepo {
           password:
               password); //these are not all my user data. They the datas that are going to the method of the serivce
       //after getting the user data from the firebaseAuthService we return it as a UserModel/UserEntity
-      return right(UserModel.fromFirebaseUser(user)); //Either<right>
+      return right(
+        UserModel.fromFirebaseUser(user),
+      ); //Either<right>
     } on CustomException catch (e) {
-      return left(ServerFailure(e //Either<left>
-          .message)); //here we return the ServerFailure with the message from the CustomException
+      return left(
+        ServerFailure(e //Either<left>
+            .message),
+      ); //here we return the ServerFailure with the message from the CustomException
+    } catch (e) {
+      log(
+        "Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}",
+      );
+      return left(
+        ServerFailure(
+            'An error occurred please try again later.'), //Either<left>
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      var user = await firebaseAuthService.signInWithEmailAndPassword(
+          email: email, password: password);
+      return right(
+        UserModel.fromFirebaseUser(user),
+      );
+    } on CustomException catch (e) {
+      return left(
+        ServerFailure(e.message),
+      );
+    } catch (e) {
+      log("Exception in AuthRepoImpl.signInWithEmailAndPassword: ${e.toString()}");
+      return left(
+        ServerFailure('An error occurred please try again later.'),
+      );
     }
   }
 }

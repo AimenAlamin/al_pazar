@@ -1,13 +1,16 @@
-import 'package:al_pazar/features/auth/presentation/login/ui/phone_and_password.dart';
+import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
+import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/email_and_password.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/helpers/spacing.dart';
-import '../../../../core/theming/styles.dart';
-import '../../../../core/theming/widgets/app_text_button.dart';
+import '../../../../../../core/helpers/spacing.dart';
+import '../../../../../../core/theming/styles.dart';
+import '../../../../../../core/theming/widgets/app_text_button.dart';
+import 'login_email_listener.dart';
 
-class LoginPhoneScreen extends StatelessWidget {
-  const LoginPhoneScreen({super.key});
+class LoginEmailScreen extends StatelessWidget {
+  const LoginEmailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +37,14 @@ class LoginPhoneScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Log in with Phone',
+                  'Log in with Email',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
                 Column(
                   children: [
-                    const PhoneAndPassword(),
-                    verticalSpace(24),
+                    const EmailAndPassword(),
+                    verticalSpace(34),
                     Align(
                       alignment: AlignmentDirectional.centerEnd,
                       child: Text(
@@ -54,9 +57,10 @@ class LoginPhoneScreen extends StatelessWidget {
                       buttonText: "Login",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
-                        // validateThenDoLogin(context);
+                        validateThenDoLoginEmail(context);
                       },
                     ),
+                    const LoginEmailBlocListener(),
                   ],
                 ),
               ],
@@ -65,5 +69,11 @@ class LoginPhoneScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void validateThenDoLoginEmail(BuildContext context) {
+    if (context.read<LoginEmailCubit>().formKey.currentState!.validate()) {
+      context.read<LoginEmailCubit>().loginWithEmailAndPassword();
+    }
   }
 }

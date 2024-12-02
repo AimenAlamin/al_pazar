@@ -6,8 +6,8 @@ import '../../../../core/helpers/spacing.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/styles.dart';
 import '../../../../core/theming/widgets/app_text_button.dart';
-import 'ui/dont_have_account.dart';
-import 'ui/terms_and_conditions_text.dart';
+import 'ui/widgets/dont_have_account.dart';
+import 'ui/widgets/terms_and_conditions_text.dart';
 
 class OnBoardingLoginScreen extends StatelessWidget {
   const OnBoardingLoginScreen({super.key});

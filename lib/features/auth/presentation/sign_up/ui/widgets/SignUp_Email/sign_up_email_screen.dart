@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../core/helpers/spacing.dart';
 import '../../../../../../../core/theming/styles.dart';
 import '../../../../../../../core/theming/widgets/app_text_button.dart';
-import '../../../../login/ui/terms_and_conditions_text.dart';
+import '../../../../login/ui/widgets/terms_and_conditions_text.dart';
 import '../already_have_account_text.dart';
 import 'sign_up_email_listener.dart';
 
