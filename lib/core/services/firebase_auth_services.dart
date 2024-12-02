@@ -18,7 +18,9 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
-      return credential.user!; //here we return the firebase user
+      final usercredential = credential.user!;
+      await usercredential.sendEmailVerification();
+      return usercredential; //here we return the firebase user
     } on FirebaseAuthException catch (e) {
       log("Exception in FirebaseAuthService.createUserWithEmailAndPassword: ${e.toString()} and code is ${e.code}");
       if (e.code == 'weak-password') {
@@ -51,7 +53,14 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
-      return credential.user!; //here we return the firebase user
+      final usercredential = credential.user!;
+      if (!usercredential.emailVerified) {
+        throw CustomException(
+          message: 'Please verify your email before logging in.',
+        );
+      }
+
+      return usercredential; // Return the Firebase user if email is verified. //here we return the firebase user
     } on FirebaseAuthException catch (e) {
       log("Exception in FirebaseAuthService.signInWithEmailAndPassword: ${e.toString()} and code is ${e.code}");
       if (e.code == 'user-not-found') {

@@ -1,5 +1,6 @@
 import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/routing/routes.dart';
+
 import 'package:al_pazar/core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,10 +25,15 @@ class LoginEmailBlocListener extends StatelessWidget {
         }
         if (state is LoginEmailSuccess) {
           context.pop(); //pop from the loading dialog
-          context.pushNamed(Routes.homeScreen);
+          context.pushReplacementNamed(Routes.homeScreen);
         }
         if (state is LoginEmailFailure) {
-          setupErrorState(context, state.message);
+          final isVerficationError = state.message.contains('verification');
+          if (isVerficationError) {
+            verificationRequiredDialog(context);
+          } else {
+            setupErrorState(context, state.message);
+          }
         }
       },
       child: const SizedBox.shrink(),
@@ -46,6 +52,35 @@ class LoginEmailBlocListener extends StatelessWidget {
         ),
         content: Text(
           error,
+          style: TextStyles.font15DarkBlueMedium,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.pop();
+            },
+            child: Text(
+              'Got it',
+              style: TextStyles.font14BlueSemiBold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void verificationRequiredDialog(BuildContext context) {
+    context.pop(); //pop from the loading dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(
+          Icons.error,
+          color: Colors.red,
+          size: 32,
+        ),
+        content: Text(
+          'Please verify your email address before logging in.',
           style: TextStyles.font15DarkBlueMedium,
         ),
         actions: [
