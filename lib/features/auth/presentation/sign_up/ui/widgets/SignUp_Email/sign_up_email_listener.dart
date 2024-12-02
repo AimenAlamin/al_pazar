@@ -23,8 +23,7 @@ class SignUpEmailBlocListener extends StatelessWidget {
           );
         }
         if (state is SignUpEmailSuccess) {
-          context.pop(); //pop from the loading dialog
-          context.pushNamed(Routes.homeScreen);
+          setupSuccessDialog(context);
         }
         if (state is SignUpEmailFailure) {
           setupErrorState(context, state.message);
@@ -52,6 +51,36 @@ class SignUpEmailBlocListener extends StatelessWidget {
           TextButton(
             onPressed: () {
               context.pop();
+            },
+            child: Text(
+              'Got it',
+              style: TextStyles.font14BlueSemiBold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void setupSuccessDialog(BuildContext context) {
+    context.pop(); //pop from the loading dialog
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(
+          Icons.domain_verification,
+          color: Color.fromARGB(255, 104, 186, 107),
+          size: 32,
+        ),
+        content: Text(
+          "A verification email has been sent to your email address. Please verify your email before logging in.",
+          style: TextStyles.font15DarkBlueMedium,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.pop();
+              context.pushReplacementNamed(Routes.loginEmailScreen);
             },
             child: Text(
               'Got it',
