@@ -28,12 +28,7 @@ class LoginEmailBlocListener extends StatelessWidget {
           context.pushReplacementNamed(Routes.homeScreen);
         }
         if (state is LoginEmailFailure) {
-          final isVerficationError = state.message.contains('verification');
-          if (isVerficationError) {
-            verificationRequiredDialog(context);
-          } else {
-            setupErrorState(context, state.message);
-          }
+          setupErrorState(context, state.message);
         }
       },
       child: const SizedBox.shrink(),
@@ -52,35 +47,6 @@ class LoginEmailBlocListener extends StatelessWidget {
         ),
         content: Text(
           error,
-          style: TextStyles.font15DarkBlueMedium,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              context.pop();
-            },
-            child: Text(
-              'Got it',
-              style: TextStyles.font14BlueSemiBold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void verificationRequiredDialog(BuildContext context) {
-    context.pop(); //pop from the loading dialog
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        icon: const Icon(
-          Icons.error,
-          color: Colors.red,
-          size: 32,
-        ),
-        content: Text(
-          'Please verify your email address before logging in.',
           style: TextStyles.font15DarkBlueMedium,
         ),
         actions: [

@@ -54,7 +54,9 @@ class FirebaseAuthService {
         password: password,
       );
       final usercredential = credential.user!;
+      // Check if email is verified
       if (!usercredential.emailVerified) {
+        await FirebaseAuth.instance.signOut();
         throw CustomException(
           message: 'Please verify your email before logging in.',
         );
