@@ -52,13 +52,13 @@ class OnBoardingLoginScreen extends StatelessWidget {
                       style: TextStyles.font12GrayMedium,
                     ),
                     verticalSpace(20),
-                    AppTextButton(
-                      buttonText: "Continue with Phone",
-                      textStyle: TextStyles.font16WhiteSemiBold,
-                      onPressed: () {
-                        context.pushNamed(Routes.loginPhoneScreen);
-                      },
-                    ),
+                    // AppTextButton(
+                    //   buttonText: "Continue with Phone",
+                    //   textStyle: TextStyles.font16WhiteSemiBold,
+                    //   onPressed: () {
+                    //     context.pushNamed(Routes.phoneScreen);
+                    //   },
+                    // ),
                     verticalSpace(16),
                     const TermsAndConditionsText(),
                     verticalSpace(30),
