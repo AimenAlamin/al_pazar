@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/theming/styles.dart';
 import '../../../../../../core/theming/widgets/app_text_button.dart';
+import '../widgets/dont_have_account.dart';
 import 'login_email_listener.dart';
 
 class LoginEmailScreen extends StatelessWidget {
@@ -60,6 +61,8 @@ class LoginEmailScreen extends StatelessWidget {
                         validateThenDoLoginEmail(context);
                       },
                     ),
+                    verticalSpace(16),
+                    const DontHaveAccountText(),
                     const LoginEmailBlocListener(),
                   ],
                 ),

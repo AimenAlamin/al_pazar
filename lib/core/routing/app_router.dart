@@ -24,10 +24,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const OnBoardingLoginScreen(),
         );
-      case Routes.onBoardingSignupScreen:
-        return MaterialPageRoute(
-          builder: (_) => const OnBoardingSignupScreen(),
-        );
+      // case Routes.onBoardingSignupScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const OnBoardingSignupScreen(),
+      //   );
       case Routes.loginEmailScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -42,10 +42,10 @@ class AppRouter {
             child: const SignupEmailScreen(),
           ),
         );
-      case Routes.signUpPhoneScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SignupPhoneScreen(),
-        );
+      // case Routes.signUpPhoneScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => const SignupPhoneScreen(),
+      //   );
       case Routes.loginPhoneScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginPhoneScreen(),

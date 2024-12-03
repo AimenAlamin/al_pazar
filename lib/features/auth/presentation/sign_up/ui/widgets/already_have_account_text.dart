@@ -23,7 +23,7 @@ class AlreadyHaveAccountText extends StatelessWidget {
             style: TextStyles.font13BlueSemiBold,
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                context.pushReplacementNamed(Routes.onBoardingLoginScreen);
+                context.pushReplacementNamed(Routes.loginEmailScreen);
               },
           ),
         ],

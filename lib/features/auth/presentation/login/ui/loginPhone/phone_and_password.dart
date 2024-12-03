@@ -61,28 +61,28 @@ class _EmailAndPasswordState extends State<PhoneAndPassword> {
             },
             //controller: context.read<LoginCubit>().emailController,
           ),
-          verticalSpace(28),
-          AppTextFormField(
-            //controller: context.read<LoginCubit>().passwordController,
-            hintText: 'Password',
-            isObscureText: isObscureText,
-            suffixIcon: GestureDetector(
-              onTap: () {
-                setState(() {
-                  isObscureText = !isObscureText;
-                });
-              },
-              child: Icon(
-                isObscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter a valid password';
-              }
-            },
-          ),
-          verticalSpace(24),
+          //verticalSpace(28),
+          // AppTextFormField(
+          //   //controller: context.read<LoginCubit>().passwordController,
+          //   hintText: 'Password',
+          //   isObscureText: isObscureText,
+          //   suffixIcon: GestureDetector(
+          //     onTap: () {
+          //       setState(() {
+          //         isObscureText = !isObscureText;
+          //       });
+          //     },
+          //     child: Icon(
+          //       isObscureText ? Icons.visibility_off : Icons.visibility,
+          //     ),
+          //   ),
+          //   validator: (value) {
+          //     if (value == null || value.isEmpty) {
+          //       return 'Please enter a valid password';
+          //     }
+          //   },
+          // ),
+          //verticalSpace(24),
         ],
       ),
     );

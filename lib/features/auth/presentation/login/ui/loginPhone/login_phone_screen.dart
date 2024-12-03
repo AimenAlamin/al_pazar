@@ -34,7 +34,7 @@ class LoginPhoneScreen extends StatelessWidget {
 
                 // Screen title
                 Text(
-                  'Log in with Phone',
+                  'Login or Register',
                   style: TextStyles.font24BlueBold,
                 ),
                 verticalSpace(36),
@@ -42,16 +42,16 @@ class LoginPhoneScreen extends StatelessWidget {
                   children: [
                     const PhoneAndPassword(),
                     verticalSpace(24),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyles.font13BlueRegular,
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: AlignmentDirectional.centerEnd,
+                    //   child: Text(
+                    //     'Forgot Password?',
+                    //     style: TextStyles.font13BlueRegular,
+                    //   ),
+                    // ),
                     verticalSpace(40),
                     AppTextButton(
-                      buttonText: "Login",
+                      buttonText: "Login or Register",
                       textStyle: TextStyles.font16WhiteSemiBold,
                       onPressed: () {
                         // validateThenDoLogin(context);

@@ -24,19 +24,6 @@ class SignupEmailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Back button at the top
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black),
-                      onPressed: () {
-                        Navigator.pop(
-                            context); // Go back to the previous screen
-                      },
-                    ),
-                  ],
-                ),
-
                 // Screen title
                 Text(
                   'Sign up with Email',
