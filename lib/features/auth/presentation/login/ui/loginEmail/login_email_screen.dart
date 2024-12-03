@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/helpers/spacing.dart';
 import '../../../../../../core/theming/styles.dart';
 import '../../../../../../core/theming/widgets/app_text_button.dart';
+import '../widgets/dont_have_account.dart';
+import '../widgets/terms_and_conditions_text.dart';
 import 'login_email_listener.dart';
 
 class LoginEmailScreen extends StatelessWidget {
@@ -22,23 +24,14 @@ class LoginEmailScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Back button at the top
-                Row(
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.black),
-                      onPressed: () {
-                        Navigator.pop(
-                            context); // Go back to the previous screen
-                      },
-                    ),
-                  ],
-                ),
-
-                // Screen title
                 Text(
-                  'Log in with Email',
+                  'Welcome To Kibzar',
                   style: TextStyles.font24BlueBold,
+                ),
+                verticalSpace(8),
+                Text(
+                  'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
+                  style: TextStyles.font14GrayRegular,
                 ),
                 verticalSpace(36),
                 Column(
@@ -60,6 +53,10 @@ class LoginEmailScreen extends StatelessWidget {
                         validateThenDoLoginEmail(context);
                       },
                     ),
+                    verticalSpace(35),
+                    const TermsAndConditionsText(),
+                    verticalSpace(60),
+                    const DontHaveAccountText(),
                     const LoginEmailBlocListener(),
                   ],
                 ),
