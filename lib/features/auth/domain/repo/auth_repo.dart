@@ -9,4 +9,8 @@ abstract class AuthRepo {
       String email, String password, String name);
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password);
+  Future addUserData({required UserEntity user});
+  Future<UserEntity> getUserData(
+      {required String
+          userId}); //here we define the getUserData method to get the user data from the firestore
 }

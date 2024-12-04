@@ -43,6 +43,11 @@ class FirebaseAuthService {
     }
   }
 
+  //Delete User if sign up fails or if the user wants to delete his account
+  Future deleteUser() async {
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
+
   //SIGN IN
   Future<User> signInWithEmailAndPassword(
       //here I used the firebase signInWithEmailAndPassword method to sign in a user

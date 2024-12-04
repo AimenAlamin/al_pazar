@@ -5,8 +5,8 @@ class UserModel extends UserEntity {
   //here we extend the UserEntity class and we have pass to it the model "using super"
   UserModel({
     required super.name,
-    super.email,
-    super.phone,
+    required super.email,
+    // super.phone,
     required super.uId,
   });
 
@@ -14,8 +14,8 @@ class UserModel extends UserEntity {
   factory UserModel.fromFirebaseUser(User user) {
     return UserModel(
       name: user.displayName ?? '',
-      email: user.email, // For email-based login
-      phone: user.phoneNumber, // For phone-based login
+      email: user.email ?? '', // For email-based login
+      // phone: user.phoneNumber, // For phone-based login
       uId: user.uid,
     );
   }
@@ -25,7 +25,7 @@ class UserModel extends UserEntity {
     return UserModel(
       name: json['name'],
       email: json['email'],
-      phone: json['phone'],
+      //phone: json['phone'],
       uId: json['uId'],
     );
   }
@@ -35,7 +35,7 @@ class UserModel extends UserEntity {
     return UserModel(
       name: user.name,
       email: user.email,
-      phone: user.phone,
+      //phone: user.phone,
       uId: user.uId,
     );
   }
@@ -45,7 +45,7 @@ class UserModel extends UserEntity {
     return {
       'name': name,
       'email': email,
-      'phone': phone,
+      //'phone': phone,
       'uId': uId,
     };
   }
