@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/helpers/spacing.dart';
 import 'widgets/explore_categories_listview.dart';
+import 'widgets/popular_item.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,6 +35,8 @@ class HomeScreen extends StatelessWidget {
               const ExploreCategoriesListView(),
               verticalSpace(28),
               const CategoriesSeeAll(text: "Popular in Cars"),
+              verticalSpace(12),
+              const PopularItem(),
             ],
           ),
         ),
