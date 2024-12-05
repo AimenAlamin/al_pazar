@@ -1,16 +1,14 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
+import 'package:al_pazar/features/login/login_email_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class accountPage extends StatefulWidget {
-  const accountPage({super.key});
+class accountPage extends StatelessWidget {
+  accountPage({super.key});
 
-  @override
-  State<accountPage> createState() => _accountPageState();
-}
-
-class _accountPageState extends State<accountPage> {
   List<Map<String, dynamic>> accountDetails = [
     {
       "Icon": Icons.person,
@@ -29,6 +27,7 @@ class _accountPageState extends State<accountPage> {
       "Text": "notification",
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,42 +96,52 @@ class _accountPageState extends State<accountPage> {
           child: ListView(
             physics: NeverScrollableScrollPhysics(),
             children: [
-              Container(
-                height: 90,
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: const BorderSide(
-                            color: Color.fromARGB(33, 94, 92, 92)))),
-                child: Center(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.person_2_outlined,
-                      color: Color.fromARGB(255, 29, 28, 28),
-                    ),
-                    title: Text("Profile"),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15,
+              InkWell(
+                onTap: () {
+                  context.pushNamed(Routes.profile);
+                },
+                child: Container(
+                  height: 90,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: const BorderSide(
+                              color: Color.fromARGB(33, 94, 92, 92)))),
+                  child: Center(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.person_2_outlined,
+                        color: Color.fromARGB(255, 29, 28, 28),
+                      ),
+                      title: Text("Profile"),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Container(
-                height: 90,
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: const BorderSide(
-                            color: Color.fromARGB(33, 94, 92, 92)))),
-                child: Center(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.wallet_rounded,
-                      color: Color.fromARGB(255, 29, 28, 28),
-                    ),
-                    title: Text("Sales"),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15,
+              InkWell(
+                onTap: () {
+                  context.pushNamed(Routes.sale);
+                },
+                child: Container(
+                  height: 90,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: const BorderSide(
+                              color: Color.fromARGB(33, 94, 92, 92)))),
+                  child: Center(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.wallet_rounded,
+                        color: Color.fromARGB(255, 29, 28, 28),
+                      ),
+                      title: Text("Sales"),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),

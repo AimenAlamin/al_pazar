@@ -1,4 +1,6 @@
 import 'package:al_pazar/core/routing/routes.dart';
+import 'package:al_pazar/features/account/Profile.dart';
+import 'package:al_pazar/features/account/sale.dart';
 import 'package:al_pazar/features/login/login_email_screen.dart';
 import 'package:al_pazar/features/login/login_phone_screen.dart';
 import 'package:al_pazar/features/login/onboarding_login_screen.dart';
@@ -41,6 +43,10 @@ class AppRouter {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const homePage());
+      case Routes.profile:
+        return MaterialPageRoute(builder: (_) => Profile());
+      case Routes.sale:
+        return MaterialPageRoute(builder: (_) => Sale());
 
       // case Routes.loginScreen:
       //   return MaterialPageRoute(
