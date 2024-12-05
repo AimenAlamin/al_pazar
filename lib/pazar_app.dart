@@ -21,7 +21,7 @@ class PazarApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.loginEmailScreen,
+        initialRoute: Routes.homeScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
