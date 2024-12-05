@@ -4,7 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/theming/styles.dart';
 
 class PopularItem extends StatelessWidget {
-  const PopularItem({super.key});
+  const PopularItem({
+    super.key,
+    required this.imageAsset,
+    required this.price,
+    required this.title,
+    required this.location,
+  });
+  final String imageAsset;
+  final String price;
+  final String title;
+  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +42,14 @@ class PopularItem extends StatelessWidget {
               child: Image.asset(
                 width: 150.w,
                 height: 105.h,
-                'assets/images/defaultcar.jpg',
+                imageAsset,
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 5.0.w, top: 5.0.h),
               child: Text(
-                'TL 15000',
+                price,
                 style: TextStyles.font20BlueBold,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -48,7 +58,7 @@ class PopularItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 5.0.w, bottom: 2.0.h),
               child: Text(
-                'Honda Vezel 2015',
+                title,
                 style: TextStyles.font14DarkBlueMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -57,7 +67,7 @@ class PopularItem extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 5.0.w, bottom: 5.0.h),
               child: Text(
-                'Lefkosa',
+                location,
                 style: TextStyles.font12GrayMedium,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
