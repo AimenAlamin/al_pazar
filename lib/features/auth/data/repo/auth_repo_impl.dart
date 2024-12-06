@@ -1,8 +1,11 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:al_pazar/core/errors/exception.dart';
 import 'package:al_pazar/core/errors/failure.dart';
+import 'package:al_pazar/core/helpers/constants.dart';
 import 'package:al_pazar/core/helpers/endpoints.dart';
+import 'package:al_pazar/core/helpers/shared_preferences.dart';
 import 'package:al_pazar/core/services/data_serivce.dart';
 
 import 'package:al_pazar/features/auth/domain/entity/user_entity.dart';
@@ -94,7 +97,8 @@ class AuthRepoImpl extends AuthRepo {
   Future addUserData({required UserEntity user}) async {
     await databaseService.addData(
         path: BackEndpoint.setUserEndpoint,
-        data: UserModel.fromEntity(user).toMap(),
+        data: UserModel.fromEntity(user)
+            .toMap(), //here we first create a model from the user data received and then convert it to a map becuase firestore data is in maps
         documentId: user.uId);
   }
 
@@ -102,6 +106,15 @@ class AuthRepoImpl extends AuthRepo {
   Future<UserEntity> getUserData({required String userId}) async {
     var userData = await databaseService.getData(
         path: BackEndpoint.getUserEndpoint, documentID: userId);
-    return UserModel.fromJson(userData);
+    return UserModel.fromJson(
+        userData); //here we convert the data from the firestore to a model
+  }
+
+  @override
+  Future saveUserData({required UserEntity user}) async {
+    var jsonData = jsonEncode(UserModel.fromEntity(user)
+        .toMap()); //here I convert the user data into user model and then to Map so I can have same dataype as firestore Map<String,dynamic>, then I JsonEncode it all to be string
+    await SharedPreferences.setString(kUserData,
+        jsonData); //after encoding done, Im saving it as a string in the shared preferences to save it locally
   }
 }

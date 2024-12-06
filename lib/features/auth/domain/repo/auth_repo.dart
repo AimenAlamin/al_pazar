@@ -12,5 +12,7 @@ abstract class AuthRepo {
   Future addUserData({required UserEntity user});
   Future<UserEntity> getUserData(
       {required String
-          userId}); //here we define the getUserData method to get the user data from the firestore
+          userId}); //here we define the getUserData method to get the user data from the firestore or any service
+  Future saveUserData(
+      {required UserEntity user}); //abstract method for saving user datta
 }

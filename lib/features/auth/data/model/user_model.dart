@@ -30,7 +30,7 @@ class UserModel extends UserEntity {
     );
   }
 
-  // From Entity
+  // /converting the user data from the user entity into model so it can be easier to work with
   factory UserModel.fromEntity(UserEntity user) {
     return UserModel(
       name: user.name,

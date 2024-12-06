@@ -94,6 +94,11 @@ class FirebaseAuthService {
     }
   }
 
+  //Check if user is logged in, and based on this condition, we can show different screens to the user
+  bool isUserLoggedIn() {
+    return FirebaseAuth.instance.currentUser != null;
+  }
+
   //SIGN OUT invalid-credential
   // Future<void> signOut() async {
   //   try {
