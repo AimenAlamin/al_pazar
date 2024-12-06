@@ -1,9 +1,10 @@
-import 'package:al_pazar/features/auth/presentation/home/ui/widgets/categories_see_all.dart';
-import 'package:al_pazar/features/auth/presentation/home/ui/widgets/home_topbar.dart';
-import 'package:al_pazar/features/auth/presentation/home/ui/widgets/search_textfield.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/categories_see_all.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/navigationbar/custom_bottom_navbar.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/home_topbar.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/helpers/spacing.dart';
+import '../../../../core/helpers/spacing.dart';
 import 'widgets/explore_categories_listview.dart';
 
 import 'widgets/popular_listview_items.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const CustomBottomNavbar(),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(

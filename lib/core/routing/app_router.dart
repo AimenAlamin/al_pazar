@@ -1,5 +1,5 @@
 import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/features/auth/presentation/home/ui/home_screen.dart';
+import 'package:al_pazar/features/home/presentation/ui/home_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
 import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
 

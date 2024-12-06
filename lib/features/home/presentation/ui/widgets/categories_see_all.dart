@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../core/theming/styles.dart';
+import '../../../../../core/theming/styles.dart';
 
 class CategoriesSeeAll extends StatelessWidget {
   const CategoriesSeeAll({super.key, required this.text});

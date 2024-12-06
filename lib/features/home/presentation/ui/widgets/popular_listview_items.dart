@@ -1,4 +1,4 @@
-import 'package:al_pazar/features/auth/presentation/home/ui/widgets/popular_item.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/popular_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
