@@ -1,3 +1,4 @@
+import 'package:al_pazar/core/helpers/shared_preferences.dart';
 import 'package:al_pazar/firebase_options.dart';
 import 'package:al_pazar/pazar_app.dart';
 import 'package:bloc/bloc.dart';
@@ -14,9 +15,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // To fix texts being hidden bug in flutter_screenutil in release mode.
+  await Prefs.init();
   setuGetIt();
-  runApp(PazarApp(
-    appRouter: AppRouter(),
-  ));
+  runApp(
+    PazarApp(
+      appRouter: AppRouter(),
+    ),
+  );
 }

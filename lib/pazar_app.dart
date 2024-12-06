@@ -23,7 +23,7 @@ class PazarApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         initialRoute: FirebaseAuthService().isUserLoggedIn()
-            ? Routes.homeScreen
+            ? Routes.signUpEmailScreen
             : Routes.loginEmailScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),

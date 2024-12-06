@@ -1,3 +1,4 @@
+import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -14,7 +15,7 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Kibzar',
+              getUserSavedData().name,
               style: TextStyles.font18DarkBlueBold,
             ),
             Text(

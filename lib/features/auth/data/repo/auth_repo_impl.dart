@@ -77,7 +77,12 @@ class AuthRepoImpl extends AuthRepo {
     try {
       var user = await firebaseAuthService.signInWithEmailAndPassword(
           email: email, password: password);
-      var userEntity = await getUserData(userId: user.uid);
+      var userEntity = await getUserData(
+          userId: user
+              .uid); //getting(retrieving) the data coming from me/user not the firebase authenction
+      await saveUserData(
+          user:
+              userEntity); //after getting the data, Im locally saving it in the shared preferences
       return right(
           // UserModel.fromFirebaseUser(user),
           userEntity);
@@ -114,7 +119,7 @@ class AuthRepoImpl extends AuthRepo {
   Future saveUserData({required UserEntity user}) async {
     var jsonData = jsonEncode(UserModel.fromEntity(user)
         .toMap()); //here I convert the user data into user model and then to Map so I can have same dataype as firestore Map<String,dynamic>, then I JsonEncode it all to be string
-    await SharedPreferences.setString(kUserData,
+    await Prefs.setString(kUserData,
         jsonData); //after encoding done, Im saving it as a string in the shared preferences to save it locally
   }
 }
