@@ -1,4 +1,5 @@
 import 'package:al_pazar/core/routing/routes.dart';
+import 'package:al_pazar/features/collections_all/collection_all_list.dart';
 import 'package:al_pazar/features/home/presentation/ui/home_screen.dart';
 import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
 import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
@@ -37,6 +38,10 @@ class AppRouter {
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder: (_) => const HomeScreen(),
+        );
+      case Routes.collectionAllList:
+        return MaterialPageRoute(
+          builder: (_) => const CollectionAllList(),
         );
       // case Routes.onBoardingLoginScreen:
       //   return MaterialPageRoute(

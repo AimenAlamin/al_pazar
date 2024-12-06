@@ -1,3 +1,5 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theming/styles.dart';
@@ -14,9 +16,14 @@ class CategoriesSeeAll extends StatelessWidget {
           style: TextStyles.font18DarkBlueSemiBold,
         ),
         const Spacer(),
-        Text(
-          'See All',
-          style: TextStyles.font12DarkBlueBold,
+        GestureDetector(
+          onTap: () {
+            context.pushNamed(Routes.collectionAllList);
+          },
+          child: Text(
+            'See All',
+            style: TextStyles.font12DarkBlueBold,
+          ),
         ),
       ],
     );

@@ -27,7 +27,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
         ),
         shadows: [
           BoxShadow(
-            color: Color(0x19000000),
+            color: const Color(0x19000000),
             blurRadius: 25.r,
             offset: Offset(0.r, -2.r),
             spreadRadius: 0.r,
