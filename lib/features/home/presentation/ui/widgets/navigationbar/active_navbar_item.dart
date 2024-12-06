@@ -10,18 +10,16 @@ class ActiveItem extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            image,
-          ),
-          verticalSpace(2),
-          Text(text, style: TextStyles.font12DarkBlueRegular),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          image,
+        ),
+        verticalSpace(2),
+        Text(text, style: TextStyles.font12DarkBlueRegular),
+      ],
     );
   }
 }
