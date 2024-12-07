@@ -1,4 +1,3 @@
-import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
 import 'package:flutter/material.dart';
@@ -42,9 +41,8 @@ class ExploreCategoriesListView extends StatelessWidget {
                     width: 40.w,
                   ),
                 ),
-                verticalSpace(8),
                 Text(
-                  "Cars", // Use category-specific name
+                  "Home &\n Living", // Use category-specific name
                   style: TextStyles.font12DarkBlueRegular,
                 ),
               ],
