@@ -146,42 +146,52 @@ class accountPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                height: 90,
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: const BorderSide(
-                            color: Color.fromARGB(33, 94, 92, 92)))),
-                child: Center(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.favorite_outline,
-                      color: Color.fromARGB(255, 29, 28, 28),
-                    ),
-                    title: Text("Favorite"),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15,
+              InkWell(
+                onTap: () {
+                  context.pushNamed(Routes.favoritesScreen);
+                },
+                child: Container(
+                  height: 90,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: const BorderSide(
+                              color: Color.fromARGB(33, 94, 92, 92)))),
+                  child: Center(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.favorite_outline,
+                        color: Color.fromARGB(255, 29, 28, 28),
+                      ),
+                      title: Text("Favorite"),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),
               ),
-              Container(
-                height: 90,
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: const BorderSide(
-                            color: Color.fromARGB(33, 94, 92, 92)))),
-                child: Center(
-                  child: ListTile(
-                    leading: Icon(
-                      Icons.notifications_outlined,
-                      color: Color.fromARGB(255, 29, 28, 28),
-                    ),
-                    title: Text("Notification"),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 15,
+              InkWell(
+                onTap: () {
+                  context.pushNamed(Routes.notification);
+                },
+                child: Container(
+                  height: 90,
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: const BorderSide(
+                              color: Color.fromARGB(33, 94, 92, 92)))),
+                  child: Center(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.notifications_outlined,
+                        color: Color.fromARGB(255, 29, 28, 28),
+                      ),
+                      title: Text("Notification"),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),

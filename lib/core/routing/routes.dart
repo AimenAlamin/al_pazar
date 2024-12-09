@@ -8,4 +8,6 @@ class Routes {
   static const String homeScreen = '/homePage';
   static const String profile = '/Profile';
   static const String sale = '/sales';
+  static const String notification = '/notify';
+  static const String favoritesScreen = '/favoritesScreen';
 }
