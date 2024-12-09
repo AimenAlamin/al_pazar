@@ -7,6 +7,7 @@ import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/login_em
 import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/add_post/presenation/view/add_post_view.dart';
 import '../../features/auth/domain/repo/auth_repo.dart';
 
 import '../../features/auth/presentation/sign_up/ui/widgets/SignUp_Email/sign_up_email_screen.dart';
@@ -42,6 +43,10 @@ class AppRouter {
       case Routes.collectionAllList:
         return MaterialPageRoute(
           builder: (_) => const CollectionAllList(),
+        );
+      case Routes.addPostView:
+        return MaterialPageRoute(
+          builder: (_) => const AddPostView(),
         );
       // case Routes.onBoardingLoginScreen:
       //   return MaterialPageRoute(
