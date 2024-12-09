@@ -22,9 +22,10 @@ class PazarApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: FirebaseAuthService().isUserLoggedIn()
-            ? Routes.homeScreen
-            : Routes.loginEmailScreen,
+        initialRoute: Routes.postingScreen,
+        // FirebaseAuthService().isUserLoggedIn()
+        //     ? Routes.homeScreen
+        //     : Routes.loginEmailScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
