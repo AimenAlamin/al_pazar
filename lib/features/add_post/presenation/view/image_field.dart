@@ -1,3 +1,4 @@
+// import 'dart:io';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -16,23 +17,13 @@ class ImageField extends StatefulWidget {
 class _ImageFieldState extends State<ImageField> {
   File? fileImage;
   bool isLoaded = false;
+
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
       enabled: isLoaded,
       child: GestureDetector(
-        onTap: () async {
-          isLoaded = true;
-          setState(() {});
-          try {
-            await pick_image();
-          } catch (e) {
-            isLoaded = false;
-            setState(() {});
-          }
-          isLoaded = false;
-          setState(() {});
-        },
+        onTap: () => showImagePickerOptions(),
         child: Stack(
           children: [
             Container(
@@ -46,28 +37,11 @@ class _ImageFieldState extends State<ImageField> {
                   top: Radius.circular(12.0.r),
                 ),
                 child: fileImage != null
-                    ? Image.file(
-                        fileImage!,
-                      )
+                    ? Image.file(fileImage!)
                     : Icon(
                         Icons.image_outlined,
                         size: 100.r,
                       ),
-                // child: Container(
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     border: Border.all(
-                //       color: Colors.grey,
-                //     ),
-                //   ),
-                //   width: double.infinity,
-                // child: fileImage != null
-                //     ? Image.file(fileImage!)
-                //     : Icon(
-                //         Icons.image_outlined,
-                //           size: 100.r,
-                //         ),
-                // ),
               ),
             ),
             Visibility(
@@ -75,7 +49,7 @@ class _ImageFieldState extends State<ImageField> {
               child: IconButton(
                 onPressed: () {
                   fileImage = null;
-                  widget.onImageSelected(fileImage);
+                  widget.onImageSelected(null);
                   setState(() {});
                 },
                 icon: const Icon(
@@ -90,10 +64,53 @@ class _ImageFieldState extends State<ImageField> {
     );
   }
 
-  Future<void> pick_image() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    fileImage = File(image!.path);
-    widget.onImageSelected(fileImage!);
+  /// Function to show modal bottom sheet with options
+  void showImagePickerOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Upload from Gallery'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  pick_image(ImageSource.gallery);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Take Photo'),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  pick_image(ImageSource.camera);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  /// Function to pick an image from the specified source
+  Future<void> pick_image(ImageSource source) async {
+    setState(() => isLoaded = true);
+
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: source);
+
+      if (image != null) {
+        fileImage = File(image.path);
+        widget.onImageSelected(fileImage);
+      }
+    } catch (e) {
+      // Handle any errors if necessary
+    } finally {
+      setState(() => isLoaded = false);
+    }
   }
 }
