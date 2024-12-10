@@ -6,7 +6,7 @@ class PostingViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text("body"),
+      body: Text("bodys"),
     );
   }
 }

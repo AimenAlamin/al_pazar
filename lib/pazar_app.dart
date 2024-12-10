@@ -1,5 +1,5 @@
 import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/core/services/firebase_auth_services.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,10 +22,17 @@ class PazarApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
         initialRoute: Routes.postingScreen,
         // FirebaseAuthService().isUserLoggedIn()
         //     ? Routes.homeScreen
         //     : Routes.loginEmailScreen,
+=======
+        // initialRoute: FirebaseAuthService().isUserLoggedIn()
+        //     ? Routes.homeScreen
+        //     : Routes.loginEmailScreen,
+        initialRoute: Routes.addPostView,
+>>>>>>> 2b112da1ca54e6c3249ee2219359ed5b312741f7
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
