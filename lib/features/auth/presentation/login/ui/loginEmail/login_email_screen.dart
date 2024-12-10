@@ -1,5 +1,5 @@
-import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
-import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/email_and_password.dart';
+import '../../cubit/login_email_cubit.dart';
+import 'email_and_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

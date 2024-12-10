@@ -1,4 +1,4 @@
-import 'package:al_pazar/core/theming/colors.dart';
+import '../colors.dart';
 import 'package:flutter/material.dart';
 
 loadingWidget(context) => showDialog(

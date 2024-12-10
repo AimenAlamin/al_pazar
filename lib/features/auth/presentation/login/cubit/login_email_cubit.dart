@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+
 import '../../../domain/entity/user_entity.dart';
 import '../../../domain/repo/auth_repo.dart';
 

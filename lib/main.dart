@@ -1,6 +1,6 @@
-import 'package:al_pazar/core/helpers/shared_preferences.dart';
-import 'package:al_pazar/firebase_options.dart';
-import 'package:al_pazar/pazar_app.dart';
+import 'core/helpers/shared_preferences.dart';
+import 'firebase_options.dart';
+import 'pazar_app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

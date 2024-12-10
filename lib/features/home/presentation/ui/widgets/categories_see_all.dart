@@ -1,5 +1,5 @@
-import 'package:al_pazar/core/helpers/extensions.dart';
-import 'package:al_pazar/core/routing/routes.dart';
+import '../../../../../core/helpers/extensions.dart';
+import '../../../../../core/routing/routes.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theming/styles.dart';

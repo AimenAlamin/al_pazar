@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:al_pazar/core/services/storage_service.dart';
+import 'storage_service.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart'
     as p; //importing path as p which is a package that provides the filename and extension from a path

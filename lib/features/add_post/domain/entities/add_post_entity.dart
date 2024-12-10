@@ -8,7 +8,7 @@ class PostEntity {
   final String category;
   final String currency;
   final File image;
-  final String? imageUrl;
+  String? imageUrl;
 
   PostEntity(
       {required this.title,

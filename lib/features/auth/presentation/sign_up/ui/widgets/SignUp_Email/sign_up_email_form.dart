@@ -1,8 +1,8 @@
-import 'package:al_pazar/core/helpers/app_regex.dart';
-import 'package:al_pazar/core/helpers/spacing.dart';
-import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
-import 'package:al_pazar/features/auth/presentation/sign_up/ui/widgets/password_validations.dart';
-import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
+import '../../../../../../../core/helpers/app_regex.dart';
+import '../../../../../../../core/helpers/spacing.dart';
+import '../../../../../../../core/theming/widgets/app_text_form_field.dart';
+import '../password_validations.dart';
+import '../../../cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

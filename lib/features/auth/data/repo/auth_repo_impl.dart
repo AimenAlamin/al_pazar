@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:al_pazar/core/errors/exception.dart';
-import 'package:al_pazar/core/errors/failure.dart';
-import 'package:al_pazar/core/helpers/constants.dart';
-import 'package:al_pazar/core/helpers/endpoints.dart';
-import 'package:al_pazar/core/helpers/shared_preferences.dart';
-import 'package:al_pazar/core/services/data_serivce.dart';
+import '../../../../core/errors/exception.dart';
+import '../../../../core/errors/failure.dart';
+import '../../../../core/helpers/constants.dart';
+import '../../../../core/helpers/endpoints.dart';
+import '../../../../core/helpers/shared_preferences.dart';
+import '../../../../core/services/data_serivce.dart';
 
-import 'package:al_pazar/features/auth/domain/entity/user_entity.dart';
+import '../../domain/entity/user_entity.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,7 +1,7 @@
-import 'package:al_pazar/features/home/presentation/ui/widgets/categories_see_all.dart';
-import 'package:al_pazar/features/home/presentation/ui/widgets/navigationbar/custom_bottom_navbar.dart';
-import 'package:al_pazar/features/home/presentation/ui/widgets/home_topbar.dart';
-import 'package:al_pazar/features/home/presentation/ui/widgets/search_textfield.dart';
+import 'widgets/categories_see_all.dart';
+import 'widgets/navigationbar/custom_bottom_navbar.dart';
+import 'widgets/home_topbar.dart';
+import 'widgets/search_textfield.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';

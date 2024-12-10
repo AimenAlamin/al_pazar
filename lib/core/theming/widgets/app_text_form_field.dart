@@ -1,5 +1,5 @@
-import 'package:al_pazar/core/theming/colors.dart';
-import 'package:al_pazar/core/theming/styles.dart';
+import '../colors.dart';
+import '../styles.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';

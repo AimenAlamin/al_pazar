@@ -1,7 +1,7 @@
-import 'package:al_pazar/core/helpers/extensions.dart';
-import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/core/theming/styles.dart';
-import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
+import '../../../../../../../core/helpers/extensions.dart';
+import '../../../../../../../core/routing/routes.dart';
+import '../../../../../../../core/theming/styles.dart';
+import '../../../cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

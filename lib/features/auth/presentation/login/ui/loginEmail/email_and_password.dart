@@ -1,5 +1,5 @@
-import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
-import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
+import '../../../../../../core/theming/widgets/app_text_form_field.dart';
+import '../../cubit/login_email_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

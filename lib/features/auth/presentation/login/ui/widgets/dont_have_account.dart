@@ -1,8 +1,8 @@
-import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/theming/styles.dart';
+import '../../../../../../core/helpers/extensions.dart';
 import '../../../../../../core/routing/routes.dart';
 
 class DontHaveAccountText extends StatelessWidget {

@@ -1,10 +1,10 @@
-import 'package:al_pazar/core/routing/routes.dart';
-import 'package:al_pazar/features/collections_all/collection_all_list.dart';
-import 'package:al_pazar/features/home/presentation/ui/home_screen.dart';
-import 'package:al_pazar/features/auth/presentation/login/cubit/login_email_cubit.dart';
-import 'package:al_pazar/features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
+import 'routes.dart';
+import '../../features/collections_all/collection_all_list.dart';
+import '../../features/home/presentation/ui/home_screen.dart';
+import '../../features/auth/presentation/login/cubit/login_email_cubit.dart';
+import '../../features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
 
-import 'package:al_pazar/features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
+import '../../features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/add_post/presenation/view/add_post_view.dart';

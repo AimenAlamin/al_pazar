@@ -1,4 +1,4 @@
-import 'package:al_pazar/core/services/data_serivce.dart';
+import 'data_serivce.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 

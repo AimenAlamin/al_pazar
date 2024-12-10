@@ -1,5 +1,5 @@
-import 'package:al_pazar/core/helpers/spacing.dart';
-import 'package:al_pazar/core/theming/styles.dart';
+import '../../../../../../core/helpers/spacing.dart';
+import '../../../../../../core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -1,4 +1,4 @@
-import 'package:al_pazar/core/helpers/extensions.dart';
+import '../../helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

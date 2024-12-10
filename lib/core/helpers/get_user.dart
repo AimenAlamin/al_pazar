@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:al_pazar/core/helpers/constants.dart';
-import 'package:al_pazar/core/helpers/shared_preferences.dart';
+import 'constants.dart';
+import 'shared_preferences.dart';
 
 import '../../features/auth/data/model/user_model.dart';
 import '../../features/auth/domain/entity/user_entity.dart';

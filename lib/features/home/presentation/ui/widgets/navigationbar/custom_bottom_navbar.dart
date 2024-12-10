@@ -1,4 +1,4 @@
-import 'package:al_pazar/features/home/domain/entities/bottom_navbar_entity.dart';
+import '../../../../domain/entities/bottom_navbar_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
