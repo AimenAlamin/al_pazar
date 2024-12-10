@@ -23,9 +23,9 @@ class AddPostCubit extends Cubit<AddPostState> {
     }, (url) async {
       postEntity.imageUrl =
           url; //2nd retrieving the image url after successful upload
-      var result = await postRepo.addPosts(
+      var finalresult = await postRepo.addPosts(
           postEntity); //3rd adding all the post entity to the database(firestore)
-      result.fold((failure) {
+      finalresult.fold((failure) {
         emit(
           AddPostFailure(failure.message),
         );
