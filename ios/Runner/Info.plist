@@ -45,6 +45,10 @@
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Kibzar requires access to your photo library to enable image uploads for your posts</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Kibzar requires camera access to capture photos for your posts</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
 	</dict>
