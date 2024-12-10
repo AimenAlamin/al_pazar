@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:al_pazar/core/theming/styles.dart';
 import 'package:al_pazar/core/theming/widgets/app_text_form_field.dart';
+import 'package:al_pazar/features/add_post/presenation/view/domain/entities/add_post_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
@@ -18,7 +19,7 @@ class AddPostViewBody extends StatefulWidget {
 class _AddPostViewBodyState extends State<AddPostViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  late String title, description, location, category;
+  late String title, description, location, category, currency;
   late int price;
   File? image;
   @override
@@ -112,6 +113,15 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                   if (image != null) {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
+                      PostEntity addPostEntity = PostEntity(
+                        title: title,
+                        description: description,
+                        location: location,
+                        price: price,
+                        category: category,
+                        currency: currency,
+                        image: image!,
+                      );
                     } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});
