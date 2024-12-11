@@ -1,7 +1,7 @@
 import 'package:al_pazar/core/helpers/endpoints.dart';
 import 'package:al_pazar/core/services/data_serivce.dart';
 import 'package:al_pazar/features/add_post/data/models/post_model.dart';
-import 'package:al_pazar/features/add_post/domain/entities/add_post_entity.dart';
+import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
 
 import '../../../../../core/errors/failure.dart';
 

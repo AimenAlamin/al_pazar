@@ -10,6 +10,7 @@ class PostEntity {
   final String currency;
   final File image;
   String? imageUrl;
+  // List<<CategoryEntity> categories;
 
   PostEntity(
       {required this.title,

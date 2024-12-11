@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:al_pazar/features/add_post/domain/entities/add_post_entity.dart';
+import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
 
 class PostModel {
   final String title;

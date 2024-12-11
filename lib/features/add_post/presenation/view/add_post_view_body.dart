@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/theming/styles.dart';
 import '../../../../core/theming/widgets/app_text_form_field.dart';
-import '../../domain/entities/add_post_entity.dart';
+import '../../domain/entities/post_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
