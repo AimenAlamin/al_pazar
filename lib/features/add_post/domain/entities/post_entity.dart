@@ -8,7 +8,7 @@ class PostEntity {
   final String category;
   final String subCategory;
   final String currency;
-  final File image;
+  File? image;
   String? imageUrl;
   // List<<CategoryEntity> categories;
 
@@ -21,5 +21,5 @@ class PostEntity {
       required this.category,
       required this.subCategory,
       required this.currency,
-      required this.image});
+      this.image});
 }

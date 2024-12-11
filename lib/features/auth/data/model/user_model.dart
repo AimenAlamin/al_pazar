@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../domain/entity/user_entity.dart';
 
 class UserModel extends UserEntity {
-  //here we extend the UserEntity class and we have pass to it the model "using super"
+  //here we extend the UserEntity class and we have pass to it the model "using super" creating a relation between the two classes
   UserModel({
     required super.name,
     required super.email,

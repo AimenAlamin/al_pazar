@@ -103,7 +103,7 @@ class AuthRepoImpl extends AuthRepo {
     await databaseService.addData(
         path: BackEndpoint.setUserEndpoint,
         data: UserModel.fromEntity(user)
-            .toMap(), //here we first create a model from the user data received and then convert it to a map becuase firestore data is in maps
+            .toMap(), //here we send the user detials as a map becuase firestore data is in maps
         documentId: user.uId);
   }
 

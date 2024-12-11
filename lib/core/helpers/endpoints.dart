@@ -4,4 +4,5 @@ class BackEndpoint {
   static const getUserEndpoint = 'users';
   static const imagesPathName = 'images';
   static const postsCollection = 'posts';
+  static const getPostsCollection = 'posts';
 }

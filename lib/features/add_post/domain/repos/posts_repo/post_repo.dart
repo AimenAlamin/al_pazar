@@ -6,5 +6,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class PostRepo {
   Future<Either<Failure, void>> addPosts(PostEntity postEntity);
-  //Future<Either<Failure, AddPostEntity>> addPost(Post post);
+  Future<Either<Failure, List<PostEntity>>> getPosts();
 }

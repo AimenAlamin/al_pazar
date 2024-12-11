@@ -10,7 +10,7 @@ class PostModel {
   final String category;
   final String subCategory;
   final String currency;
-  final File image;
+  File? image;
   String? imageUrl;
 
   PostModel(
@@ -22,8 +22,8 @@ class PostModel {
       required this.category,
       required this.currency,
       required this.subCategory,
-      required this.image});
-
+      this.image});
+//this is a factory constructor that takes a postEntity and returns a postModel, needed when we want to send the postEntity to the database
   factory PostModel.fromEntity(PostEntity postEntity) {
     return PostModel(
       title: postEntity.title,
@@ -37,6 +37,20 @@ class PostModel {
       imageUrl: postEntity.imageUrl,
     );
   }
+//this is a factory constructor that takes a map of strings and dynamic and returns a postModel, needed when we want to get the postModel from the database
+  factory PostModel.fromJson(Map<String, dynamic> json) {
+    return PostModel(
+      title: json['title'],
+      description: json['description'],
+      location: json['location'],
+      price: json['price'],
+      category: json['category'],
+      subCategory: json['subCategory'],
+      currency: json['currency'],
+      imageUrl: json['imageUrl'],
+    );
+  }
+  //this method is used to convert the postModel to a map of strings and dynamic, needed when we want to send the postModel to the database
   toJson() {
     return {
       'title': title,
@@ -48,5 +62,19 @@ class PostModel {
       'subCategory': subCategory,
       'imageUrl': imageUrl,
     };
+  }
+
+  // this method is used to convert the postModel to a postEntity, needed when we want to retrieve the data from the database and display it in the UI
+  PostEntity toEntity() {
+    return PostEntity(
+      title: title,
+      description: description,
+      location: location,
+      price: price,
+      category: category,
+      currency: currency,
+      subCategory: subCategory,
+      imageUrl: imageUrl,
+    );
   }
 }

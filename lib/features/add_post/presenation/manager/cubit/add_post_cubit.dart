@@ -15,7 +15,7 @@ class AddPostCubit extends Cubit<AddPostState> {
   Future<void> addPost(PostEntity postEntity) async {
     emit(AddPostLoading());
     var result = await imagesRepo.uploadImage(
-        postEntity.image); // 1st uploading the image to the storage
+        postEntity.image!); // 1st uploading the image to the storage
     result.fold((failure) {
       emit(
         AddPostFailure(failure.message),

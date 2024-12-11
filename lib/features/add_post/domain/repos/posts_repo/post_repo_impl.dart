@@ -24,4 +24,30 @@ class PostRepoImpl implements PostRepo {
       return Left(ServerFailure("Failed to add post"));
     }
   }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getPosts() async {
+    try {
+      var postData = await databaseService.getData(
+          //type casting because I know I will receive a list of maps of strings and dynamic
+          path: BackEndpoint.postsCollection) as List<Map<String, dynamic>>;
+      //
+      //1st way. detialed
+      //mapping each item in the collection and then parse it to a list of postModels
+      // List<PostModel> postModels =
+      //     postData.map((item) => PostModel.fromJson(item)).toList();
+      // //mapping each item in the list of postModels and then parse it to a list of postEntities because the method should return a list of postEntities
+      // List<PostEntity> postEntities =
+      //     postData.map((e) => e.toEntity()).toList();
+      // return Right(postEntities);
+      //
+      //2nd way. shortcut
+      List<PostEntity> posts =
+          postData.map((e) => PostModel.fromJson(e).toEntity()).toList();
+
+      return Right(posts);
+    } catch (e) {
+      return Left(ServerFailure("Failed to get posts"));
+    }
+  }
 }
