@@ -8,6 +8,7 @@ class PostModel {
   final String location;
   final int price;
   final String category;
+  final String subCategory;
   final String currency;
   final File image;
   String? imageUrl;
@@ -20,6 +21,7 @@ class PostModel {
       required this.price,
       required this.category,
       required this.currency,
+      required this.subCategory,
       required this.image});
 
   factory PostModel.fromEntity(PostEntity postEntity) {
@@ -29,8 +31,10 @@ class PostModel {
       location: postEntity.location,
       price: postEntity.price,
       category: postEntity.category,
+      subCategory: postEntity.subCategory,
       currency: postEntity.currency,
       image: postEntity.image,
+      imageUrl: postEntity.imageUrl,
     );
   }
   toJson() {
@@ -41,7 +45,8 @@ class PostModel {
       'price': price,
       'category': category,
       'currency': currency,
-      'image': image,
+      'subCategory': subCategory,
+      'imageUrl': imageUrl,
     };
   }
 }

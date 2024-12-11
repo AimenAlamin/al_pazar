@@ -11,7 +11,7 @@ class AddPostCubit extends Cubit<AddPostState> {
   final ImagesRepo imagesRepo;
   final PostRepo postRepo;
 
-//method triggered when the user clicks the post sumbit button
+//method triggered and receive the value of its parameter when the user clicks the post sumbit button
   Future<void> addPost(PostEntity postEntity) async {
     emit(AddPostLoading());
     var result = await imagesRepo.uploadImage(

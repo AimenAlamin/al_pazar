@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/theming/styles.dart';
 import '../../../../core/theming/widgets/app_text_form_field.dart';
 import '../../domain/entities/add_post_entity.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/widgets/app_text_button.dart';
+import '../manager/cubit/add_post_cubit.dart';
 import 'image_field.dart';
 
 class AddPostViewBody extends StatefulWidget {
@@ -19,7 +22,7 @@ class AddPostViewBody extends StatefulWidget {
 class _AddPostViewBodyState extends State<AddPostViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  late String title, description, location, category, currency;
+  late String title, description, location, category, currency, subCategory;
   late int price;
   File? image;
   @override
@@ -56,6 +59,20 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                 },
                 onSaved: (value) {
                   price = int.parse(value!);
+                },
+                // controller: context.read<SignUpEmailCubit>().nameController,
+              ),
+              verticalSpace(18),
+              AppTextFormField(
+                hintText: 'Currency',
+
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                },
+                onSaved: (value) {
+                  currency = value!;
                 },
                 // controller: context.read<SignUpEmailCubit>().nameController,
               ),
@@ -100,6 +117,19 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                 // controller: context.read<SignUpEmailCubit>().nameController,
               ),
               verticalSpace(18),
+              AppTextFormField(
+                hintText: 'SubCategory',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field is required';
+                  }
+                },
+                onSaved: (value) {
+                  subCategory = value!;
+                },
+                // controller: context.read<SignUpEmailCubit>().nameController,
+              ),
+              verticalSpace(18),
               ImageField(
                 onImageSelected: (image) {
                   this.image = image;
@@ -114,6 +144,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       PostEntity addPostEntity = PostEntity(
+                        subCategory: subCategory,
                         title: title,
                         description: description,
                         location: location,
@@ -122,6 +153,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         currency: currency,
                         image: image!,
                       );
+                      context.read<AddPostCubit>().addPost(addPostEntity);
                     } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});

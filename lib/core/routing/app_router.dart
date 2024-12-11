@@ -48,6 +48,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const AddPostView(),
         );
+
       // case Routes.onBoardingLoginScreen:
       //   return MaterialPageRoute(
       //     builder: (_) => const OnBoardingLoginScreen(),

@@ -6,6 +6,7 @@ class PostEntity {
   final String location;
   final int price;
   final String category;
+  final String subCategory;
   final String currency;
   final File image;
   String? imageUrl;
@@ -17,6 +18,7 @@ class PostEntity {
       required this.location,
       required this.price,
       required this.category,
+      required this.subCategory,
       required this.currency,
       required this.image});
 }
