@@ -25,6 +25,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
   late String title, description, location, category, currency, subCategory;
   late int price;
   File? image;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -152,6 +153,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         category: category,
                         currency: currency,
                         image: image!,
+                        timestamp: DateTime.now(),
                       );
                       context.read<AddPostCubit>().addPost(addPostEntity);
                     } else {

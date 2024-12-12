@@ -10,6 +10,7 @@ class PostEntity {
   final String currency;
   File? image;
   String? imageUrl;
+  final DateTime timestamp;
   // List<<CategoryEntity> categories;
 
   PostEntity(
@@ -21,5 +22,6 @@ class PostEntity {
       required this.category,
       required this.subCategory,
       required this.currency,
+      required this.timestamp,
       this.image});
 }

@@ -12,6 +12,7 @@ class PostModel {
   final String currency;
   File? image;
   String? imageUrl;
+  final DateTime timestamp;
 
   PostModel(
       {required this.title,
@@ -22,6 +23,7 @@ class PostModel {
       required this.category,
       required this.currency,
       required this.subCategory,
+      required this.timestamp,
       this.image});
 //this is a factory constructor that takes a postEntity and returns a postModel, needed when we want to send the postEntity to the database
   factory PostModel.fromEntity(PostEntity postEntity) {
@@ -35,6 +37,7 @@ class PostModel {
       currency: postEntity.currency,
       image: postEntity.image,
       imageUrl: postEntity.imageUrl,
+      timestamp: postEntity.timestamp,
     );
   }
 //this is a factory constructor that takes a map of strings and dynamic and returns a postModel, needed when we want to get the postModel from the database
@@ -48,6 +51,8 @@ class PostModel {
       subCategory: json['subCategory'],
       currency: json['currency'],
       imageUrl: json['imageUrl'],
+      timestamp: DateTime.parse(json[
+          'timestamp']), //converting the timestamp from a string to a DateTime object
     );
   }
   //this method is used to convert the postModel to a map of strings and dynamic, needed when we want to send the postModel to the database
@@ -61,6 +66,8 @@ class PostModel {
       'currency': currency,
       'subCategory': subCategory,
       'imageUrl': imageUrl,
+      'timestamp':
+          timestamp.toIso8601String(), //converting the timestamp to a string
     };
   }
 
@@ -75,6 +82,7 @@ class PostModel {
       currency: currency,
       subCategory: subCategory,
       imageUrl: imageUrl,
+      timestamp: timestamp,
     );
   }
 }

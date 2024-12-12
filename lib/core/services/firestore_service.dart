@@ -19,15 +19,33 @@ class FireStoreService implements DatabaseService {
   }
 
   @override
-  Future<dynamic> getData({required String path, String? documentID}) async {
+  //This method accept query to fetch specific list, accept documentID to document related with the user or specific documentID
+  Future<dynamic> getData(
+      {required String path,
+      String? documentID,
+      Map<String, dynamic>? query}) async {
     if (documentID != null) {
+      //fetch a specific document, get one item(document)
       var snapshot = await firestore.collection(path).doc(documentID).get();
       return snapshot.data();
-    } else {
-      var snapshot = await firestore
-          .collection(path)
-          .get(); //fetch all documents in the collection
-      return snapshot.docs
+    } else //fetch all documents, get all items(documents)
+    {
+      Query<Map<String, dynamic>> snapshotlist = firestore.collection(path);
+      if (query != null) {
+        //fetch from the collection based on the query that I want to retrieve
+        if (query['orderBy'] != null) {
+          var orderByField = query['orderBy'];
+          var newest = query['descending'];
+          snapshotlist = snapshotlist.orderBy(orderByField, descending: newest);
+          // if(query['limit'] != null)
+          // { var limit = query['limit'];
+          //   snapshotlist = snapshotlist.limit(limit);
+          // }
+        }
+      }
+      //get the data based on the query recieved. if no query is provided, it will get all the data
+      var result = await snapshotlist.get();
+      return result.docs
           .map((e) => e.data())
           .toList(); //map the data of each document to a list
     }
