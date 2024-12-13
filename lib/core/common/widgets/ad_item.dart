@@ -4,14 +4,27 @@ import 'package:al_pazar/core/helpers/custom_timeago.dart';
 import 'package:al_pazar/core/theming/styles.dart';
 import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AdItem extends StatelessWidget {
+class AdItem extends StatefulWidget {
   const AdItem({
     super.key,
     required this.posts,
   });
   final PostEntity posts;
+
+  @override
+  State<AdItem> createState() => _AdItemState();
+}
+
+class _AdItemState extends State<AdItem> {
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<FetchPostCubit>().fetchPosts();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +41,7 @@ class AdItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: CustomNetworkImage(imageUrl: posts.imageUrl!),
+            child: CustomNetworkImage(imageUrl: widget.posts.imageUrl!),
           ),
           horizontalSpace(16),
           Expanded(
@@ -36,28 +49,28 @@ class AdItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${posts.currency} ${posts.price}',
+                  '${widget.posts.currency} ${widget.posts.price}',
                   style: TextStyles.font20BlueBold,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 verticalSpace(8),
                 Text(
-                  posts.title,
+                  widget.posts.title,
                   style: TextStyles.font14DarkBlueMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 verticalSpace(8),
                 Text(
-                  posts.location,
+                  widget.posts.location,
                   style: TextStyles.font13GrayMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 verticalSpace(8),
                 Text(
-                  TimeAgoHelper.getTimeAgo(posts.timestamp),
+                  TimeAgoHelper.getTimeAgo(widget.posts.timestamp),
                   style: TextStyles.font13GrayMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
