@@ -158,7 +158,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         timestamp: DateTime.now(),
                       );
                       context.read<AddPostCubit>().addPost(addPostEntity);
-                      context.pushNamed(Routes.mainView);
+                      //context.pushNamed(Routes.mainView);
                     } else {
                       autovalidateMode = AutovalidateMode.always;
                       setState(() {});
