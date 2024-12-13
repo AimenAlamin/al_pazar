@@ -1,4 +1,3 @@
-import 'package:al_pazar/core/common/widgets/custom_network_image.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/helpers/custom_timeago.dart';
 import 'package:al_pazar/core/theming/styles.dart';
@@ -28,7 +27,12 @@ class AdItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: CustomNetworkImage(imageUrl: posts.imageUrl!),
+            child: Image.network(
+              posts.imageUrl!,
+              width: 110.w,
+              height: 120.h,
+              fit: BoxFit.cover,
+            ),
           ),
           horizontalSpace(16),
           Expanded(

@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'nav_bar_item.dart';
 
 class CustomBottomNavbar extends StatefulWidget {
-  const CustomBottomNavbar({super.key});
-
+  const CustomBottomNavbar({super.key, required this.onItemTapped});
+  final ValueChanged<int> onItemTapped;
   @override
   State<CustomBottomNavbar> createState() => _CustomBottomNavbarState();
 }
@@ -43,6 +43,7 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
                 setState(() {
                   selectedIndex = e
                       .key; // here we assign what is selected from the buttons navbar to the selectedIndex
+                  widget.onItemTapped(e.key);
                 });
               },
               child: NavbarItem(

@@ -36,7 +36,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           verticalSpace(24),
           const SearchTextfield(),
           verticalSpace(18),
-          const CategoriesSeeAll(text: "Check me out"),
+          const CategoriesSeeAll(text: "Explore Categories"),
           verticalSpace(18),
           //const PostsListedview(),
           const ExploreCategoriesListView(),

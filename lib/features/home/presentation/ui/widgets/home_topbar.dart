@@ -19,7 +19,7 @@ class HomeTopBar extends StatelessWidget {
               style: TextStyles.font18DarkBlueBold,
             ),
             Text(
-              'All in one',
+              '',
               style: TextStyles.font14GrayRegular,
             ),
           ],
