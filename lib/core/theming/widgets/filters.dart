@@ -14,7 +14,7 @@ class FilterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed(Routes.homeScreen);
+        context.pushNamed(Routes.mainView);
       },
       child: Container(
         padding: const EdgeInsets.all(12),

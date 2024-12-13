@@ -20,6 +20,7 @@ void setuGetIt() {
   getIt.registerSingleton<StoargeService>(FirebaseStorageService());
   getIt.registerSingleton<ImagesRepo>(
       ImagesRepoImpl(getIt.get<StoargeService>()));
+
   getIt.registerSingleton<PostRepo>(PostRepoImpl(getIt.get<DatabaseService>()));
 
   getIt.registerSingleton<AuthRepo>(
@@ -29,4 +30,9 @@ void setuGetIt() {
           DatabaseService>(), //because its required we didn't use ".get"getIt.get<DatabaseService>()
     ),
   );
+  // getIt.registerSingleton<PostRepo>(
+  //   PostRepoImpl(
+  //     getIt<DatabaseService>(),
+  //   ),
+  // );
 }

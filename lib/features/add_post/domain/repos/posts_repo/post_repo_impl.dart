@@ -34,7 +34,7 @@ class PostRepoImpl implements PostRepo {
           //here we pass/mention(query) to the method impleting getData and tell it how we want to get the posts. so we make the firestore handle the query
           query: {
             "orderBy": "timestamp",
-            "descending": "true",
+            "descending": true
           }) as List<Map<String, dynamic>>;
 
       List<PostEntity> posts =

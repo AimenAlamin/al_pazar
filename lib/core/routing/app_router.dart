@@ -1,6 +1,6 @@
 import 'routes.dart';
 import '../../features/collections_all/collection_all_list.dart';
-import '../../features/home/presentation/ui/home_screen.dart';
+import '../../features/home/presentation/ui/home_main_view.dart';
 import '../../features/auth/presentation/login/cubit/login_email_cubit.dart';
 import '../../features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
 
@@ -36,9 +36,9 @@ class AppRouter {
           ),
         );
 
-      case Routes.homeScreen:
+      case Routes.mainView:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const MainView(),
         );
       case Routes.collectionAllList:
         return MaterialPageRoute(

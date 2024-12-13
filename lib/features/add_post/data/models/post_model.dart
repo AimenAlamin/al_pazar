@@ -4,11 +4,11 @@ import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
 
 class PostModel {
   final String title;
-  final String description;
+  String? description;
   final String location;
   final int price;
-  final String category;
-  final String subCategory;
+  String? category;
+  String? subCategory;
   final String currency;
   File? image;
   String? imageUrl;
@@ -16,24 +16,24 @@ class PostModel {
 
   PostModel(
       {required this.title,
-      this.imageUrl,
-      required this.description,
       required this.location,
       required this.price,
-      required this.category,
       required this.currency,
-      required this.subCategory,
       required this.timestamp,
-      this.image});
+      this.description,
+      this.category,
+      this.subCategory,
+      this.image,
+      this.imageUrl});
 //this is a factory constructor that takes a postEntity and returns a postModel, needed when we want to send the postEntity to the database
   factory PostModel.fromEntity(PostEntity postEntity) {
     return PostModel(
       title: postEntity.title,
-      description: postEntity.description,
+      description: postEntity.description!,
       location: postEntity.location,
       price: postEntity.price,
-      category: postEntity.category,
-      subCategory: postEntity.subCategory,
+      category: postEntity.category!,
+      subCategory: postEntity.subCategory!,
       currency: postEntity.currency,
       image: postEntity.image,
       imageUrl: postEntity.imageUrl,
