@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../routing/routes.dart';
-import '../colors.dart';
 
 class FilterWidget extends StatelessWidget {
   const FilterWidget({
@@ -19,7 +18,7 @@ class FilterWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: const ShapeDecoration(
-          color: ColorsManager.moreLighterGray,
+          color: Colors.white,
           shape: OvalBorder(),
         ),
         child: SvgPicture.asset("assets/svgs/filters.svg"),
