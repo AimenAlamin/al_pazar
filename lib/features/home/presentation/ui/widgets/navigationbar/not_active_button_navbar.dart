@@ -9,16 +9,19 @@ class NotActive extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          image,
-        ),
-        verticalSpace(2),
-        Text(text, style: TextStyles.font12DarkBlueRegular),
-      ],
+    return Container(
+      color: Colors.transparent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            image,
+          ),
+          verticalSpace(2),
+          Text(text, style: TextStyles.font12DarkBlueRegular),
+        ],
+      ),
     );
   }
 }
