@@ -52,7 +52,7 @@ class _AdItemState extends State<AdItem> {
               children: [
                 Text(
                   '${widget.posts.currency} ${widget.posts.price}',
-                  style: TextStyles.font20BlueBold,
+                  style: TextStyles.font16BlueBold,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

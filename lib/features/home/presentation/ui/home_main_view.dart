@@ -18,17 +18,20 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int currentViewIndex = 0;
-  void onItemTapped(int index) {
-    setState(() {
-      currentViewIndex = index;
-    });
-  }
+  // void onItemTapped(int index) {
+  //   setState(() {
+  //     currentViewIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: CustomBottomNavbar(
-        onItemTapped: onItemTapped,
+        onItemTapped: (index) {
+          currentViewIndex = index;
+          setState(() {});
+        },
       ),
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -40,19 +43,19 @@ class _MainViewState extends State<MainView> {
             20.0,
             28.0,
           ),
-          child: getCurrentView(),
+          child: IndexedStack(
+            //indexed stack is used to show the current view index without losing the state of the previous view to avoid rebuilding the view
+            index: currentViewIndex,
+            children: const [
+              HomeView(),
+              FavoritesView(),
+              AddPostView(),
+              ChatView(),
+              AccountView(),
+            ],
+          ),
         ),
       ),
     );
-  }
-
-  Widget getCurrentView() {
-    return [
-      const HomeView(),
-      const FavoritesView(),
-      const AddPostView(),
-      const ChatView(),
-      const AccountView(),
-    ][currentViewIndex];
   }
 }
