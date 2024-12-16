@@ -1,3 +1,5 @@
+import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
+
 import 'routes.dart';
 import '../../features/collections_all/collection_all_list.dart';
 import '../../features/home/presentation/ui/home_main_view.dart';
@@ -47,6 +49,10 @@ class AppRouter {
       case Routes.addPostView:
         return MaterialPageRoute(
           builder: (_) => const AddPostView(),
+        );
+      case Routes.postDetailScreen:
+        return MaterialPageRoute(
+          builder: (_) => const PostDetialsScreen(),
         );
 
       // case Routes.onBoardingLoginScreen:

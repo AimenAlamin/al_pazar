@@ -7,17 +7,43 @@ import 'filters.dart';
 AppBar buildAppBar(context,
     {required String title,
     bool showBackButton = true,
-    bool showNotification = true}) {
+    bool showFilterButton = false,
+    bool showShareButton = false,
+    bool showFavouriteButton = false}) {
   return AppBar(
     backgroundColor: Colors.white,
     actions: [
       Visibility(
-        visible: showNotification,
+        visible: showFilterButton,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.r),
           child: const FilterWidget(),
         ),
-      )
+      ),
+      Visibility(
+        visible: showFavouriteButton,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.r),
+          child: GestureDetector(
+            onTap: () {},
+            child: const Icon(
+              Icons.favorite_outline_outlined,
+            ),
+          ),
+        ),
+      ),
+      Visibility(
+        visible: showShareButton,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.r),
+          child: GestureDetector(
+            onTap: () {},
+            child: const Icon(
+              Icons.share_outlined,
+            ),
+          ),
+        ),
+      ),
     ],
     leading: Visibility(
       visible: showBackButton,
