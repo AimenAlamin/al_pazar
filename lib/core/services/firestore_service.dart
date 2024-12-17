@@ -27,6 +27,7 @@ class FireStoreService implements DatabaseService {
     if (documentID != null) {
       //fetch a specific document, get one item(document)
       var snapshot = await firestore.collection(path).doc(documentID).get();
+      //  if (!snapshot.exists) throw Exception('User data not found'); ///////////
       return snapshot.data();
     } else //fetch all documents, get all items(documents)
     {
