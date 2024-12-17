@@ -2,7 +2,6 @@ import 'package:al_pazar/core/common/cubit/fetch_post_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/helpers/custom_error_widget.dart';
 
