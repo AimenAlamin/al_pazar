@@ -8,4 +8,7 @@ class Routes {
   static const String addPostView = '/addPostView';
   static const String addPostViewBody = '/addPostViewBody';
   static const String postDetailScreen = '/postDetailScreen';
+  static const String categoryScreen = '/categoryScreen';
+  static const String subCategoryScreen = '/subCategoryScreen';
+  static const String testScreen = '/testScreen';
 }

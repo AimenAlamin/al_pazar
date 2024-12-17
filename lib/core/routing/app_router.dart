@@ -1,5 +1,10 @@
+import 'package:al_pazar/features/category/domain/category_entity.dart';
+import 'package:al_pazar/features/category/widgets/category_screen.dart';
+import 'package:al_pazar/features/category/widgets/subcategory_screen.dart';
+import 'package:al_pazar/features/category/widgets/test_screen.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
+import '../../features/category/domain/subcategory_entity.dart';
 import 'routes.dart';
 import '../../features/collections_all/collection_all_list.dart';
 import '../../features/home/presentation/ui/home_main_view.dart';
@@ -53,6 +58,20 @@ class AppRouter {
       case Routes.postDetailScreen:
         return MaterialPageRoute(
           builder: (_) => const PostDetialsScreen(),
+        );
+      case Routes.categoryScreen:
+        return MaterialPageRoute(
+          builder: (_) => CategoryScreen(),
+        );
+      case Routes.subCategoryScreen:
+        return MaterialPageRoute(
+          builder: (_) => SubcategoryScreen(
+              categoryEntity: settings.arguments as CategoryEntity),
+        );
+      case Routes.testScreen:
+        return MaterialPageRoute(
+          builder: (_) => TestScreen(
+              subcategoryEntity: settings.arguments as SubcategoryEntity),
         );
 
       // case Routes.onBoardingLoginScreen:
