@@ -115,7 +115,7 @@ class AddSubcategoryScreen extends StatelessWidget {
             onTap: () {
               // Navigate to a new screen or handle subcategory click
               context.pushNamed(
-                Routes.testScreen,
+                Routes.addPostViewBody,
                 arguments: {
                   'selectedCategory': category,
                   'selectedSubcategory': subcategories[index],

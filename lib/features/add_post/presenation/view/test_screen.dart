@@ -18,8 +18,8 @@ class TestScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Selected Category: $selectedCategory'),
-            Text('Selected Subcategory: $selectedSubcategory'),
+            Text(' $selectedCategory'),
+            Text(' $selectedSubcategory'),
           ],
         ),
       ),

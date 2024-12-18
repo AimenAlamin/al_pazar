@@ -22,7 +22,7 @@ class AddCategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Category Screen'),
+        title: const Text('What are you offering?'),
       ),
       body: ListView.builder(
         itemCount: categories.length,

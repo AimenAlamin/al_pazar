@@ -1,3 +1,7 @@
+import 'package:al_pazar/features/add_post/domain/repos/images_repo/images_repo.dart';
+import 'package:al_pazar/features/add_post/domain/repos/posts_repo/post_repo.dart';
+import 'package:al_pazar/features/add_post/presenation/manager/cubit/add_post_cubit.dart';
+import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/test_screen.dart';
@@ -12,7 +16,6 @@ import '../../features/auth/presentation/login/ui/loginEmail/login_email_screen.
 import '../../features/auth/presentation/sign_up/cubit/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/add_post/presenation/view/add_post_view.dart';
 import '../../features/auth/domain/repo/auth_repo.dart';
 
 import '../../features/auth/presentation/sign_up/ui/widgets/SignUp_Email/sign_up_email_screen.dart';
@@ -49,9 +52,21 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CollectionAllList(),
         );
-      case Routes.addPostView:
+      case Routes.addPostViewBody:
         return MaterialPageRoute(
-          builder: (_) => const AddPostView(),
+          builder: (_) {
+            // Ensure arguments are a Map
+            final args = settings.arguments as Map<String, dynamic>;
+            final selectedCategory = args['selectedCategory'] as String;
+            final selectedSubcategory = args['selectedSubcategory'] as String;
+            return BlocProvider(
+              create: (context) =>
+                  AddPostCubit(getIt.get<ImagesRepo>(), getIt.get<PostRepo>()),
+              child: AddPostViewBody(
+                  selectedCategory: selectedCategory,
+                  selectedSubcategory: selectedSubcategory),
+            );
+          },
         );
       case Routes.postDetailScreen:
         return MaterialPageRoute(

@@ -1,4 +1,5 @@
-import 'package:al_pazar/features/add_post/presenation/view/add_post_view.dart';
+import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
+
 import 'package:al_pazar/features/home/presentation/ui/widgets/account_view.dart';
 
 import '../../../chats/chat_view.dart';
@@ -46,10 +47,10 @@ class _MainViewState extends State<MainView> {
           child: IndexedStack(
             //indexed stack is used to show the current view index without losing the state of the previous view to avoid rebuilding the view
             index: currentViewIndex,
-            children: const [
+            children: [
               HomeView(),
               FavoritesView(),
-              AddPostView(),
+              AddCategoryScreen(),
               ChatView(),
               AccountView(),
             ],
