@@ -1,3 +1,6 @@
+import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
+import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
+import 'package:al_pazar/features/add_post/presenation/view/test_screen.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import 'routes.dart';
@@ -53,6 +56,30 @@ class AppRouter {
       case Routes.postDetailScreen:
         return MaterialPageRoute(
           builder: (_) => const PostDetialsScreen(),
+        );
+      case Routes.addcategoryScreen:
+        return MaterialPageRoute(
+          builder: (_) => AddCategoryScreen(),
+        );
+      case Routes.addsubCategoryScreen:
+        return MaterialPageRoute(
+          builder: (_) {
+            return AddSubcategoryScreen(category: settings.arguments as String);
+          },
+        );
+      case Routes.testScreen:
+        return MaterialPageRoute(
+          builder: (_) {
+            // Ensure arguments are a Map
+            final args = settings.arguments as Map<String, dynamic>;
+            final selectedCategory = args['selectedCategory'] as String;
+            final selectedSubcategory = args['selectedSubcategory'] as String;
+
+            return TestScreen(
+              selectedCategory: selectedCategory,
+              selectedSubcategory: selectedSubcategory,
+            );
+          },
         );
 
       // case Routes.onBoardingLoginScreen:
