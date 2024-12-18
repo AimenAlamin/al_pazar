@@ -1,6 +1,9 @@
 import 'dart:io';
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theming/styles.dart';
 import '../../../../core/theming/widgets/app_text_form_field.dart';
@@ -13,10 +16,12 @@ import '../manager/cubit/add_post_cubit.dart';
 import 'image_field.dart';
 
 class AddPostViewBody extends StatefulWidget {
-  const AddPostViewBody(
-      {super.key,
-      required this.selectedCategory,
-      required this.selectedSubcategory});
+  const AddPostViewBody({
+    super.key,
+    required this.selectedCategory,
+    required this.selectedSubcategory,
+  });
+
   final String selectedCategory;
   final String selectedSubcategory;
 
@@ -27,9 +32,79 @@ class AddPostViewBody extends StatefulWidget {
 class _AddPostViewBodyState extends State<AddPostViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  late String title, description, location, currency;
+
+  late String title, description, currency = '', location = '';
   late int price;
   File? image;
+
+  final List<Map<String, dynamic>> currencies = [
+    {'name': 'TL', 'flag': '🇹🇷'},
+    {'name': 'USD', 'flag': '🇺🇸'},
+    {'name': 'EUR', 'flag': '🇪🇺'},
+    {'name': 'GBP', 'flag': '🇬🇧'},
+  ];
+
+  final List<String> northCyprusCities = [
+    "Lefkoşa",
+    "Mağusa",
+    "Girne",
+    "Güzelyurt",
+    "İskele",
+    "Lefke"
+  ];
+
+  final TextEditingController _currencyController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+
+  @override
+  void dispose() {
+    _currencyController.dispose();
+    _locationController.dispose();
+    super.dispose();
+  }
+
+  void _showCurrencyBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView(
+          children: currencies.map((currency) {
+            return ListTile(
+              leading: Text(currency['flag'], style: TextStyle(fontSize: 24)),
+              title: Text(currency['name']),
+              onTap: () {
+                setState(() {
+                  _currencyController.text = currency['name'];
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  void _showLocationBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView(
+          children: northCyprusCities.map((city) {
+            return ListTile(
+              title: Text(city),
+              onTap: () {
+                setState(() {
+                  _locationController.text = city;
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +114,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(8.0.r),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +147,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                   children: [
                     AppTextFormField(
                       hintText: 'Title',
-
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
@@ -81,7 +155,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       onSaved: (value) {
                         title = value!;
                       },
-                      // controller: context.read<SignUpEmailCubit>().nameController,
                     ),
                     verticalSpace(18),
                     AppTextFormField(
@@ -95,21 +168,24 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       onSaved: (value) {
                         price = int.parse(value!);
                       },
-                      // controller: context.read<SignUpEmailCubit>().nameController,
                     ),
                     verticalSpace(18),
-                    AppTextFormField(
-                      hintText: 'Currency',
-
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'This field is required';
-                        }
-                      },
-                      onSaved: (value) {
-                        currency = value!;
-                      },
-                      // controller: context.read<SignUpEmailCubit>().nameController,
+                    GestureDetector(
+                      onTap: _showCurrencyBottomSheet,
+                      child: AbsorbPointer(
+                        child: AppTextFormField(
+                          controller: _currencyController,
+                          hintText: 'Currency',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This field is required';
+                            }
+                          },
+                          onSaved: (value) {
+                            currency = value!;
+                          },
+                        ),
+                      ),
                     ),
                     verticalSpace(18),
                     AppTextFormField(
@@ -123,20 +199,24 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       onSaved: (value) {
                         description = value!;
                       },
-                      // controller: context.read<SignUpEmailCubit>().nameController,
                     ),
                     verticalSpace(18),
-                    AppTextFormField(
-                      hintText: 'Location',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'This field is required';
-                        }
-                      },
-                      onSaved: (value) {
-                        location = value!;
-                      },
-                      // controller: context.read<SignUpEmailCubit>().nameController,
+                    GestureDetector(
+                      onTap: _showLocationBottomSheet,
+                      child: AbsorbPointer(
+                        child: AppTextFormField(
+                          controller: _locationController,
+                          hintText: 'Location',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'This field is required';
+                            }
+                          },
+                          onSaved: (value) {
+                            location = value!;
+                          },
+                        ),
+                      ),
                     ),
                     verticalSpace(18),
                     ImageField(
@@ -164,7 +244,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               timestamp: DateTime.now(),
                             );
                             context.read<AddPostCubit>().addPost(addPostEntity);
-                            //context.pushNamed(Routes.mainView);
+                            context.pushReplacementNamed(Routes.mainView);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                             setState(() {});

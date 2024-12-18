@@ -48,11 +48,11 @@ class _MainViewState extends State<MainView> {
             //indexed stack is used to show the current view index without losing the state of the previous view to avoid rebuilding the view
             index: currentViewIndex,
             children: [
-              HomeView(),
-              FavoritesView(),
+              const HomeView(),
+              const FavoritesView(),
               AddCategoryScreen(),
-              ChatView(),
-              AccountView(),
+              const ChatView(),
+              const AccountView(),
             ],
           ),
         ),
