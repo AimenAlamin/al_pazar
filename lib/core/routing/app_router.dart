@@ -5,6 +5,7 @@ import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.d
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/test_screen.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/home_view.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import 'routes.dart';
@@ -71,6 +72,10 @@ class AppRouter {
       case Routes.postDetailScreen:
         return MaterialPageRoute(
           builder: (_) => const PostDetialsScreen(),
+        );
+      case Routes.homeView:
+        return MaterialPageRoute(
+          builder: (_) => const HomeView(),
         );
       case Routes.addcategoryScreen:
         return MaterialPageRoute(

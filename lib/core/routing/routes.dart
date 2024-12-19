@@ -11,4 +11,5 @@ class Routes {
   static const String addcategoryScreen = '/addcategoryScreen';
   static const String addsubCategoryScreen = '/addsubCategoryScreen';
   static const String testScreen = '/testScreen';
+  static const String homeView = '/homeView';
 }

@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:al_pazar/core/helpers/extensions.dart';
-import 'package:al_pazar/core/routing/routes.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +11,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/widgets/app_text_button.dart';
 import '../manager/cubit/add_post_cubit.dart';
+import 'add_post_listener.dart';
 import 'image_field.dart';
 
 class AddPostViewBody extends StatefulWidget {
@@ -140,6 +139,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                 ),
               ),
               verticalSpace(18),
+              const AddPostListener(),
               Form(
                 key: _formKey,
                 autovalidateMode: autovalidateMode,
@@ -244,7 +244,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               timestamp: DateTime.now(),
                             );
                             context.read<AddPostCubit>().addPost(addPostEntity);
-                            context.pushReplacementNamed(Routes.mainView);
                           } else {
                             autovalidateMode = AutovalidateMode.always;
                             setState(() {});
