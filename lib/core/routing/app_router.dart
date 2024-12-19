@@ -8,6 +8,7 @@ import 'package:al_pazar/features/add_post/presenation/view/test_screen.dart';
 import 'package:al_pazar/features/home/presentation/ui/widgets/home_view.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
+import '../../features/add_post/domain/entities/post_entity.dart';
 import 'routes.dart';
 import '../../features/collections_all/collection_all_list.dart';
 import '../../features/home/presentation/ui/home_main_view.dart';
@@ -71,7 +72,8 @@ class AppRouter {
         );
       case Routes.postDetailScreen:
         return MaterialPageRoute(
-          builder: (_) => const PostDetialsScreen(),
+          builder: (_) =>
+              PostDetialsScreen(postDetails: settings.arguments as PostEntity),
         );
       case Routes.homeView:
         return MaterialPageRoute(

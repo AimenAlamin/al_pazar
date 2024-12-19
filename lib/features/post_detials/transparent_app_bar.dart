@@ -22,7 +22,7 @@ class TransparentAppBar extends StatelessWidget {
               onTap: () {},
               child: const Icon(
                 Icons.favorite_outline_outlined,
-                color: Colors.white,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -32,7 +32,7 @@ class TransparentAppBar extends StatelessWidget {
               onTap: () {},
               child: const Icon(
                 Icons.share_outlined,
-                color: Colors.white,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -43,7 +43,7 @@ class TransparentAppBar extends StatelessWidget {
           },
           child: const Icon(
             Icons.arrow_back_ios_new,
-            color: Colors.white,
+            color: Colors.grey,
           ),
         ),
       ),

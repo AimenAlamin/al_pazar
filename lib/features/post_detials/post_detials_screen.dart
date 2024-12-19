@@ -6,10 +6,13 @@ import 'package:al_pazar/features/post_detials/widgets/custom_post_detials_navba
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../core/helpers/custom_timeago.dart';
+import '../add_post/domain/entities/post_entity.dart';
 import 'transparent_app_bar.dart';
 
 class PostDetialsScreen extends StatelessWidget {
-  const PostDetialsScreen({super.key});
+  const PostDetialsScreen({super.key, required this.postDetails});
+  final PostEntity postDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class PostDetialsScreen extends StatelessWidget {
                 SizedBox(
                   height: 350.h,
                   width: double.infinity,
-                  child: Image.asset(
-                    "assets/images/room.jpg",
+                  child: Image.network(
+                    postDetails.imageUrl!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -38,14 +41,14 @@ class PostDetialsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Eur 500",
+                        '${postDetails.currency} ${postDetails.price}',
                         style: TextStyles.font20BlueBold,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       verticalSpace(2),
                       Text(
-                        "New room for rent",
+                        postDetails.title,
                         style: TextStyles.font16DarkBlueBold,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -54,14 +57,14 @@ class PostDetialsScreen extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Magusa",
+                            postDetails.location,
                             style: TextStyles.font14DarkerGrayRegular,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const Spacer(),
                           Text(
-                            "12.12.2024",
+                            TimeAgoHelper.getTimeAgo(postDetails.timestamp),
                             style: TextStyles.font14DarkerGrayRegular,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -80,12 +83,7 @@ class PostDetialsScreen extends StatelessWidget {
                       ),
                       verticalSpace(5),
                       Text(
-                        "This is a new room for rent in Magusa. The room is fully furnished and has a private bathroom. The room is located in a quiet area and is close to the city center. The room is available for rent from 1st January 2022. The rent is 500 euros per month. The room is suitable for students or working professionals. \nFor more information, please contact us. serious inquiries only.",
-                        style: TextStyles.font14DarkBlueRegular,
-                      ),
-                      verticalSpace(16),
-                      Text(
-                        "This is a new room for rent in Magusa. The room is fully furnished and has a private bathroom. The room is located in a quiet area and is close to the city center. The room is available for rent from 1st January 2022. The rent is 500 euros per month. The room is suitable for students or working professionals. \nFor more information, please contact us. serious inquiries only.",
+                        postDetails.description!,
                         style: TextStyles.font14DarkBlueRegular,
                       ),
                     ],
