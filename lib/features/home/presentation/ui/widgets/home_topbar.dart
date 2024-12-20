@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 
@@ -14,12 +15,12 @@ class HomeTopBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              //getUserSavedData().name,
-              'Kibzar',
+              getUserSavedData().name,
+              // 'Kibzar',
               style: TextStyles.font18DarkBlueBold,
             ),
             Text(
-              'All in one',
+              ' ',
               style: TextStyles.font14GrayRegular,
             ),
           ],

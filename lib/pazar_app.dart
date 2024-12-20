@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routing/app_router.dart';
+import 'core/services/firebase_auth_services.dart';
 import 'core/theming/colors.dart';
 
 class PazarApp extends StatelessWidget {
@@ -22,10 +23,10 @@ class PazarApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
-        // initialRoute: FirebaseAuthService().isUserLoggedIn()
-        //     ? Routes.homeScreen
-        //     : Routes.loginEmailScreen,
-        initialRoute: Routes.mainView,
+        initialRoute: FirebaseAuthService().isUserLoggedIn()
+            ? Routes.mainView
+            : Routes.loginEmailScreen,
+        // initialRoute: Routes.signUpEmailScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );
