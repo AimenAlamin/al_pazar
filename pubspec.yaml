@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^8.1.4
+  carousel_slider: ^5.0.0
   cloud_firestore: ^5.5.0
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1

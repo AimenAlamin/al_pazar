@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../core/helpers/get_user.dart';
 import '../../../../../core/theming/colors.dart';
-import '../../../../../core/theming/styles.dart';
 
 class HomeTopBar extends StatelessWidget {
   const HomeTopBar({super.key});
@@ -14,14 +11,19 @@ class HomeTopBar extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              getUserSavedData().name,
-              // 'Kibzar',
-              style: TextStyles.font18DarkBlueBold,
-            ),
-            Text(
-              ' ',
-              style: TextStyles.font14GrayRegular,
+            // Text(
+            //  // getUserSavedData().name,
+            //   // 'Kibzar',
+            //   style: TextStyles.font18DarkBlueBold,
+            // ),
+            // Text(
+            //   ' ',
+            //   style: TextStyles.font14GrayRegular,
+            // ),
+            SizedBox(
+              height: 70.0,
+              width: 70.0,
+              child: Image.asset("assets/images/splashImg.png"),
             ),
           ],
         ),

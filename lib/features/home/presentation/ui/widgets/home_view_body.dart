@@ -1,5 +1,7 @@
+import 'package:al_pazar/core/common/widgets/image_sliding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/common/cubit/fetch_post_cubit.dart';
 import '../../../../../core/helpers/spacing.dart';
@@ -40,6 +42,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           verticalSpace(18),
           //const PostsListedview(),
           const ExploreCategoriesListView(),
+          verticalSpace(18),
+          SizedBox(
+            height: 160.h,
+            width: MediaQuery.of(context).size.width,
+            child: const ImageSlider(),
+          ),
           verticalSpace(28),
           const PostsListedViewBlocBuilder(),
           // const CategoriesSeeAll(text: "Cars For Sale"),

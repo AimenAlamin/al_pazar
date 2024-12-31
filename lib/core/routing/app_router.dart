@@ -1,10 +1,11 @@
+import 'package:al_pazar/core/common/widgets/image_sliding.dart';
 import 'package:al_pazar/features/add_post/domain/repos/images_repo/images_repo.dart';
 import 'package:al_pazar/features/add_post/domain/repos/posts_repo/post_repo.dart';
 import 'package:al_pazar/features/add_post/presenation/manager/cubit/add_post_cubit.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
-import 'package:al_pazar/features/add_post/presenation/view/test_screen.dart';
+
 import 'package:al_pazar/features/home/presentation/ui/widgets/home_view.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
@@ -89,19 +90,23 @@ class AppRouter {
             return AddSubcategoryScreen(category: settings.arguments as String);
           },
         );
+      // case Routes.testScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) {
+      //       // Ensure arguments are a Map
+      //       final args = settings.arguments as Map<String, dynamic>;
+      //       final selectedCategory = args['selectedCategory'] as String;
+      //       final selectedSubcategory = args['selectedSubcategory'] as String;
+
+      //       return TestScreen(
+      //         selectedCategory: selectedCategory,
+      //         selectedSubcategory: selectedSubcategory,
+      //       );
+      //     },
+      //   );
       case Routes.testScreen:
         return MaterialPageRoute(
-          builder: (_) {
-            // Ensure arguments are a Map
-            final args = settings.arguments as Map<String, dynamic>;
-            final selectedCategory = args['selectedCategory'] as String;
-            final selectedSubcategory = args['selectedSubcategory'] as String;
-
-            return TestScreen(
-              selectedCategory: selectedCategory,
-              selectedSubcategory: selectedSubcategory,
-            );
-          },
+          builder: (_) => ImageSlider(),
         );
 
       // case Routes.onBoardingLoginScreen:
