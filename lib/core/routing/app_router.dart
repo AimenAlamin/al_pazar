@@ -45,15 +45,13 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => const CollectionAllList(),
         );
-<<<<<<< HEAD
       case Routes.postingScreen:
         return MaterialPageRoute(
           builder: (_) => const PostingView(),
-=======
+        );
       case Routes.addPostView:
         return MaterialPageRoute(
           builder: (_) => const AddPostView(),
->>>>>>> 2b112da1ca54e6c3249ee2219359ed5b312741f7
         );
       // case Routes.onBoardingLoginScreen:
       //   return MaterialPageRoute(
