@@ -2,7 +2,7 @@ import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
-import 'package:al_pazar/features/login/login_email_screen.dart';
+//import 'package:al_pazar/features/login/login_email_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

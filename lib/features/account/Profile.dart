@@ -1,7 +1,7 @@
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 class Profile extends StatefulWidget {
   Profile({super.key});
@@ -17,7 +17,7 @@ class _ProfileState extends State<Profile> {
   final TextEditingController userLastname =
       TextEditingController(text: "oleko");
 
-  DateTime _dateOfbirth = DateTime.now(); // Correct variable name
+//DateTime _dateOfbirth = DateTime.now(); // Correct variable name
   String formattedDate = "";
 
   // Use the correct name
@@ -26,7 +26,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    formattedDate = DateFormat('dd/MM/yyyy').format(_dateOfbirth);
+    formattedDate = "15";
     setState(() {});
     // TODO: implement initState
     super.initState();
@@ -182,11 +182,11 @@ class _ProfileState extends State<Profile> {
                         child: child!,
                       );
                     }).then((value) {
-                  setState(() {
+                  /*  setState(() {
                     _dateOfbirth = value!;
                     formattedDate =
                         DateFormat('dd/MM/yyyy').format(_dateOfbirth);
-                  });
+                  });*/
                 });
               },
               child: Container(
