@@ -16,66 +16,82 @@ class AddSubcategoryScreen extends StatelessWidget {
         return [
           SubcategoryConstants.kCars,
           SubcategoryConstants.kMotorcycles,
-          SubcategoryConstants.kTrucks,
+          SubcategoryConstants.kVehiclePartsAccessories,
           SubcategoryConstants.kBicycles,
-          SubcategoryConstants.kVehicleParts,
         ];
       case CategoryConstants.kRealEstate:
         return [
           SubcategoryConstants.kApartments,
           SubcategoryConstants.kHouses,
-          SubcategoryConstants.kCommercial,
           SubcategoryConstants.kLand,
           SubcategoryConstants.kRoomRentals,
         ];
       case CategoryConstants.kElectronics:
         return [
-          SubcategoryConstants.kPhones,
+          SubcategoryConstants.kMobilePhones,
           SubcategoryConstants.kLaptops,
           SubcategoryConstants.kTablets,
-          SubcategoryConstants.kTVs,
-          SubcategoryConstants.kCameras,
-          SubcategoryConstants.kAccessories,
+          SubcategoryConstants.kGamingConsoles,
+          SubcategoryConstants.kElectronicsAccessories,
+          SubcategoryConstants.kOtherElectronics,
         ];
-      case CategoryConstants.kHomeFurniture:
+      case CategoryConstants.kHomeAppliances:
         return [
-          SubcategoryConstants.kFurniture,
+          SubcategoryConstants.kMicrowavesOvens,
+          SubcategoryConstants.kBlenders,
+          SubcategoryConstants.kWaterBoilers,
+          SubcategoryConstants.kPansCookware,
+          SubcategoryConstants.kDishesUtensils,
+          SubcategoryConstants.kIrons,
+          SubcategoryConstants.kVacuumCleaners,
+          SubcategoryConstants.kHeaters,
+          SubcategoryConstants.kFans,
+          SubcategoryConstants.kRouters,
+          SubcategoryConstants.kOtherAppliances,
+        ];
+      case CategoryConstants.kFurniture:
+        return [
+          SubcategoryConstants.kDesksChairs,
+          SubcategoryConstants.kSofas,
+          SubcategoryConstants.kBedsMattresses,
+          SubcategoryConstants.kBlanketsBedding,
+          SubcategoryConstants.kCurtains,
           SubcategoryConstants.kHomeDecor,
-          SubcategoryConstants.kKitchenAppliances,
-          SubcategoryConstants.kLighting,
-          SubcategoryConstants.kStorage,
+          SubcategoryConstants.kCarpets,
+          SubcategoryConstants.kOtherFurniture,
         ];
-      case CategoryConstants.kClothingAccessories:
+      case CategoryConstants.kEducation:
         return [
-          SubcategoryConstants.kMenClothing,
-          SubcategoryConstants.kWomenClothing,
-          SubcategoryConstants.kKidsClothing,
-          SubcategoryConstants.kShoes,
-          SubcategoryConstants.kJewelry,
+          SubcategoryConstants.kCalculators,
+          SubcategoryConstants.kLabCoatsMedicalSupplies,
+          SubcategoryConstants.kEngineeringTools,
+          SubcategoryConstants.kStationeryArtSupplies,
+          SubcategoryConstants.kBooksStudyMaterials,
+          SubcategoryConstants.kBagsBackpacks,
+          SubcategoryConstants.kOnlineCoursesTutorials,
+          SubcategoryConstants.kEbooksDigitalResources,
+          SubcategoryConstants.kTutoringServices,
+          SubcategoryConstants.kOtherStudySupplies,
         ];
-      case CategoryConstants.kHealthBeauty:
+      case CategoryConstants.kFashion:
+        return [
+          SubcategoryConstants.kMensClothingShoes,
+          SubcategoryConstants.kWomensClothingShoes,
+          SubcategoryConstants.kMensAccessories,
+          SubcategoryConstants.kWomensAccessories,
+        ];
+      case CategoryConstants.kSelfCare:
         return [
           SubcategoryConstants.kSkincare,
           SubcategoryConstants.kHaircare,
           SubcategoryConstants.kMakeup,
-          SubcategoryConstants.kWellness,
-          SubcategoryConstants.kFitnessEquipment,
         ];
-      case CategoryConstants.kSportsOutdoors:
+      case CategoryConstants.kPets:
         return [
-          SubcategoryConstants.kOutdoorGear,
-          SubcategoryConstants.kSportsEquipment,
-          SubcategoryConstants.kCamping,
-          SubcategoryConstants.kFishing,
-          SubcategoryConstants.kCycling,
-        ];
-      case CategoryConstants.kHobbiesEntertainment:
-        return [
-          SubcategoryConstants.kBooks,
-          SubcategoryConstants.kMusicalInstruments,
-          SubcategoryConstants.kBoardGames,
-          SubcategoryConstants.kVideoGames,
-          SubcategoryConstants.kCrafts,
+          SubcategoryConstants.kCats,
+          SubcategoryConstants.kDogs,
+          SubcategoryConstants.kOtherPetsAnimals,
+          SubcategoryConstants.kAccessoriesPetCareProducts,
         ];
       case CategoryConstants.kJobs:
         return [
@@ -84,14 +100,32 @@ class AddSubcategoryScreen extends StatelessWidget {
           SubcategoryConstants.kFreelance,
           SubcategoryConstants.kInternships,
           SubcategoryConstants.kRemote,
+          SubcategoryConstants.kCampusJobs,
         ];
+      case CategoryConstants.kEntertainment:
+        return [
+          SubcategoryConstants.kMusicalInstruments,
+          SubcategoryConstants.kVideoGames,
+          SubcategoryConstants.kBoardGames,
+          SubcategoryConstants.kVideoGames,
+          SubcategoryConstants.kArtSupplies,
+          SubcategoryConstants.kPosters,
+          SubcategoryConstants.kCampingGear,
+        ];
+
       case CategoryConstants.kServices:
         return [
+          SubcategoryConstants.kCookingBaking,
+          SubcategoryConstants.kHomeTutoring,
+          SubcategoryConstants.kPhotography,
+          SubcategoryConstants.kEventAssistance,
           SubcategoryConstants.kHomeCleaning,
-          SubcategoryConstants.kRepairs,
-          SubcategoryConstants.kTutoring,
-          SubcategoryConstants.kCatering,
-          SubcategoryConstants.kEventPlanning,
+          SubcategoryConstants.kOtherServices,
+        ];
+      case CategoryConstants.kLostFound:
+        return [
+          SubcategoryConstants.kLostItems,
+          SubcategoryConstants.kFoundItems,
         ];
       default:
         return [];

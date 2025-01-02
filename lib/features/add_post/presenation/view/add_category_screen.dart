@@ -9,13 +9,16 @@ class AddCategoryScreen extends StatelessWidget {
     CategoryConstants.kVehicles,
     CategoryConstants.kRealEstate,
     CategoryConstants.kElectronics,
-    CategoryConstants.kHomeFurniture,
-    CategoryConstants.kClothingAccessories,
-    CategoryConstants.kHealthBeauty,
-    CategoryConstants.kSportsOutdoors,
-    CategoryConstants.kHobbiesEntertainment,
+    CategoryConstants.kHomeAppliances,
+    CategoryConstants.kFurniture,
+    CategoryConstants.kEducation,
+    CategoryConstants.kFashion,
+    CategoryConstants.kEntertainment,
+    CategoryConstants.kSelfCare,
+    CategoryConstants.kPets,
     CategoryConstants.kJobs,
     CategoryConstants.kServices,
+    CategoryConstants.kLostFound,
   ];
 
   @override

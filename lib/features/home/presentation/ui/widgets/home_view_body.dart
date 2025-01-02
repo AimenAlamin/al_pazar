@@ -9,6 +9,7 @@ import 'categories_see_all.dart';
 import 'explore_categories_listview.dart';
 import 'home_topbar.dart';
 
+import 'popular_listview_items.dart';
 import 'posts_listed_view_bloc_builder.dart';
 import 'search_textfield.dart';
 
@@ -49,38 +50,46 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: const ImageSlider(),
           ),
           verticalSpace(38),
-          const PostsListedViewBlocBuilder(),
-          // const CategoriesSeeAll(text: "Cars For Sale"),
-          // verticalSpace(12),
-          // const PopularListviewItems(
-          //     imageAsset: "assets/images/defaultcar.jpg",
-          //     price: "TL 15000",
-          //     title: "Honda Vezel 2020",
-          //     location: "Magusa"),
-          // verticalSpace(48),
-          // const CategoriesSeeAll(text: "Residentials For Rent"),
-          // verticalSpace(12),
-          // const PopularListviewItems(
-          //     imageAsset: "assets/images/livingroom.jpg",
-          //     price: "TL 52000",
-          //     title: "Luxury Villa",
-          //     location: "Keyrenia"),
-          // verticalSpace(48),
-          // const CategoriesSeeAll(text: "Rooms For Rent"),
-          // verticalSpace(12),
-          // const PopularListviewItems(
-          //     imageAsset: "assets/images/room.jpg",
-          //     price: "TL 8000",
-          //     title: "Room in 3+1 for Rent",
-          //     location: "Lefkosa"),
-          // verticalSpace(48),
-          // const CategoriesSeeAll(text: "Cars For Sale"),
-          // verticalSpace(12),
-          // const PopularListviewItems(
-          //     imageAsset: "assets/images/defaultcar.jpg",
-          //     price: "TL 15000",
-          //     title: "Honda Vezel 2020",
-          //     location: "Magusa"),
+          // const PostsListedViewBlocBuilder(),
+          const CategoriesSeeAll(text: "Cars For Sale"),
+          verticalSpace(12),
+          const PopularListviewItems(
+              imageAsset: "assets/images/defaultcar.jpg",
+              price: "TL 15000",
+              title: "Honda Vezel 2020",
+              location: "Magusa"),
+          verticalSpace(48),
+          const CategoriesSeeAll(text: "Residentials For Rent"),
+          verticalSpace(12),
+          const PopularListviewItems(
+              imageAsset: "assets/images/livingroom.jpg",
+              price: "TL 52000",
+              title: "Luxury Villa",
+              location: "Keyrenia"),
+          verticalSpace(48),
+          const CategoriesSeeAll(text: "Rooms For Rent"),
+          verticalSpace(12),
+          const PopularListviewItems(
+              imageAsset: "assets/images/room.jpg",
+              price: "TL 8000",
+              title: "Room in 3+1 for Rent",
+              location: "Lefkosa"),
+          verticalSpace(48),
+          const CategoriesSeeAll(text: "Electronics For Sale"),
+          verticalSpace(12),
+          const PopularListviewItems(
+              imageAsset: "assets/images/defaultcar.jpg",
+              price: "TL 15000",
+              title: "Honda Vezel 2020",
+              location: "Magusa"),
+          verticalSpace(48),
+          const CategoriesSeeAll(text: "Furniture For Sale"),
+          verticalSpace(12),
+          const PopularListviewItems(
+              imageAsset: "assets/images/defaultcar.jpg",
+              price: "TL 15000",
+              title: "Honda Vezel 2020",
+              location: "Magusa"),
         ],
       ),
     );

@@ -19,6 +19,7 @@ class ExploreCategoriesListView extends StatelessWidget {
       {"name": "Education", "icon": "assets/svgs/book-solid.svg"},
       {"name": "Fashions", "icon": "assets/svgs/glasses-solid.svg"},
       {"name": "Entertainment", "icon": "assets/svgs/icons-solid.svg"},
+      {"name": "Self-Care", "icon": "assets/svgs/spray-can-sparkles-solid.svg"},
       {"name": "Pets", "icon": "assets/svgs/cat-solid.svg"},
       {"name": "Jobs", "icon": "assets/svgs/job.svg"},
       {"name": "Services", "icon": "assets/svgs/hand-holding-dollar-solid.svg"},
