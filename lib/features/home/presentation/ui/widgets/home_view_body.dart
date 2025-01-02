@@ -1,4 +1,5 @@
 import 'package:al_pazar/core/common/widgets/image_sliding.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/popular_listview_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,43 +54,23 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           // const PostsListedViewBlocBuilder(),
           const CategoriesSeeAll(text: "Cars For Sale"),
           verticalSpace(12),
-          const PopularListviewItems(
-              imageAsset: "assets/images/defaultcar.jpg",
-              price: "TL 15000",
-              title: "Honda Vezel 2020",
-              location: "Magusa"),
+          const PopularListViewBlocBuilder(),
           verticalSpace(48),
           const CategoriesSeeAll(text: "Residentials For Rent"),
           verticalSpace(12),
-          const PopularListviewItems(
-              imageAsset: "assets/images/livingroom.jpg",
-              price: "TL 52000",
-              title: "Luxury Villa",
-              location: "Keyrenia"),
+          const PopularListViewBlocBuilder(),
           verticalSpace(48),
           const CategoriesSeeAll(text: "Rooms For Rent"),
           verticalSpace(12),
-          const PopularListviewItems(
-              imageAsset: "assets/images/room.jpg",
-              price: "TL 8000",
-              title: "Room in 3+1 for Rent",
-              location: "Lefkosa"),
+          const PopularListViewBlocBuilder(),
           verticalSpace(48),
           const CategoriesSeeAll(text: "Electronics For Sale"),
           verticalSpace(12),
-          const PopularListviewItems(
-              imageAsset: "assets/images/defaultcar.jpg",
-              price: "TL 15000",
-              title: "Honda Vezel 2020",
-              location: "Magusa"),
+          const PopularListViewBlocBuilder(),
           verticalSpace(48),
           const CategoriesSeeAll(text: "Furniture For Sale"),
           verticalSpace(12),
-          const PopularListviewItems(
-              imageAsset: "assets/images/defaultcar.jpg",
-              price: "TL 15000",
-              title: "Honda Vezel 2020",
-              location: "Magusa"),
+          const PopularListViewBlocBuilder(),
         ],
       ),
     );
