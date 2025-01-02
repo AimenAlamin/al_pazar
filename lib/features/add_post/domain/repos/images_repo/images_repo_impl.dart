@@ -12,16 +12,17 @@ class ImagesRepoImpl implements ImagesRepo {
   ImagesRepoImpl(this.storageService);
 
   @override
-  Future<Either<Failure, String>> uploadImage(File image) async {
+  Future<Either<Failure, List<String>>> uploadImages(List<File> images) async {
     try {
-      String url = await storageService.uploadFile(
-          image,
+      // Upload multiple images and retrieve their URLs
+      List<String> urls = await storageService.uploadFiles(
+          images,
           BackEndpoint
-              .imagesPathName); //uploading the image and folderpath name to the storage
-      return Right(url);
+              .imagesPathName); // Pass the list of images and the folder path name to the storage
+      return Right(urls); // Return the list of image URLs
     } catch (e) {
       return Left(
-        ServerFailure("Failed to upload image"),
+        ServerFailure("Failed to upload images"),
       );
     }
   }

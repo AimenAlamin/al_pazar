@@ -5,67 +5,92 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageField extends StatefulWidget {
-  const ImageField({super.key, required this.onImageSelected});
-  final ValueChanged<File?> onImageSelected;
+  const ImageField({super.key, required this.onImagesSelected});
+  final ValueChanged<List<File>>
+      onImagesSelected; // Accept a list of images instead of a single image
 
   @override
   State<ImageField> createState() => _ImageFieldState();
 }
 
 class _ImageFieldState extends State<ImageField> {
-  File? fileImage;
+  List<File> fileImages = []; // Store multiple images
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        await pick_image();
-        setState(() {});
-      },
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0.r),
-              color: Colors.white,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(12.0.r),
-              ),
-              child: fileImage != null
-                  ? Image.file(
-                      fileImage!,
-                    )
-                  : Icon(
-                      Icons.image_outlined,
-                      size: 100.r,
+    return Column(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              // Display all selected images horizontally
+              ...fileImages.map((image) => Padding(
+                    padding: EdgeInsets.all(8.0.r),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12.0.r),
+                          child: Image.file(
+                            image,
+                            width: 100.r,
+                            height: 100.r,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.close,
+                              color: Colors.red,
+                              size: 20.r,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                fileImages.remove(
+                                    image); // Remove image from the list
+                                widget.onImagesSelected(fileImages);
+                              });
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-            ),
-          ),
-          Visibility(
-            visible: fileImage != null,
-            child: IconButton(
-              onPressed: () {
-                fileImage = null;
-                widget.onImageSelected(fileImage);
-                setState(() {});
-              },
-              icon: const Icon(
-                Icons.close,
-                color: Colors.red,
+                  )),
+              // Add button to pick more images
+              IconButton(
+                onPressed: () async {
+                  await pickImages();
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.add,
+                  size: 50.r,
+                  color: Colors.grey,
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Future<void> pick_image() async {
+  // Modified to allow selecting multiple images
+  Future<void> pickImages() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    fileImage = File(image!.path);
-    widget.onImageSelected(fileImage!);
+    final List<XFile>? images =
+        await picker.pickMultiImage(); // Pick multiple images
+
+    if (images != null) {
+      setState(() {
+        fileImages.addAll(images.map((image) =>
+            File(image.path))); // Add all selected images to the list
+        widget.onImagesSelected(
+            fileImages); // Pass the list of images to the parent
+      });
+    }
   }
 }

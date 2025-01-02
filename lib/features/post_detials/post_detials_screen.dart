@@ -25,13 +25,20 @@ class PostDetialsScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Full-screen image
+                // Image slider
                 SizedBox(
                   height: 350.h,
                   width: double.infinity,
-                  child: Image.network(
-                    postDetails.imageUrl!,
-                    fit: BoxFit.cover,
+                  child: PageView.builder(
+                    itemCount: postDetails.imageUrl!.length,
+                    itemBuilder: (context, index) {
+                      return Image.network(
+                        postDetails.imageUrl![index],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: 350.h,
+                      );
+                    },
                   ),
                 ),
                 Padding(

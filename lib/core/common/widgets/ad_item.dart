@@ -53,7 +53,9 @@ class _AdItemState extends State<AdItem> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: Image.network(
-                widget.posts.imageUrl!,
+                widget.posts.imageUrl?.isNotEmpty == true
+                    ? widget.posts.imageUrl!.first
+                    : "assets/images/internetConnectionError.jpeg", // Fallback image URL
                 width: 110.w,
                 height: 120.h,
                 fit: BoxFit.cover,

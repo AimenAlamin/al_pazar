@@ -34,7 +34,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
 
   late String title, description, currency = '', location = '';
   late int price;
-  File? image;
+  List<File>? image;
 
   final List<Map<String, dynamic>> currencies = [
     {'name': 'TL', 'flag': '🇹🇷'},
@@ -145,6 +145,16 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                 autovalidateMode: autovalidateMode,
                 child: Column(
                   children: [
+                    ImageField(
+                      onImagesSelected: (images) {
+                        image = images;
+                      },
+                    ),
+                    // ImageField(
+                    //   onImageSelected: (image) {
+                    //     this.image = image;
+                    //   },
+                    // ),
                     AppTextFormField(
                       hintText: 'Title',
                       validator: (value) {
@@ -219,11 +229,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       ),
                     ),
                     verticalSpace(18),
-                    ImageField(
-                      onImageSelected: (image) {
-                        this.image = image;
-                      },
-                    ),
                     verticalSpace(18),
                     AppTextButton(
                       buttonText: "Post Ad",

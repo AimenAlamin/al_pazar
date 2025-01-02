@@ -8,8 +8,8 @@ class PostEntity {
   String? category;
   String? subCategory;
   final String currency;
-  File? image;
-  String? imageUrl;
+  List<File>? image;
+  List<String>? imageUrl;
   final DateTime timestamp;
 
   PostEntity(

@@ -10,8 +10,8 @@ class PostModel {
   String? category;
   String? subCategory;
   final String currency;
-  File? image;
-  String? imageUrl;
+  List<File>? image;
+  List<String>? imageUrl;
   final DateTime timestamp;
 
   PostModel(
@@ -50,7 +50,9 @@ class PostModel {
       category: json['category'],
       subCategory: json['subCategory'],
       currency: json['currency'],
-      imageUrl: json['imageUrl'],
+      imageUrl:
+          (json['imageUrl'] as List<dynamic>).map((e) => e.toString()).toList(),
+
       timestamp: DateTime.parse(json[
           'timestamp']), //converting the timestamp from a string to a DateTime object
     );
