@@ -1,31 +1,48 @@
-import '../../../../../core/helpers/extensions.dart';
-import '../../../../../core/routing/routes.dart';
+import 'package:al_pazar/core/helpers/category_subcategory_constant.dart';
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theming/styles.dart';
-
 class CategoriesSeeAll extends StatelessWidget {
-  const CategoriesSeeAll({super.key, required this.text});
-  final String text;
+  CategoriesSeeAll({super.key});
+  final List<String> categories = [
+    CategoryConstants.kVehicles,
+    CategoryConstants.kRealEstate,
+    CategoryConstants.kElectronics,
+    CategoryConstants.kHomeAppliances,
+    CategoryConstants.kFurniture,
+    CategoryConstants.kEducation,
+    CategoryConstants.kFashion,
+    CategoryConstants.kEntertainment,
+    CategoryConstants.kSelfCare,
+    CategoryConstants.kPets,
+    CategoryConstants.kJobs,
+    CategoryConstants.kServices,
+    CategoryConstants.kLostFound,
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          text,
-          style: TextStyles.font18DarkBlueSemiBold,
-        ),
-        const Spacer(),
-        GestureDetector(
-          onTap: () {
-            context.pushNamed(Routes.collectionAllList);
-          },
-          child: Text(
-            'See All',
-            style: TextStyles.font12DarkBlueBold,
-          ),
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Explore Categories'),
+      ),
+      body: ListView.builder(
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(categories[index]),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              // Navigate to a new screen or handle category click
+
+              // categoryEntity.categoryName = categories[index];
+              context.pushNamed(Routes.subCollectionAllList,
+                  arguments: categories[index]);
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -13,6 +13,7 @@ import 'explore_categories_listview.dart';
 import 'home_topbar.dart';
 
 import 'search_textfield.dart';
+import 'see_all.dart';
 
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({
@@ -40,13 +41,13 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           verticalSpace(8),
           const SearchTextfield(),
           verticalSpace(23),
-          const CategoriesSeeAll(text: "Explore Categories"),
+          const SeeAll(text: "Explore Categories"),
           verticalSpace(18),
           const ExploreCategoriesListView(),
           verticalSpace(18),
           SizedBox(
             height: 160.h,
-            width: MediaQuery.of(context).size.width,
+            width: double.infinity,
             child: const ImageSlider(),
           ),
           verticalSpace(38),

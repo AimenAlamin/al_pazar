@@ -5,14 +5,17 @@ import 'package:al_pazar/features/add_post/presenation/manager/cubit/add_post_cu
 import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/categories_see_all.dart';
 import 'package:al_pazar/features/home/presentation/ui/widgets/category_filter_view.dart';
 
 import 'package:al_pazar/features/home/presentation/ui/widgets/home_view.dart';
+
+import 'package:al_pazar/features/home/presentation/ui/widgets/sub_categories_see_all.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import '../../features/add_post/domain/entities/post_entity.dart';
 import 'routes.dart';
-import '../../features/collections_all/collection_all_list.dart';
+
 import '../../features/home/presentation/ui/home_main_view.dart';
 import '../../features/auth/presentation/login/cubit/login_email_cubit.dart';
 import '../../features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
@@ -54,7 +57,7 @@ class AppRouter {
         );
       case Routes.collectionAllList:
         return MaterialPageRoute(
-          builder: (_) => const CollectionAllList(),
+          builder: (_) => CategoriesSeeAll(),
         );
       case Routes.addPostViewBody:
         return MaterialPageRoute(
@@ -89,6 +92,12 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) {
             return AddSubcategoryScreen(category: settings.arguments as String);
+          },
+        );
+      case Routes.subCollectionAllList:
+        return MaterialPageRoute(
+          builder: (_) {
+            return SubCategoriesSeeAll(category: settings.arguments as String);
           },
         );
       case Routes.categoryFilterView:
