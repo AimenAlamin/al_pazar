@@ -10,8 +10,6 @@ import 'categories_see_all.dart';
 import 'explore_categories_listview.dart';
 import 'home_topbar.dart';
 
-import 'popular_listview_items.dart';
-import 'posts_listed_view_bloc_builder.dart';
 import 'search_textfield.dart';
 
 class HomeViewBody extends StatefulWidget {

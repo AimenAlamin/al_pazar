@@ -1,3 +1,4 @@
+import '../../../../../core/helpers/category_subcategory_constant.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +12,49 @@ class ExploreCategoriesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     // Predefined list of categories with corresponding icons
     final categories = [
-      {"name": "Vechiles", "icon": "assets/svgs/car-rear-solid.svg"},
-      {"name": "Real Estate", "icon": "assets/svgs/hotel.svg"},
-      {"name": "Electronics", "icon": "assets/svgs/mobile-screen-solid.svg"},
-      {"name": "Home Appliances", "icon": "assets/svgs/kitchen-set-solid.svg"},
-      {"name": "Furniture", "icon": "assets/svgs/couch-solid.svg"},
-      {"name": "Education", "icon": "assets/svgs/book-solid.svg"},
-      {"name": "Fashions", "icon": "assets/svgs/glasses-solid.svg"},
-      {"name": "Entertainment", "icon": "assets/svgs/icons-solid.svg"},
-      {"name": "Self-Care", "icon": "assets/svgs/spray-can-sparkles-solid.svg"},
-      {"name": "Pets", "icon": "assets/svgs/cat-solid.svg"},
-      {"name": "Jobs", "icon": "assets/svgs/job.svg"},
-      {"name": "Services", "icon": "assets/svgs/hand-holding-dollar-solid.svg"},
-      {"name": "Lost & Found", "icon": "assets/svgs/Lost-Found.svg"},
+      {
+        "name": CategoryConstants.kVehicles,
+        "icon": "assets/svgs/car-rear-solid.svg"
+      },
+      {"name": CategoryConstants.kRealEstate, "icon": "assets/svgs/hotel.svg"},
+      {
+        "name": CategoryConstants.kElectronics,
+        "icon": "assets/svgs/mobile-screen-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kHomeAppliances,
+        "icon": "assets/svgs/kitchen-set-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kFurniture,
+        "icon": "assets/svgs/couch-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kEducation,
+        "icon": "assets/svgs/book-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kFashion,
+        "icon": "assets/svgs/glasses-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kEntertainment,
+        "icon": "assets/svgs/icons-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kSelfCare,
+        "icon": "assets/svgs/spray-can-sparkles-solid.svg"
+      },
+      {"name": CategoryConstants.kPets, "icon": "assets/svgs/cat-solid.svg"},
+      {"name": CategoryConstants.kJobs, "icon": "assets/svgs/job.svg"},
+      {
+        "name": CategoryConstants.kServices,
+        "icon": "assets/svgs/hand-holding-dollar-solid.svg"
+      },
+      {
+        "name": CategoryConstants.kLostFound,
+        "icon": "assets/svgs/Lost-Found.svg"
+      },
     ];
 
     return SizedBox(

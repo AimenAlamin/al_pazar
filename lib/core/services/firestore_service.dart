@@ -38,10 +38,10 @@ class FireStoreService implements DatabaseService {
           var orderByField = query['orderBy'];
           var newest = query['descending'];
           snapshotlist = snapshotlist.orderBy(orderByField, descending: newest);
-          // if(query['limit'] != null)
-          // { var limit = query['limit'];
-          //   snapshotlist = snapshotlist.limit(limit);
-          // }
+          if (query['limit'] != null) {
+            var limit = query['limit'];
+            snapshotlist = snapshotlist.limit(limit);
+          }
         }
       }
       //get the data based on the query recieved. if no query is provided, it will get all the data
