@@ -34,7 +34,7 @@ class PostRepoImpl implements PostRepo {
       var getpostData = await databaseService.getData(
         path: BackEndpoint.postsCollection,
         query: {
-          'limit': 4,
+          'limit': 10,
           "orderBy": "timestamp",
           "descending": true,
         },

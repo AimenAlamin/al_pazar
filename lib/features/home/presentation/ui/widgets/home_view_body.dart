@@ -1,18 +1,18 @@
 import 'package:al_pazar/core/common/widgets/image_sliding.dart';
-import 'package:al_pazar/core/theming/styles.dart';
+
 import 'package:al_pazar/features/home/presentation/ui/widgets/popular_listview_bloc_builder.dart';
-import 'package:al_pazar/features/home/presentation/ui/widgets/posts_listed_view_bloc_builder.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/common/cubit/fetch_post_cubit.dart';
 import '../../../../../core/helpers/spacing.dart';
-import 'categories_see_all.dart';
+
 import 'explore_categories_listview.dart';
 import 'home_topbar.dart';
 
-import 'search_textfield.dart';
+import 'searchfield/search_textfield.dart';
 import 'see_all.dart';
 
 class HomeViewBody extends StatefulWidget {
@@ -51,12 +51,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: const ImageSlider(),
           ),
           verticalSpace(38),
-          Text(
-            "Featured Lists",
-            style: TextStyles.font18DarkBlueSemiBold,
-          ),
-          verticalSpace(10),
-          const PostsListedViewBlocBuilder(),
+          const SeeAll(text: "Featured Listings"),
+          verticalSpace(15),
+          const PopularListViewBlocBuilder(),
         ],
       ),
     );
