@@ -5,6 +5,7 @@ import 'package:al_pazar/features/add_post/presenation/manager/cubit/add_post_cu
 import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/category_filter_view.dart';
 
 import 'package:al_pazar/features/home/presentation/ui/widgets/home_view.dart';
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
@@ -90,6 +91,14 @@ class AppRouter {
             return AddSubcategoryScreen(category: settings.arguments as String);
           },
         );
+      case Routes.categoryFilterView:
+        return MaterialPageRoute(
+          builder: (_) {
+            return CategoryFilterView(
+                categoryName: settings.arguments as String);
+          },
+        );
+
       // case Routes.testScreen:
       //   return MaterialPageRoute(
       //     builder: (_) {

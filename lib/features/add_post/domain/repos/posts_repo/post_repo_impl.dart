@@ -28,15 +28,43 @@ class PostRepoImpl implements PostRepo {
   @override
   Future<Either<Failure, List<PostEntity>>> getPosts() async {
     try {
-      var getpostData = await databaseService.getData(
-          //type casting because I know I will receive a list of maps of strings and dynamic
-          path: BackEndpoint.postsCollection,
-          //here we pass/mention(query) to the method impleting getData and tell it how we want to get the posts. so we make the firestore handle the query
-          query: {
-            "orderBy": "timestamp",
-            "descending": true
-          }) as List<Map<String, dynamic>>;
+      // Prepare the filter for Firestore
 
+      // Call Firestore's getData method with the filter
+      var getpostData = await databaseService.getData(
+        path: BackEndpoint.postsCollection,
+        query: {
+          'limit': 4,
+          "orderBy": "timestamp",
+          "descending": true,
+        },
+      ) as List<Map<String, dynamic>>;
+
+      // Map the result to PostEntity
+      List<PostEntity> posts =
+          getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
+
+      return Right(posts);
+    } catch (e) {
+      return Left(ServerFailure("Failed to get posts"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
+      String categoryName) async {
+    try {
+      // Prepare the filter for Firestore
+
+      // Call Firestore's getData method with the filter
+      var getpostData = await databaseService.getData(
+        path: BackEndpoint.postsCollection,
+        query: {
+          'category': categoryName,
+        },
+      ) as List<Map<String, dynamic>>;
+
+      // Map the result to PostEntity
       List<PostEntity> posts =
           getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
 

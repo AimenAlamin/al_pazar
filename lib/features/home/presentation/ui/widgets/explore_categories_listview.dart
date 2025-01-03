@@ -1,9 +1,15 @@
+import 'package:al_pazar/core/common/widgets/ad_item.dart';
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/routing/routes.dart';
+
 import '../../../../../core/helpers/category_subcategory_constant.dart';
 import '../../../../../core/theming/colors.dart';
 import '../../../../../core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'category_filter_view.dart';
 
 class ExploreCategoriesListView extends StatelessWidget {
   const ExploreCategoriesListView({super.key});
@@ -67,13 +73,8 @@ class ExploreCategoriesListView extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               // Navigate to a new page with the selected category name
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      CategoryDetailScreen(categoryName: category['name']!),
-                ),
-              );
+              context.pushNamed(Routes.categoryFilterView,
+                  arguments: category['name']!);
             },
             child: Padding(
               padding: EdgeInsetsDirectional.only(start: index == 0 ? 0 : 24.w),
@@ -97,28 +98,6 @@ class ExploreCategoriesListView extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class CategoryDetailScreen extends StatelessWidget {
-  final String categoryName;
-
-  const CategoryDetailScreen({super.key, required this.categoryName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(categoryName),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'Welcome to $categoryName',
-          style: TextStyle(fontSize: 20),
-        ),
       ),
     );
   }

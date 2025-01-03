@@ -20,35 +20,39 @@ class FireStoreService implements DatabaseService {
 
   @override
   //This method accept query to fetch specific list, accept documentID to document related with the user or specific documentID
-  Future<dynamic> getData(
-      {required String path,
-      String? documentID,
-      Map<String, dynamic>? query}) async {
+  Future<dynamic> getData({
+    required String path,
+    String? documentID,
+    Map<String, dynamic>? query,
+  }) async {
     if (documentID != null) {
-      //fetch a specific document, get one item(document)
+      // Fetch a specific document
       var snapshot = await firestore.collection(path).doc(documentID).get();
-      //  if (!snapshot.exists) throw Exception('User data not found'); ///////////
       return snapshot.data();
-    } else //fetch all documents, get all items(documents)
-    {
+    } else {
+      // Fetch all documents with optional filtering and query
       Query<Map<String, dynamic>> snapshotlist = firestore.collection(path);
+
+      // Apply ordering and limiting conditions
       if (query != null) {
-        //fetch from the collection based on the query that I want to retrieve
         if (query['orderBy'] != null) {
           var orderByField = query['orderBy'];
           var newest = query['descending'];
           snapshotlist = snapshotlist.orderBy(orderByField, descending: newest);
-          if (query['limit'] != null) {
-            var limit = query['limit'];
-            snapshotlist = snapshotlist.limit(limit);
-          }
+        }
+        if (query['limit'] != null) {
+          var limit = query['limit'];
+          snapshotlist = snapshotlist.limit(limit);
+        }
+        if (query['category'] != null) {
+          snapshotlist =
+              snapshotlist.where('category', isEqualTo: query['category']);
         }
       }
-      //get the data based on the query recieved. if no query is provided, it will get all the data
+
+      // Get the data based on the query and filter received
       var result = await snapshotlist.get();
-      return result.docs
-          .map((e) => e.data())
-          .toList(); //map the data of each document to a list
+      return result.docs.map((e) => e.data()).toList();
     }
   }
 }

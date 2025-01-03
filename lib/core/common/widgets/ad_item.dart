@@ -28,14 +28,6 @@ class _AdItemState extends State<AdItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => PostDetialsScreen(
-        //       postDetails: widget.posts,
-        //     ),
-        //   ),
-        // );
         context.pushNamed(Routes.postDetailScreen, arguments: widget.posts);
       },
       child: Container(

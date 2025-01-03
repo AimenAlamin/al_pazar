@@ -1,5 +1,7 @@
 import 'package:al_pazar/core/common/widgets/image_sliding.dart';
+import 'package:al_pazar/core/theming/styles.dart';
 import 'package:al_pazar/features/home/presentation/ui/widgets/popular_listview_bloc_builder.dart';
+import 'package:al_pazar/features/home/presentation/ui/widgets/posts_listed_view_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +42,6 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           verticalSpace(23),
           const CategoriesSeeAll(text: "Explore Categories"),
           verticalSpace(18),
-          //const PostsListedview(),
           const ExploreCategoriesListView(),
           verticalSpace(18),
           SizedBox(
@@ -49,26 +50,12 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             child: const ImageSlider(),
           ),
           verticalSpace(38),
-          // const PostsListedViewBlocBuilder(),
-          const CategoriesSeeAll(text: "Cars For Sale"),
-          verticalSpace(12),
-          const PopularListViewBlocBuilder(),
-          verticalSpace(48),
-          const CategoriesSeeAll(text: "Residentials For Rent"),
-          verticalSpace(12),
-          const PopularListViewBlocBuilder(),
-          verticalSpace(48),
-          const CategoriesSeeAll(text: "Rooms For Rent"),
-          verticalSpace(12),
-          const PopularListViewBlocBuilder(),
-          verticalSpace(48),
-          const CategoriesSeeAll(text: "Electronics For Sale"),
-          verticalSpace(12),
-          const PopularListViewBlocBuilder(),
-          verticalSpace(48),
-          const CategoriesSeeAll(text: "Furniture For Sale"),
-          verticalSpace(12),
-          const PopularListViewBlocBuilder(),
+          Text(
+            "Featured Lists",
+            style: TextStyles.font18DarkBlueSemiBold,
+          ),
+          verticalSpace(10),
+          const PostsListedViewBlocBuilder(),
         ],
       ),
     );
