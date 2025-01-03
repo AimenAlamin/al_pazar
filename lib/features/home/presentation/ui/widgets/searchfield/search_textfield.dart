@@ -16,7 +16,7 @@ class SearchTextfield extends StatelessWidget {
         suffixIcon: const Icon(Icons.search),
         controller: searchController,
         onFieldSubmitted: (value) {
-          context.pushNamed(Routes.categoryFilterView, arguments: value);
+          context.pushNamed(Routes.subCategoryFilterView, arguments: value);
         });
   }
 }

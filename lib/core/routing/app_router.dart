@@ -14,6 +14,7 @@ import 'package:al_pazar/features/home/presentation/ui/widgets/sub_categories_se
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import '../../features/add_post/domain/entities/post_entity.dart';
+import '../../features/home/presentation/ui/widgets/searchfield/sub_category_filter_view.dart';
 import 'routes.dart';
 
 import '../../features/home/presentation/ui/home_main_view.dart';
@@ -105,6 +106,13 @@ class AppRouter {
           builder: (_) {
             return CategoryFilterView(
                 categoryName: settings.arguments as String);
+          },
+        );
+      case Routes.subCategoryFilterView:
+        return MaterialPageRoute(
+          builder: (_) {
+            return SubCategoryFilterView(
+                subCategoryName: settings.arguments as String);
           },
         );
 

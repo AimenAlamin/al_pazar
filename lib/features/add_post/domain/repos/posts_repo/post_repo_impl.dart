@@ -50,6 +50,7 @@ class PostRepoImpl implements PostRepo {
     }
   }
 
+  //here we get the posts based on the category
   @override
   Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
       String categoryName) async {
@@ -61,6 +62,32 @@ class PostRepoImpl implements PostRepo {
         path: BackEndpoint.postsCollection,
         query: {
           'category': categoryName,
+        },
+      ) as List<Map<String, dynamic>>;
+
+      // Map the result to PostEntity
+      List<PostEntity> posts =
+          getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
+
+      return Right(posts);
+    } catch (e) {
+      return Left(ServerFailure("Failed to get posts"));
+    }
+  }
+
+  //here we get the posts based on the subcategory
+  @override
+  @override
+  Future<Either<Failure, List<PostEntity>>> getSubCategoryFilteredPosts(
+      String subCategoryName) async {
+    try {
+      // Prepare the filter for Firestore
+
+      // Call Firestore's getData method with the filter
+      var getpostData = await databaseService.getData(
+        path: BackEndpoint.postsCollection,
+        query: {
+          'subCategory': subCategoryName,
         },
       ) as List<Map<String, dynamic>>;
 

@@ -14,4 +14,5 @@ class Routes {
   static const String testScreen = '/testScreen';
   static const String homeView = '/homeView';
   static const String categoryFilterView = '/categoryFilterView';
+  static const String subCategoryFilterView = '/subCategoryFilterView';
 }
