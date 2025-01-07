@@ -13,6 +13,7 @@ class ImageSlider extends StatefulWidget {
 class _ImageSliderState extends State<ImageSlider> {
   final List<String> images = [
     'assets/images/henry-co-21HT36zwLn8-unsplash.jpg',
+    'assets/images/updatedPoster1.jpg',
     'assets/images/florencia-viadana-0y92si4ZLyA-unsplash.jpg',
     'assets/images/toa-heftiba-50ijCEHhN8o-unsplash.jpg',
   ];

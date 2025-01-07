@@ -1,4 +1,3 @@
-import 'package:al_pazar/core/common/widgets/image_sliding.dart';
 import 'package:al_pazar/features/add_post/domain/repos/images_repo/images_repo.dart';
 import 'package:al_pazar/features/add_post/domain/repos/posts_repo/post_repo.dart';
 import 'package:al_pazar/features/add_post/presenation/manager/cubit/add_post_cubit.dart';
@@ -115,68 +114,6 @@ class AppRouter {
                 subCategoryName: settings.arguments as String);
           },
         );
-
-      // case Routes.testScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) {
-      //       // Ensure arguments are a Map
-      //       final args = settings.arguments as Map<String, dynamic>;
-      //       final selectedCategory = args['selectedCategory'] as String;
-      //       final selectedSubcategory = args['selectedSubcategory'] as String;
-
-      //       return TestScreen(
-      //         selectedCategory: selectedCategory,
-      //         selectedSubcategory: selectedSubcategory,
-      //       );
-      //     },
-      //   );
-      case Routes.testScreen:
-        return MaterialPageRoute(
-          builder: (_) => ImageSlider(),
-        );
-
-      // case Routes.onBoardingLoginScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const OnBoardingLoginScreen(),
-      //   );
-      // case Routes.onBoardingSignupScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => const OnBoardingSignupScreen(),
-      //   );
-      //   case Routes.loginPhoneScreen:
-      // return MaterialPageRoute(
-      //   builder: (_) => const LoginPhoneScreen(),
-      // );
-      //  case Routes.signUpPhoneScreen:
-      // return MaterialPageRoute(
-      //   builder: (_) => const SignupPhoneScreen(),
-      // );
-
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<LoginCubit>(),
-      //       child: const LoginScreen(),
-      //     ),
-      //   );
-      // case Routes.signUpScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (context) => getIt<SignupCubit>(),
-      //       child: const SignupScreen(),
-      //     ),
-      //   );
-      // case Routes.homeScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) {
-      //       final String name =
-      //           settings.arguments as String; // Cast argument to String
-      //       return BlocProvider(
-      //         create: (context) => HomeCubit(getIt())..getSpecializations(),
-      //         child: HomeScreen(name: name), // Pass the name to the HomeScreen
-      //       );
-      //     },
-      //   );
 
       default:
         return null;

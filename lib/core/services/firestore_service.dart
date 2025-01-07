@@ -52,6 +52,11 @@ class FireStoreService implements DatabaseService {
           snapshotlist = snapshotlist.where('subCategory',
               isEqualTo: query['subCategory']);
         }
+        // if (query['category'] != null && query['subCategory'] != null) {
+        //   snapshotlist = snapshotlist
+        //       .where('category', isEqualTo: query['category'])
+        //       .where('subCategory', isEqualTo: query['subCategory']);
+        // }
       }
 
       // Get the data based on the query and filter received

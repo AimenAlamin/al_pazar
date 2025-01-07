@@ -1,4 +1,3 @@
-import 'package:al_pazar/core/common/widgets/ad_item.dart';
 import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/routing/routes.dart';
 
@@ -8,8 +7,6 @@ import '../../../../../core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import 'category_filter_view.dart';
 
 class ExploreCategoriesListView extends StatelessWidget {
   const ExploreCategoriesListView({super.key});
