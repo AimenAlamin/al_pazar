@@ -18,7 +18,8 @@ class PostDetialsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar: const CustomPostDetialsNavbar(),
+      bottomNavigationBar:
+          CustomPostDetialsNavbar(sellerName: postDetails.sellerName),
       body: SingleChildScrollView(
         child: Stack(
           children: [

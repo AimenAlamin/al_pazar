@@ -13,6 +13,8 @@ class PostModel {
   List<File>? image;
   List<String>? imageUrl;
   final DateTime timestamp;
+  final String sellerId;
+  final String sellerName;
 
   PostModel(
       {required this.title,
@@ -20,6 +22,8 @@ class PostModel {
       required this.price,
       required this.currency,
       required this.timestamp,
+      required this.sellerId,
+      required this.sellerName,
       this.description,
       this.category,
       this.subCategory,
@@ -38,6 +42,8 @@ class PostModel {
       image: postEntity.image,
       imageUrl: postEntity.imageUrl,
       timestamp: postEntity.timestamp,
+      sellerId: postEntity.sellerId,
+      sellerName: postEntity.sellerName,
     );
   }
 //this is a factory constructor that takes a map of strings and dynamic and returns a postModel, needed when we want to get the postModel from the database
@@ -50,6 +56,8 @@ class PostModel {
       category: json['category'],
       subCategory: json['subCategory'],
       currency: json['currency'],
+      sellerId: json['sellerId'],
+      sellerName: json['sellerName'],
       imageUrl:
           (json['imageUrl'] as List<dynamic>).map((e) => e.toString()).toList(),
 
@@ -64,9 +72,12 @@ class PostModel {
       'description': description,
       'location': location,
       'price': price,
-      'category': category,
       'currency': currency,
+      'category': category,
+
       'subCategory': subCategory,
+      'sellerId': sellerId,
+      'sellerName': sellerName,
       'imageUrl': imageUrl,
       'timestamp':
           timestamp.toIso8601String(), //converting the timestamp to a string
@@ -83,6 +94,8 @@ class PostModel {
       category: category,
       currency: currency,
       subCategory: subCategory,
+      sellerId: sellerId,
+      sellerName: sellerName,
       imageUrl: imageUrl,
       timestamp: timestamp,
     );

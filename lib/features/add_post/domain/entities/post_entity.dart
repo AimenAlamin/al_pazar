@@ -11,6 +11,8 @@ class PostEntity {
   List<File>? image;
   List<String>? imageUrl;
   final DateTime timestamp;
+  final String sellerId;
+  final String sellerName;
 
   PostEntity(
       {required this.title,
@@ -18,6 +20,8 @@ class PostEntity {
       required this.price,
       required this.currency,
       required this.timestamp,
+      required this.sellerId,
+      required this.sellerName,
       this.description,
       this.category,
       this.subCategory,

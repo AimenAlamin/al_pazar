@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomPostDetialsNavbar extends StatelessWidget {
-  const CustomPostDetialsNavbar({super.key});
+  const CustomPostDetialsNavbar({super.key, required this.sellerName});
+  final String sellerName;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class CustomPostDetialsNavbar extends StatelessWidget {
           ),
           horizontalSpace(5),
           Text(
-            "Aimen", // Use category-specific name
+            sellerName, // Use category-specific name
             style: TextStyles.font14DarkBlueMedium,
           ),
           const Spacer(),

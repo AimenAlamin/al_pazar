@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -245,6 +246,8 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               price: price,
                               category: widget.selectedCategory,
                               currency: currency,
+                              sellerId: getUserSavedData().uId,
+                              sellerName: getUserSavedData().name,
                               image: image!,
                               timestamp: DateTime.now(),
                             );
