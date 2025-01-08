@@ -15,6 +15,7 @@ import 'package:al_pazar/features/home/presentation/ui/widgets/sub_categories_se
 import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import '../../features/add_post/domain/entities/post_entity.dart';
+import '../../features/chats/domain/entity/chatroom_entity.dart';
 import '../../features/chats/domain/presentation/chatroom_list_screen.dart';
 import '../../features/chats/domain/presentation/chatroom_screen.dart';
 import '../../features/home/presentation/ui/widgets/searchfield/sub_category_filter_view.dart';
@@ -130,13 +131,11 @@ class AppRouter {
       //   ),
       // );
       case Routes.chatScreen:
-        final args = settings.arguments as Map<String, String>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt<ChatRepo>()),
             child: ChatScreen(
-              recipientName: args['recipientName']!,
-              userID: args['userID']!,
+              chatRoomEntity: settings.arguments as ChatRoomEntity,
             ),
           ),
         );

@@ -9,7 +9,7 @@ abstract class ChatRepo {
   //Future<void> deleteChatRoom(String chatRoomId);
   //Future<Either<Failure, List<ChatRoomEntity>>> getChatRooms(String userId);
   Future<Either<Failure, void>> sendMessage(
-      String chatRoomId, MessageEntity message);
+      MessageEntity messageEntity, ChatRoomEntity? chatroomEntity);
   Future<void> markMessagesAsRead({
     required String chatroomID,
     required String userID,

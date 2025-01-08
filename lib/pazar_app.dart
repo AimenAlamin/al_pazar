@@ -26,7 +26,7 @@ class PazarApp extends StatelessWidget {
         initialRoute: FirebaseAuthService().isUserLoggedIn()
             ? Routes.mainView
             : Routes.loginEmailScreen,
-        // initialRoute: Routes.mainView,
+        // initialRoute: Routes.loginEmailScreen,
         onGenerateRoute: appRouter.generateRoute,
       ),
     );

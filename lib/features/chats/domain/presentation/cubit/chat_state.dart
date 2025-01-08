@@ -8,6 +8,14 @@ class ChatLoading extends ChatState {}
 
 class ChatRoomCreated extends ChatState {}
 
+class MessageSentSuccess extends ChatState {}
+
+class MessageSentFaliure extends ChatState {
+  final String message;
+
+  MessageSentFaliure(this.message);
+}
+
 class ChatRoomsLoadedSuccess extends ChatState {
   final List<ChatRoomEntity> chatrooms;
 

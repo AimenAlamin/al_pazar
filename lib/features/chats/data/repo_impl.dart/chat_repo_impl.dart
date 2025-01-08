@@ -1,6 +1,6 @@
 import 'package:al_pazar/core/errors/failure.dart';
 import 'package:al_pazar/core/helpers/endpoints.dart';
-import 'package:al_pazar/core/helpers/get_user.dart';
+
 import 'package:al_pazar/core/services/data_serivce.dart';
 import 'package:al_pazar/features/chats/data/model/chatroom_model.dart';
 import 'package:al_pazar/features/chats/data/model/message_model.dart';
@@ -30,18 +30,34 @@ class ChatRepoImpl implements ChatRepo {
         path: BackEndpoint.chatroomsCollection,
         data: ChatRoomModel.fromEntity(chatroomEntity).toJson(),
         documentId: chatroomID,
-        subCollection: BackEndpoint.messagesCollection,
-        subData: MessageModel(
-          senderID: getUserSavedData().uId,
-          receiverID: chatroomEntity.sellerID,
-          message: 'Hello, is this still available?',
-          timestamp: DateTime.now(),
-          isRead: false,
-        ).toJson(),
       );
       return Right(null);
     } catch (e) {
       return Left(ServerFailure("Failed to create chatroom"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendMessage(
+      MessageEntity messageEntity, ChatRoomEntity? chatroomEntity) async {
+    try {
+      List<String> ids = [
+        chatroomEntity!.buyerID,
+        chatroomEntity.sellerID,
+        chatroomEntity.postID
+      ];
+      ids.sort();
+      final chatroomID = ids.join('_');
+      await dataService.addData(
+        path: BackEndpoint.chatroomsCollection,
+        data: ChatRoomModel.fromEntity(chatroomEntity).toJson(),
+        documentId: chatroomID,
+        subCollection: BackEndpoint.messagesCollection,
+        subData: MessageModel.fromEntity(messageEntity).toJson(),
+      );
+      return Right(null);
+    } catch (e) {
+      return Left(ServerFailure("Failed to send message"));
     }
   }
 
@@ -91,27 +107,5 @@ class ChatRepoImpl implements ChatRepo {
       path: 'chatrooms/$chatroomID',
       data: {'unreadCount': 0},
     );
-  }
-
-  @override
-  Future<Either<Failure, void>> sendMessage(
-      String chatRoomId, MessageEntity message) async {
-    try {
-      final messageModel = MessageModel(
-        senderID: message.senderID,
-        receiverID: message.receiverID,
-        message: message.message,
-        timestamp: message.timestamp,
-        isRead: message.isRead,
-      );
-
-      await dataService.addData(
-        path: 'chatrooms/$chatRoomId/messages',
-        data: messageModel.toJson(),
-      );
-      return Right(null);
-    } catch (e) {
-      return Left(ServerFailure("Failed to send message"));
-    }
   }
 }

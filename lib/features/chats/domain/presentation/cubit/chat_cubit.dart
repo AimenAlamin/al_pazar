@@ -25,6 +25,21 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
+  Future<void> sendMessage(
+      MessageEntity messageEntity, ChatRoomEntity? chatroomEntity) async {
+    emit(ChatLoading());
+    var result = await chatRepo.sendMessage(messageEntity, chatroomEntity);
+    result.fold((failure) {
+      emit(
+        MessageSentFaliure(failure.message),
+      );
+    }, (success) {
+      emit(
+        MessageSentSuccess(),
+      );
+    });
+  }
+
   // void getChatrooms(String userID) {
   //   emit(ChatLoading());
   //   chatRepo.getChatrooms(userID).listen(

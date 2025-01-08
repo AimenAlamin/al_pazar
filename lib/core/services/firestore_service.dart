@@ -14,7 +14,9 @@ class FireStoreService implements DatabaseService {
   }) async {
     if (documentId != null && subCollection != null) {
       var docRef = firestore.collection(path).doc(documentId);
-      await docRef.set(data);
+      // Ensure the chatroom document is created or updated
+      await docRef.set(data, SetOptions(merge: true));
+
       var subCollectionRef = docRef.collection(subCollection);
       await subCollectionRef.add(subData!);
     } else if (documentId != null) {

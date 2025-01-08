@@ -1,3 +1,4 @@
+import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,13 +6,11 @@ import '../entity/message_entity.dart';
 import 'cubit/chat_cubit.dart';
 
 class ChatScreen extends StatefulWidget {
-  final String recipientName;
-  final String userID;
+  final ChatRoomEntity chatRoomEntity;
 
   const ChatScreen({
     super.key,
-    required this.recipientName,
-    required this.userID,
+    required this.chatRoomEntity,
   });
 
   @override
@@ -27,28 +26,11 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  // void _sendMessage(BuildContext context) {
-  //   final messageText = _messageController.text.trim();
-  //   if (messageText.isNotEmpty) {
-  //     final message = MessageEntity(
-  //       senderID: widget.userID,
-  //       receiverID: '', // ReceiverID should be determined in your logic
-  //       message: messageText,
-  //       timestamp: DateTime.now(),
-  //       isRead: false,
-  //     );
-  // context
-  //     .read<ChatCubit>()
-  //     .sendMessage(chatroomID: messageText, message: message);
-  //  _messageController.clear();
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.recipientName),
+        title: Text(widget.chatRoomEntity.recipientName),
       ),
       body: Column(
         children: [
@@ -60,7 +42,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     itemCount: state.messages.length,
                     itemBuilder: (context, index) {
                       final message = state.messages[index];
-                      final isSentByMe = message.senderID == widget.userID;
+                      final isSentByMe =
+                          message.senderID == widget.chatRoomEntity.buyerID;
                       return Align(
                         alignment: isSentByMe
                             ? Alignment.centerRight
@@ -105,10 +88,25 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                // IconButton(
-                //   icon: const Icon(Icons.send),
-                //   onPressed: () => _sendMessage(context),
-                // ),
+                IconButton(
+                  onPressed: () {
+                    final messageText = _messageController.text.trim();
+                    if (messageText.isNotEmpty) {
+                      MessageEntity message = MessageEntity(
+                        message: messageText,
+                        senderID: widget.chatRoomEntity.buyerID,
+                        receiverID: widget.chatRoomEntity.sellerID,
+                        timestamp: DateTime.now(),
+                        isRead: false,
+                      );
+                      context
+                          .read<ChatCubit>()
+                          .sendMessage(message, widget.chatRoomEntity);
+                      _messageController.clear();
+                    }
+                  },
+                  icon: const Icon(Icons.send),
+                )
               ],
             ),
           ),

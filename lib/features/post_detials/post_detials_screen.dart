@@ -40,23 +40,8 @@ class PostDetialsScreen extends StatelessWidget {
             recipientName: postDetails.sellerName,
           );
           context.read<ChatCubit>().createChatRoom(chatRoomEntity);
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => ChatScreen(
-          //       chatroomID:
-          //           '${postDetails.postID}_$userID${postDetails.sellerId}',
-          //       recipientName: postDetails.sellerName,
-          //       userID: userID,
-          //     ),
-          //   ),
-          // )
-          context.pushNamed(Routes.chatScreen, arguments: {
-            'chatroomID':
-                '${postDetails.postID}_$userID${postDetails.sellerId}',
-            'recipientName': postDetails.sellerName,
-            'userID': userID,
-          });
+
+          context.pushNamed(Routes.chatScreen, arguments: chatRoomEntity);
         },
       ),
       body: SingleChildScrollView(
