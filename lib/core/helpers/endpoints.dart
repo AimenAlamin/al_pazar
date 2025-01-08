@@ -5,4 +5,6 @@ class BackEndpoint {
   static const imagesPathName = 'images';
   static const postsCollection = 'posts';
   static const getPostsCollection = 'posts';
+  static const chatroomsCollection = 'chatrooms';
+  static const messagesCollection = 'messages';
 }

@@ -5,13 +5,11 @@ import '../entity/message_entity.dart';
 import 'cubit/chat_cubit.dart';
 
 class ChatScreen extends StatefulWidget {
-  final String chatroomID;
   final String recipientName;
   final String userID;
 
   const ChatScreen({
     super.key,
-    required this.chatroomID,
     required this.recipientName,
     required this.userID,
   });
@@ -29,22 +27,22 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
-  void _sendMessage(BuildContext context) {
-    final messageText = _messageController.text.trim();
-    if (messageText.isNotEmpty) {
-      final message = MessageEntity(
-        senderID: widget.userID,
-        receiverID: '', // ReceiverID should be determined in your logic
-        message: messageText,
-        timestamp: DateTime.now(),
-        isRead: false,
-      );
-      context
-          .read<ChatCubit>()
-          .sendMessage(chatroomID: messageText, message: message);
-      _messageController.clear();
-    }
-  }
+  // void _sendMessage(BuildContext context) {
+  //   final messageText = _messageController.text.trim();
+  //   if (messageText.isNotEmpty) {
+  //     final message = MessageEntity(
+  //       senderID: widget.userID,
+  //       receiverID: '', // ReceiverID should be determined in your logic
+  //       message: messageText,
+  //       timestamp: DateTime.now(),
+  //       isRead: false,
+  //     );
+  // context
+  //     .read<ChatCubit>()
+  //     .sendMessage(chatroomID: messageText, message: message);
+  //  _messageController.clear();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   );
                 } else if (state is ChatLoading) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (state is ChatError) {
+                } else if (state is ChatRoomFailure) {
                   return Center(child: Text('Error: ${state.message}'));
                 }
                 return const SizedBox.shrink();
@@ -107,10 +105,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () => _sendMessage(context),
-                ),
+                // IconButton(
+                //   icon: const Icon(Icons.send),
+                //   onPressed: () => _sendMessage(context),
+                // ),
               ],
             ),
           ),

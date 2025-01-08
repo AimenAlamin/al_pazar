@@ -4,8 +4,7 @@ import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ChatRepo {
-  Future<Either<Failure, void>> createChatRoom(String postID, String buyerID,
-      String sellerID, String postTitle, String postPhotoUrl);
+  Future<Either<Failure, void>> createChatRoom(ChatRoomEntity chatroomEntity);
 
   //Future<void> deleteChatRoom(String chatRoomId);
   //Future<Either<Failure, List<ChatRoomEntity>>> getChatRooms(String userId);

@@ -121,21 +121,20 @@ class AppRouter {
                 subCategoryName: settings.arguments as String);
           },
         );
-      case Routes.chatroomListScreen:
-        final userID = settings.arguments as String;
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => ChatCubit(getIt<ChatRepo>()),
-            child: ChatroomListScreen(userID: userID),
-          ),
-        );
+      // case Routes.chatroomListScreen:
+      //   final userID = settings.arguments as String;
+      // return MaterialPageRoute(
+      //   builder: (_) => BlocProvider(
+      //     create: (context) => ChatCubit(getIt<ChatRepo>()),
+      //     child: ChatroomListScreen(userID: userID),
+      //   ),
+      // );
       case Routes.chatScreen:
         final args = settings.arguments as Map<String, String>;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt<ChatRepo>()),
             child: ChatScreen(
-              chatroomID: args['chatroomID']!,
               recipientName: args['recipientName']!,
               userID: args['userID']!,
             ),

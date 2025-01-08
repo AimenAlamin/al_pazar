@@ -4,6 +4,7 @@ import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
+import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
 
 import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
 
@@ -30,13 +31,15 @@ class PostDetialsScreen extends StatelessWidget {
       bottomNavigationBar: CustomPostDetialsNavbar(
         sellerName: postDetails.sellerName,
         onChatPressed: () {
-          context.read<ChatCubit>().createChatRoom(
-                postDetails.postID,
-                userID,
-                postDetails.sellerId,
-                postDetails.title,
-                postDetails.imageUrl![0],
-              );
+          ChatRoomEntity chatRoomEntity = ChatRoomEntity(
+            postID: postDetails.postID,
+            buyerID: userID,
+            sellerID: postDetails.sellerId,
+            postTitle: postDetails.title,
+            postPhotoUrl: postDetails.imageUrl![0],
+            recipientName: postDetails.sellerName,
+          );
+          context.read<ChatCubit>().createChatRoom(chatRoomEntity);
           // Navigator.push(
           //   context,
           //   MaterialPageRoute(

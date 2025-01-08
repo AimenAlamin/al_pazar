@@ -1,4 +1,5 @@
 import 'package:al_pazar/core/errors/failure.dart';
+import 'package:al_pazar/core/helpers/endpoints.dart';
 import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/services/data_serivce.dart';
 import 'package:al_pazar/features/chats/data/model/chatroom_model.dart';
@@ -14,30 +15,30 @@ class ChatRepoImpl implements ChatRepo {
   ChatRepoImpl(this.dataService);
 
   @override
-  Future<Either<Failure, void>> createChatRoom(String postID, String buyerID,
-      String sellerID, String postTitle, String postPhotoUrl) async {
+  Future<Either<Failure, void>> createChatRoom(
+      ChatRoomEntity chatroomEntity) async {
     try {
-      final chatroomID = "${postID}_$buyerID\_$sellerID";
-
-      final currentUser = getUserSavedData();
-      final recipientID = currentUser.uId == buyerID ? sellerID : buyerID;
-      final recipientName = await _getUserName(recipientID);
-
-      final chatroomModel = ChatRoomModel(
-        chatroomID: chatroomID,
-        postID: postID,
-        buyerID: buyerID,
-        sellerID: sellerID,
-        postTitle: postTitle,
-        postPhotoUrl: postPhotoUrl,
-        lastMessage: '',
-        lastMessageTimestamp: DateTime.now(),
-        unreadCount: 0,
-        recipientName: recipientName,
-      );
+      List<String> ids = [
+        chatroomEntity.buyerID,
+        chatroomEntity.sellerID,
+        chatroomEntity.postID
+      ];
+      ids.sort();
+      final chatroomID = ids.join('_');
 
       await dataService.addData(
-          path: 'chatrooms/$chatroomID', data: chatroomModel.toJson());
+        path: BackEndpoint.chatroomsCollection,
+        data: ChatRoomModel.fromEntity(chatroomEntity).toJson(),
+        documentId: chatroomID,
+        subCollection: BackEndpoint.messagesCollection,
+        subData: MessageModel(
+          senderID: getUserSavedData().uId,
+          receiverID: chatroomEntity.sellerID,
+          message: 'Hello, is this still available?',
+          timestamp: DateTime.now(),
+          isRead: false,
+        ).toJson(),
+      );
       return Right(null);
     } catch (e) {
       return Left(ServerFailure("Failed to create chatroom"));

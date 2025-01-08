@@ -20,8 +20,8 @@ class MessagesLoadedSuccess extends ChatState {
   MessagesLoadedSuccess(this.messages);
 }
 
-class ChatError extends ChatState {
+class ChatRoomFailure extends ChatState {
   final String message;
 
-  ChatError(this.message);
+  ChatRoomFailure(this.message);
 }

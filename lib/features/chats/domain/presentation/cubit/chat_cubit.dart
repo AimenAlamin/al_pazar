@@ -11,59 +11,62 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.chatRepo) : super(ChatInitial());
 
-  Future<void> createChatRoom(String postID, String buyerID, String sellerID,
-      String postTitle, String postPhotoUrl) async {
+  Future<void> createChatRoom(ChatRoomEntity chatroomEntity) async {
     emit(ChatLoading());
-    final result = await chatRepo.createChatRoom(
-        postID, buyerID, sellerID, postTitle, postPhotoUrl);
-    result.fold(
-      (failure) => emit(ChatError(failure.message)),
-      (_) => emit(ChatRoomCreated()),
-    );
+    var result = await chatRepo.createChatRoom(chatroomEntity);
+    result.fold((failure) {
+      emit(
+        ChatRoomFailure(failure.message),
+      );
+    }, (success) {
+      emit(
+        ChatRoomCreated(),
+      );
+    });
   }
 
-  void getChatrooms(String userID) {
-    emit(ChatLoading());
-    chatRepo.getChatrooms(userID).listen(
-      (chatrooms) {
-        emit(ChatRoomsLoadedSuccess(chatrooms));
-      },
-      onError: (e) {
-        emit(ChatError(e.toString()));
-      },
-    );
-  }
+  // void getChatrooms(String userID) {
+  //   emit(ChatLoading());
+  //   chatRepo.getChatrooms(userID).listen(
+  //     (chatrooms) {
+  //       emit(ChatRoomsLoadedSuccess(chatrooms));
+  //     },
+  //     onError: (e) {
+  //       emit(ChatRoomFailure(e.toString()));
+  //     },
+  //   );
+  // }
 
-  void getMessages(String chatroomID) {
-    emit(ChatLoading());
-    chatRepo.getMessages(chatroomID).listen(
-      (messages) {
-        emit(MessagesLoadedSuccess(messages));
-      },
-      onError: (e) {
-        emit(ChatError(e.toString()));
-      },
-    );
-  }
+  // void getMessages(String chatroomID) {
+  //   emit(ChatLoading());
+  //   chatRepo.getMessages(chatroomID).listen(
+  //     (messages) {
+  //       emit(MessagesLoadedSuccess(messages));
+  //     },
+  //     onError: (e) {
+  //       emit(ChatRoomFailure(e.toString()));
+  //     },
+  //   );
+  // }
 
-  Future<void> sendMessage(
-      {required String chatroomID, required MessageEntity message}) async {
-    emit(ChatLoading());
-    final result = await chatRepo.sendMessage(chatroomID, message);
-    result.fold(
-      (failure) => emit(ChatError(failure.message)),
-      (_) => emit(ChatRoomCreated()),
-    );
-  }
+  // Future<void> sendMessage(
+  //     {required String chatroomID, required MessageEntity message}) async {
+  //   emit(ChatLoading());
+  //   final result = await chatRepo.sendMessage(chatroomID, message);
+  //   result.fold(
+  //     (failure) => emit(ChatRoomFailure(failure.message)),
+  //     (_) => emit(ChatRoomCreated()),
+  //   );
+  // }
 
-  Future<void> markMessagesAsRead({
-    required String chatroomID,
-    required String userID,
-  }) async {
-    try {
-      await chatRepo.markMessagesAsRead(chatroomID: chatroomID, userID: userID);
-    } catch (e) {
-      emit(ChatError(e.toString()));
-    }
-  }
+  // Future<void> markMessagesAsRead({
+  //   required String chatroomID,
+  //   required String userID,
+  // }) async {
+  //   try {
+  //     await chatRepo.markMessagesAsRead(chatroomID: chatroomID, userID: userID);
+  //   } catch (e) {
+  //     emit(ChatRoomFailure(e.toString()));
+  //   }
+  // }
 }

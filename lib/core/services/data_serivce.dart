@@ -1,9 +1,11 @@
 abstract class DatabaseService {
-  Future<void> addData(
-      {required String path,
-      required Map<String, dynamic> data,
-      String?
-          documentId}); // here the path can be API endpoint or the path to a colloection or document in the firestore
+  Future<void> addData({
+    required String path,
+    required Map<String, dynamic> data,
+    String? documentId,
+    String? subCollection,
+    Map<String, dynamic>? subData,
+  }); // here the path can be API endpoint or the path to a colloection or document in the firestore
   Future<dynamic> getData({
     required String path,
     String? documentID,
