@@ -1,4 +1,4 @@
-import 'package:al_pazar/features/chats/chat_view_body.dart';
+import 'package:al_pazar/features/chats/domain/presentation/chat_view_body.dart';
 import 'package:flutter/material.dart';
 
 class ChatView extends StatelessWidget {

@@ -1,9 +1,15 @@
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
 
+import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
+
 import 'package:al_pazar/features/post_detials/widgets/custom_post_detials_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/helpers/custom_timeago.dart';
@@ -16,10 +22,40 @@ class PostDetialsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String userID =
+        getUserSavedData().uId; // Replace with actual logged-in user ID
+
     return Scaffold(
       backgroundColor: Colors.white,
-      bottomNavigationBar:
-          CustomPostDetialsNavbar(sellerName: postDetails.sellerName),
+      bottomNavigationBar: CustomPostDetialsNavbar(
+        sellerName: postDetails.sellerName,
+        onChatPressed: () {
+          context.read<ChatCubit>().createChatRoom(
+                postDetails.postID,
+                userID,
+                postDetails.sellerId,
+                postDetails.title,
+                postDetails.imageUrl![0],
+              );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => ChatScreen(
+          //       chatroomID:
+          //           '${postDetails.postID}_$userID${postDetails.sellerId}',
+          //       recipientName: postDetails.sellerName,
+          //       userID: userID,
+          //     ),
+          //   ),
+          // )
+          context.pushNamed(Routes.chatScreen, arguments: {
+            'chatroomID':
+                '${postDetails.postID}_$userID${postDetails.sellerId}',
+            'recipientName': postDetails.sellerName,
+            'userID': userID,
+          });
+        },
+      ),
       body: SingleChildScrollView(
         child: Stack(
           children: [

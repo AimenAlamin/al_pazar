@@ -14,6 +14,7 @@ import '../../../../core/theming/widgets/app_text_button.dart';
 import '../manager/cubit/add_post_cubit.dart';
 import 'add_post_listener.dart';
 import 'image_field.dart';
+import 'package:uuid/uuid.dart';
 
 class AddPostViewBody extends StatefulWidget {
   const AddPostViewBody({
@@ -36,6 +37,8 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
   late String title, description, currency = '', location = '';
   late int price;
   List<File>? image;
+  final uuid = Uuid();
+  late String generatedPostID;
 
   final List<Map<String, dynamic>> currencies = [
     {'name': 'TL', 'flag': '🇹🇷'},
@@ -55,6 +58,12 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
 
   final TextEditingController _currencyController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    generatedPostID = uuid.v4();
+  }
 
   @override
   void dispose() {
@@ -238,7 +247,10 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         if (image != null) {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            // Generate postID
+
                             PostEntity addPostEntity = PostEntity(
+                              postID: generatedPostID,
                               subCategory: widget.selectedSubcategory,
                               title: title,
                               description: description,

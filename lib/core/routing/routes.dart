@@ -14,4 +14,6 @@ class Routes {
   static const String homeView = '/homeView';
   static const String categoryFilterView = '/categoryFilterView';
   static const String subCategoryFilterView = '/subCategoryFilterView';
+  static const String chatroomListScreen = '/chatroomList';
+  static const String chatScreen = '/chat';
 }

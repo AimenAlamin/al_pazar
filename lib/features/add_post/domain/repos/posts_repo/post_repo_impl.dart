@@ -2,6 +2,7 @@ import 'package:al_pazar/core/helpers/endpoints.dart';
 import 'package:al_pazar/core/services/data_serivce.dart';
 import 'package:al_pazar/features/add_post/data/models/post_model.dart';
 import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../../core/errors/failure.dart';
 
@@ -100,4 +101,9 @@ class PostRepoImpl implements PostRepo {
       return Left(ServerFailure("Failed to get posts"));
     }
   }
+}
+
+extension on FirebaseFirestore {
+  addPostWithDocRef(
+      {required String path, required Map<String, dynamic> data}) {}
 }
