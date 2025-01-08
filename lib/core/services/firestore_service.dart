@@ -7,23 +7,26 @@ class FireStoreService implements DatabaseService {
   @override
   Future<void> addData({
     required String path,
-    required Map<String, dynamic> data,
+    Map<String, dynamic>? data,
     String? documentId,
     String? subCollection,
     Map<String, dynamic>? subData,
   }) async {
     if (documentId != null && subCollection != null) {
       var docRef = firestore.collection(path).doc(documentId);
-      // Ensure the chatroom document is created or updated
-      await docRef.set(data, SetOptions(merge: true));
+
+      // Ensure the chatroom document is created or updated only if data is provided
+      if (data != null) {
+        await docRef.set(data, SetOptions(merge: true));
+      }
 
       var subCollectionRef = docRef.collection(subCollection);
       await subCollectionRef.add(subData!);
     } else if (documentId != null) {
-      await firestore.collection(path).doc(documentId).set(data);
+      await firestore.collection(path).doc(documentId).set(data!);
     } else {
       await firestore.collection(path).add(
-          data); //here if we don't provide the documentID Firebase will automatically generate one, so we can't map the usr with his document
+          data!); //here if we don't provide the documentID Firebase will automatically generate one, so we can't map the usr with his document
     }
   }
 

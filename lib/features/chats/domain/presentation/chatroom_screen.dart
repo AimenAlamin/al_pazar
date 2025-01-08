@@ -1,3 +1,4 @@
+import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +20,19 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
+  late final String chatroomID;
+  @override
+  void initState() {
+    super.initState();
+    // Create chatroom ID using buyerID, sellerID, and postID
+    List<String> ids = [
+      widget.chatRoomEntity.buyerID,
+      widget.chatRoomEntity.sellerID,
+      widget.chatRoomEntity.postID
+    ];
+    ids.sort();
+    chatroomID = ids.join('_'); // Ensure consistent and unique chatroom ID
+  }
 
   @override
   void dispose() {
@@ -43,7 +57,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     itemBuilder: (context, index) {
                       final message = state.messages[index];
                       final isSentByMe =
-                          message.senderID == widget.chatRoomEntity.buyerID;
+                          message.senderID == getUserSavedData().uId;
                       return Align(
                         alignment: isSentByMe
                             ? Alignment.centerRight
@@ -92,16 +106,21 @@ class _ChatScreenState extends State<ChatScreen> {
                   onPressed: () {
                     final messageText = _messageController.text.trim();
                     if (messageText.isNotEmpty) {
+                      final String currentUserID = getUserSavedData().uId;
+                      final String receiverID =
+                          currentUserID == widget.chatRoomEntity.buyerID
+                              ? widget.chatRoomEntity.sellerID
+                              : widget.chatRoomEntity.buyerID;
                       MessageEntity message = MessageEntity(
                         message: messageText,
-                        senderID: widget.chatRoomEntity.buyerID,
-                        receiverID: widget.chatRoomEntity.sellerID,
+                        senderID: currentUserID,
+                        receiverID: receiverID,
                         timestamp: DateTime.now(),
                         isRead: false,
                       );
                       context
                           .read<ChatCubit>()
-                          .sendMessage(message, widget.chatRoomEntity);
+                          .sendMessage(message, chatroomID);
                       _messageController.clear();
                     }
                   },

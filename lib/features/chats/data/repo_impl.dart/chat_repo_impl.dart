@@ -39,18 +39,10 @@ class ChatRepoImpl implements ChatRepo {
 
   @override
   Future<Either<Failure, void>> sendMessage(
-      MessageEntity messageEntity, ChatRoomEntity? chatroomEntity) async {
+      MessageEntity messageEntity, String chatroomID) async {
     try {
-      List<String> ids = [
-        chatroomEntity!.buyerID,
-        chatroomEntity.sellerID,
-        chatroomEntity.postID
-      ];
-      ids.sort();
-      final chatroomID = ids.join('_');
       await dataService.addData(
         path: BackEndpoint.chatroomsCollection,
-        data: ChatRoomModel.fromEntity(chatroomEntity).toJson(),
         documentId: chatroomID,
         subCollection: BackEndpoint.messagesCollection,
         subData: MessageModel.fromEntity(messageEntity).toJson(),
@@ -61,11 +53,11 @@ class ChatRepoImpl implements ChatRepo {
     }
   }
 
-  Future<String> _getUserName(String userID) async {
-    final users = await dataService.getData(path: 'users');
-    final user = users.firstWhere((user) => user['uId'] == userID);
-    return user['name'];
-  }
+  // Future<String> _getUserName(String userID) async {
+  //   final users = await dataService.getData(path: 'users');
+  //   final user = users.firstWhere((user) => user['uId'] == userID);
+  //   return user['name'];
+  // }
 
   @override
   Stream<List<ChatRoomEntity>> getChatrooms(String userID) {

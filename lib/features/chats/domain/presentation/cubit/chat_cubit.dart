@@ -26,9 +26,9 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   Future<void> sendMessage(
-      MessageEntity messageEntity, ChatRoomEntity? chatroomEntity) async {
+      MessageEntity messageEntity, String chatroomID) async {
     emit(ChatLoading());
-    var result = await chatRepo.sendMessage(messageEntity, chatroomEntity);
+    var result = await chatRepo.sendMessage(messageEntity, chatroomID);
     result.fold((failure) {
       emit(
         MessageSentFaliure(failure.message),
