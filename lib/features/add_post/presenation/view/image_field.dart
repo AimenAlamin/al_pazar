@@ -60,15 +60,25 @@ class _ImageFieldState extends State<ImageField> {
                     ),
                   )),
               // Add button to pick more images
-              IconButton(
-                onPressed: () async {
-                  await pickImages();
-                  setState(() {});
-                },
-                icon: Icon(
-                  Icons.add,
-                  size: 50.r,
-                  color: Colors.grey,
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(12.0.r),
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 203, 182, 182),
+                    width: 1.0.r,
+                  ),
+                ),
+                child: IconButton(
+                  onPressed: () async {
+                    await pickImages();
+                    setState(() {});
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    size: 50.r,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
             ],

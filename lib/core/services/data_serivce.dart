@@ -10,5 +10,5 @@ abstract class DatabaseService {
     required String path,
     String? documentID,
     Map<String, dynamic>? query,
-  }); //general method that fetch data from the path(endpoint/collection/document) and user identifier(token/firebaseUID) and return it as a UserEntity
+  }); //general method that fetch data from the path(endpoint/collection/document) and user identifier(token/firebaseUID) and return it
 }

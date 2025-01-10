@@ -1,21 +1,33 @@
+import 'dart:io';
+
+import 'package:al_pazar/core/helpers/extensions.dart';
+import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
+import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
+import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
+import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../add_post/domain/entities/post_entity.dart';
 
 class CustomPostDetialsNavbar extends StatelessWidget {
   const CustomPostDetialsNavbar({
     super.key,
-    required this.sellerName,
-    required this.onChatPressed,
+    required this.postDetails,
   });
 
-  final String sellerName;
-  final VoidCallback onChatPressed;
+  final PostEntity postDetails;
 
   @override
   Widget build(BuildContext context) {
+    final String userID =
+        getUserSavedData().uId; // Replace with actual logged-in user ID
     return Container(
       height: 90.h,
       decoration: BoxDecoration(
@@ -41,7 +53,7 @@ class CustomPostDetialsNavbar extends StatelessWidget {
           ),
           horizontalSpace(5),
           Text(
-            sellerName, // Use category-specific name
+            postDetails.sellerName, // Use category-specific name
             style: TextStyles.font14DarkBlueMedium,
           ),
           const Spacer(),
@@ -50,19 +62,101 @@ class CustomPostDetialsNavbar extends StatelessWidget {
               color: ColorsManager.mediumRed,
               shape: BoxShape.circle,
             ),
+            //chat button
             child: IconButton(
-              onPressed: onChatPressed, // Trigger chat callback
+              onPressed: () {
+                ChatRoomEntity chatRoomEntity = ChatRoomEntity(
+                  postID: postDetails.postID,
+                  buyerID: userID,
+                  sellerID: postDetails.sellerId,
+                  postTitle: postDetails.title,
+                  postPhotoUrl: postDetails.imageUrl![0],
+                  recipientName: postDetails.sellerName,
+                );
+                context.read<ChatCubit>().createChatRoom(chatRoomEntity);
+
+                context.pushNamed(Routes.chatScreen, arguments: chatRoomEntity);
+              },
               icon: const Icon(Icons.message_outlined),
             ),
           ),
+          //phone call button
+
           Container(
             decoration: const BoxDecoration(
               color: ColorsManager.mediumRed,
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                final String phoneNumber = postDetails.phoneNumber!;
+                final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
+
+                try {
+                  if (await canLaunchUrl(phoneUri)) {
+                    await launchUrl(
+                      phoneUri,
+                      mode: LaunchMode
+                          .externalApplication, // Opens phone dialer externally
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Could not launch phone dialer')),
+                    );
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Failed to open phone dialer: $e')),
+                  );
+                }
+              },
               icon: const Icon(Icons.phone_outlined),
+            ),
+          ),
+
+          // WhatsApp button
+          GestureDetector(
+            onTap: () async {
+              final String phone = postDetails.phoneNumber!.replaceAll('+', '');
+              const String text = "Hello, I'm interested in your ad";
+              final String androidUrl =
+                  "whatsapp://send?phone=$phone&text=${Uri.encodeComponent(text)}";
+
+              // final String webUrl =
+              //     "https://web.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(text)}";
+              // try {
+              //   if (Platform.isAndroid) {
+              //     if (await canLaunchUrl(Uri.parse(androidUrl))) {
+              //       await launchUrl(Uri.parse(androidUrl),
+              //           mode: LaunchMode.externalApplication);
+              //     }
+              //   } else {
+              //     // Fallback to web for unsupported platforms or if app is not installed
+              //     await launchUrl(Uri.parse(webUrl),
+              //         mode: LaunchMode.externalApplication);
+              //   }
+              // } catch (e) {
+              //   ScaffoldMessenger.of(context).showSnackBar(
+              //     SnackBar(content: Text('Failed to open WhatsApp: $e')),
+              //   );
+              // }
+              try {
+                await launchUrl(Uri.parse(androidUrl),
+                    mode: LaunchMode.externalApplication);
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Failed to open WhatsApp: $e')),
+                );
+              }
+            },
+            child: CircleAvatar(
+              radius: 28,
+              backgroundColor: ColorsManager.lightRead,
+              child: SvgPicture.asset(
+                'assets/svgs/whatsapp-brands-solid.svg', // Use category-specific icon
+                height: 30.h,
+                width: 30.w,
+              ),
             ),
           ),
         ],

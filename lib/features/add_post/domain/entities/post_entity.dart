@@ -11,6 +11,10 @@ class PostEntity {
   final String currency;
   List<File>? image;
   List<String>? imageUrl;
+  List<String>? paymentOptions;
+  List<String>? contactMethod;
+  String? phoneNumber;
+  String? condition;
   final DateTime timestamp;
   final String sellerId;
   final String sellerName;
@@ -29,5 +33,9 @@ class PostEntity {
     this.subCategory,
     this.image,
     this.imageUrl,
+    this.paymentOptions,
+    this.contactMethod,
+    this.phoneNumber,
+    this.condition,
   });
 }

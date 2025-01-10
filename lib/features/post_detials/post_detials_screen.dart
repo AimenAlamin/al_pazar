@@ -1,16 +1,11 @@
-import 'package:al_pazar/core/helpers/extensions.dart';
-import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
-import 'package:al_pazar/core/routing/routes.dart';
+
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
-import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
-
-import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
 
 import 'package:al_pazar/features/post_detials/widgets/custom_post_detials_navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/helpers/custom_timeago.dart';
@@ -23,26 +18,10 @@ class PostDetialsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userID =
-        getUserSavedData().uId; // Replace with actual logged-in user ID
-
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: CustomPostDetialsNavbar(
-        sellerName: postDetails.sellerName,
-        onChatPressed: () {
-          ChatRoomEntity chatRoomEntity = ChatRoomEntity(
-            postID: postDetails.postID,
-            buyerID: userID,
-            sellerID: postDetails.sellerId,
-            postTitle: postDetails.title,
-            postPhotoUrl: postDetails.imageUrl![0],
-            recipientName: postDetails.sellerName,
-          );
-          context.read<ChatCubit>().createChatRoom(chatRoomEntity);
-
-          context.pushNamed(Routes.chatScreen, arguments: chatRoomEntity);
-        },
+        postDetails: postDetails,
       ),
       body: SingleChildScrollView(
         child: Stack(
@@ -108,7 +87,55 @@ class PostDetialsScreen extends StatelessWidget {
                         color: ColorsManager.lighterGray,
                         thickness: 3,
                       ),
-                      verticalSpace(16),
+                      verticalSpace(10),
+                      Text(
+                        "Detials",
+                        style: TextStyles.font18DarkBlueBold,
+                      ),
+                      verticalSpace(6),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Condtion",
+                              style: TextStyles.font14DarkBlueMedium,
+                            ),
+                            TextSpan(
+                              text: ' : ',
+                              style: TextStyles.font14DarkBlueBold,
+                            ),
+                            TextSpan(
+                              text: postDetails.condition!,
+                              style: TextStyles.font14DarkBlueRegular,
+                            ),
+                          ],
+                        ),
+                      ),
+                      verticalSpace(8),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "payment Options",
+                              style: TextStyles.font14DarkBlueMedium,
+                            ),
+                            TextSpan(
+                              text: ' : ',
+                              style: TextStyles.font14DarkBlueBold,
+                            ),
+                            TextSpan(
+                              text: postDetails.paymentOptions!.join(", "),
+                              style: TextStyles.font14DarkBlueRegular,
+                            ),
+                          ],
+                        ),
+                      ),
+                      verticalSpace(8),
+                      const Divider(
+                        color: ColorsManager.lighterGray,
+                        thickness: 3,
+                      ),
+                      verticalSpace(10),
                       Text(
                         "Description",
                         style: TextStyles.font18DarkBlueBold,

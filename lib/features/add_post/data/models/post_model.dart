@@ -13,24 +13,33 @@ class PostModel {
   final String currency;
   List<File>? image;
   List<String>? imageUrl;
+  List<String>? paymentOptions;
+  List<String>? contactMethod;
+  String? phoneNumber;
+  String? condition;
   final DateTime timestamp;
   final String sellerId;
   final String sellerName;
 
-  PostModel(
-      {required this.title,
-      required this.location,
-      required this.postID,
-      required this.price,
-      required this.currency,
-      required this.timestamp,
-      required this.sellerId,
-      required this.sellerName,
-      this.description,
-      this.category,
-      this.subCategory,
-      this.image,
-      this.imageUrl});
+  PostModel({
+    required this.title,
+    required this.location,
+    required this.postID,
+    required this.price,
+    required this.currency,
+    required this.timestamp,
+    required this.sellerId,
+    required this.sellerName,
+    this.description,
+    this.category,
+    this.subCategory,
+    this.image,
+    this.imageUrl,
+    this.paymentOptions,
+    this.contactMethod,
+    this.phoneNumber,
+    this.condition,
+  });
 //this is a factory constructor that takes a postEntity and returns a postModel, needed when we want to send the postEntity to the database
   factory PostModel.fromEntity(PostEntity postEntity) {
     return PostModel(
@@ -47,6 +56,10 @@ class PostModel {
       timestamp: postEntity.timestamp,
       sellerId: postEntity.sellerId,
       sellerName: postEntity.sellerName,
+      paymentOptions: postEntity.paymentOptions,
+      contactMethod: postEntity.contactMethod,
+      phoneNumber: postEntity.phoneNumber,
+      condition: postEntity.condition,
     );
   }
 //this is a factory constructor that takes a map of strings and dynamic and returns a postModel, needed when we want to get the postModel from the database
@@ -62,6 +75,15 @@ class PostModel {
       currency: json['currency'],
       sellerId: json['sellerId'],
       sellerName: json['sellerName'],
+      phoneNumber: json['phoneNumber'],
+      condition: json['condition'],
+      paymentOptions: (json['paymentOptions'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
+      contactMethod: (json['contactMethod'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
+
       imageUrl:
           (json['imageUrl'] as List<dynamic>).map((e) => e.toString()).toList(),
 
@@ -83,6 +105,10 @@ class PostModel {
       'sellerId': sellerId,
       'sellerName': sellerName,
       'imageUrl': imageUrl,
+      'paymentOptions': paymentOptions,
+      'contactMethod': contactMethod,
+      'phoneNumber': phoneNumber,
+      'condition': condition,
       'timestamp':
           timestamp.toIso8601String(), //converting the timestamp to a string
     };
@@ -103,6 +129,10 @@ class PostModel {
       sellerName: sellerName,
       imageUrl: imageUrl,
       timestamp: timestamp,
+      paymentOptions: paymentOptions,
+      contactMethod: contactMethod,
+      phoneNumber: phoneNumber,
+      condition: condition,
     );
   }
 }

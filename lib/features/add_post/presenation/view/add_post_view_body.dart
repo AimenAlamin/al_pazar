@@ -1,14 +1,11 @@
 import 'dart:io';
-
 import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/theming/styles.dart';
 import '../../../../core/theming/widgets/app_text_form_field.dart';
 import '../../domain/entities/post_entity.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/widgets/app_text_button.dart';
 import '../manager/cubit/add_post_cubit.dart';
@@ -36,6 +33,10 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
 
   late String title, description, currency = '', location = '';
   late int price;
+  late String condition = 'New'; // Default condition
+  late String phoneNumber;
+  List<String> paymentOptions = [];
+  List<String> contactMethods = [];
   List<File>? image;
   final uuid = Uuid();
   late String generatedPostID;
@@ -47,6 +48,12 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
     {'name': 'GBP', 'flag': '🇬🇧'},
   ];
 
+  final List<String> paymentOptionsList = ['Cash', 'Exchange', 'Installment'];
+  final List<String> contactMethodsList = [
+    'Phone Number',
+    'Kibzar Chat',
+    'Both'
+  ];
   final List<String> northCyprusCities = [
     "Lefkoşa",
     "Mağusa",
@@ -58,6 +65,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
 
   final TextEditingController _currencyController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
 
   @override
   void initState() {
@@ -69,6 +77,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
   void dispose() {
     _currencyController.dispose();
     _locationController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -160,11 +169,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         image = images;
                       },
                     ),
-                    // ImageField(
-                    //   onImageSelected: (image) {
-                    //     this.image = image;
-                    //   },
-                    // ),
                     AppTextFormField(
                       hintText: 'Title',
                       validator: (value) {
@@ -239,7 +243,117 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       ),
                     ),
                     verticalSpace(18),
+
+                    // Phone Number Field
+                    AppTextFormField(
+                      controller: _phoneNumberController,
+                      hintText: 'Mobile Phone Number',
+                      keyboardType: TextInputType.phone,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'This field is required';
+                        }
+                      },
+                      onSaved: (value) {
+                        phoneNumber = value!;
+                      },
+                    ),
                     verticalSpace(18),
+
+                    // Payment Options Section
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Payment Options',
+                            style: TextStyles.font12DarkBlueBold),
+                        verticalSpace(8),
+                        Row(
+                          children: paymentOptionsList.map((option) {
+                            return Flexible(
+                              child: CheckboxListTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(option,
+                                    style: TextStyles.font12DarkBlueBold),
+                                value: paymentOptions.contains(option),
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    if (value == true) {
+                                      paymentOptions.add(option);
+                                    } else {
+                                      paymentOptions.remove(option);
+                                    }
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        )
+                      ],
+                    ),
+                    verticalSpace(18),
+
+                    // Condition Section
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Condition', style: TextStyles.font12DarkBlueBold),
+                        verticalSpace(8),
+                        Row(
+                          children: ['New', 'Used', 'Other'].map((cond) {
+                            return Expanded(
+                              child: RadioListTile<String>(
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(cond),
+                                value: cond,
+                                groupValue: condition,
+                                onChanged: (value) {
+                                  setState(() {
+                                    condition = value!;
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    verticalSpace(18),
+
+                    // Contact Methods Section
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Contact Method',
+                            style: TextStyles.font12DarkBlueBold),
+                        verticalSpace(8),
+                        Row(
+                          children: contactMethodsList.map((method) {
+                            return Expanded(
+                              child: CheckboxListTile(
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(method),
+                                value: contactMethods.contains(method),
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    if (value == true) {
+                                      contactMethods.add(method);
+                                    } else {
+                                      contactMethods.remove(method);
+                                    }
+                                  });
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    verticalSpace(18),
+
                     AppTextButton(
                       buttonText: "Post Ad",
                       textStyle: TextStyles.font16WhiteSemiBold,
@@ -247,7 +361,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         if (image != null) {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            // Generate postID
 
                             PostEntity addPostEntity = PostEntity(
                               postID: generatedPostID,
@@ -262,6 +375,10 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               sellerName: getUserSavedData().name,
                               image: image!,
                               timestamp: DateTime.now(),
+                              condition: condition,
+                              phoneNumber: phoneNumber,
+                              paymentOptions: paymentOptions,
+                              contactMethod: contactMethods,
                             );
                             context.read<AddPostCubit>().addPost(addPostEntity);
                           } else {

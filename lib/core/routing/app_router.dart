@@ -16,7 +16,7 @@ import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import '../../features/add_post/domain/entities/post_entity.dart';
 import '../../features/chats/domain/entity/chatroom_entity.dart';
-import '../../features/chats/domain/presentation/chatroom_list_screen.dart';
+
 import '../../features/chats/domain/presentation/chatroom_screen.dart';
 import '../../features/home/presentation/ui/widgets/searchfield/sub_category_filter_view.dart';
 import 'routes.dart';
