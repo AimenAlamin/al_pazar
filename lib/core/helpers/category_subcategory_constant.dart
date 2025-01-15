@@ -64,7 +64,7 @@ class SubcategoryConstants {
   static const String kLabCoatsMedicalSupplies = 'Lab Coats & Medical Supplies';
   static const String kEngineeringTools = 'Engineering Tools';
   static const String kStationeryArtSupplies = 'Stationery & Art Supplies';
-  static const String kBooksStudyMaterials = 'Books & Study Materials';
+  static const String kBooksStudyNotes = 'Books & Study Notes';
   static const String kBagsBackpacks = 'Bags & Backpacks';
   static const String kOnlineCoursesTutorials = 'Online Courses & Tutorials';
   static const String kEbooksDigitalResources = 'eBooks & Digital Resources';

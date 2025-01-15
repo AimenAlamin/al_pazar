@@ -66,7 +66,7 @@ class AddSubcategoryScreen extends StatelessWidget {
           SubcategoryConstants.kLabCoatsMedicalSupplies,
           SubcategoryConstants.kEngineeringTools,
           SubcategoryConstants.kStationeryArtSupplies,
-          SubcategoryConstants.kBooksStudyMaterials,
+          SubcategoryConstants.kBooksStudyNotes,
           SubcategoryConstants.kBagsBackpacks,
           SubcategoryConstants.kOnlineCoursesTutorials,
           SubcategoryConstants.kEbooksDigitalResources,

@@ -76,7 +76,7 @@ class _SignupFormState extends State<SignupEmailForm> {
             hintText: 'Email',
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter valid email ending with .edu.tr';
+                return 'Only emails ending with ".edu.tr" are allowed.';
               } //will add it later     value == null ||  value.isEmpty ||!AppRegex.isEmailValid(value)
             },
             controller: context.read<SignUpEmailCubit>().emailController,

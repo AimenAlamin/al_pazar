@@ -42,7 +42,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
   late String generatedPostID;
 
   final List<Map<String, dynamic>> currencies = [
-    {'name': 'TL', 'flag': '🇹🇷'},
+    {'name': 'TRY', 'flag': '🇹🇷'},
     {'name': 'USD', 'flag': '🇺🇸'},
     {'name': 'EUR', 'flag': '🇪🇺'},
     {'name': 'GBP', 'flag': '🇬🇧'},
@@ -275,7 +275,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                                     ListTileControlAffinity.leading,
                                 contentPadding: EdgeInsets.zero,
                                 title: Text(option,
-                                    style: TextStyles.font12DarkBlueBold),
+                                    style: TextStyles.font12DarkBlueMedium),
                                 value: paymentOptions.contains(option),
                                 onChanged: (bool? value) {
                                   setState(() {
