@@ -1,6 +1,9 @@
+import 'package:al_pazar/core/helpers/endpoints.dart';
+import 'package:al_pazar/features/chats/data/model/message_model.dart';
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 import 'package:al_pazar/features/chats/domain/repo/chat_repo.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 part 'chat_state.dart';
 
@@ -23,48 +26,15 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
-  // void getChatrooms(String userID) {
-  //   emit(ChatLoading());
-  //   chatRepo.getChatrooms(userID).listen(
-  //     (chatrooms) {
-  //       emit(ChatRoomsLoadedSuccess(chatrooms));
-  //     },
-  //     onError: (e) {
-  //       emit(ChatRoomFailure(e.toString()));
-  //     },
-  //   );
-  // }
-
-  // void getMessages(String chatroomID) {
-  //   emit(ChatLoading());
-  //   chatRepo.getMessages(chatroomID).listen(
-  //     (messages) {
-  //       emit(MessagesLoadedSuccess(messages));
-  //     },
-  //     onError: (e) {
-  //       emit(ChatRoomFailure(e.toString()));
-  //     },
-  //   );
-  // }
-
-  // Future<void> sendMessage(
-  //     {required String chatroomID, required MessageEntity message}) async {
-  //   emit(ChatLoading());
-  //   final result = await chatRepo.sendMessage(chatroomID, message);
-  //   result.fold(
-  //     (failure) => emit(ChatRoomFailure(failure.message)),
-  //     (_) => emit(ChatRoomCreated()),
-  //   );
-  // }
-
-  // Future<void> markMessagesAsRead({
-  //   required String chatroomID,
-  //   required String userID,
-  // }) async {
-  //   try {
-  //     await chatRepo.markMessagesAsRead(chatroomID: chatroomID, userID: userID);
-  //   } catch (e) {
-  //     emit(ChatRoomFailure(e.toString()));
-  //   }
-  // }
+  // Stream messages for a specific conversationId
+  Stream<List<MessageEntity>> getMessages(String conversationId) {
+    return FirebaseFirestore.instance
+        .collection(BackEndpoint.messagesCollection)
+        .where('conversationId', isEqualTo: conversationId)
+        .orderBy('timestamp', descending: false)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) {
+              return MessageModel.fromJson(doc.data()).toEntity();
+            }).toList());
+  }
 }

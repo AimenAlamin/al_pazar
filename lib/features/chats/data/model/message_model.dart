@@ -1,4 +1,5 @@
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MessageModel {
   final String? conversationId;
@@ -38,7 +39,7 @@ class MessageModel {
       recipientId: json['recipientId'],
       postId: json['postId'],
       message: json['message'],
-      timestamp: json['timestamp'],
+      timestamp: (json['timestamp'] as Timestamp).toDate(),
       isRead: json['isRead'],
     );
   }
@@ -50,7 +51,7 @@ class MessageModel {
       'recipientId': recipientId,
       'postId': postId,
       'message': message,
-      'timestamp': timestamp,
+      'timestamp': timestamp != null ? Timestamp.fromDate(timestamp!) : null,
       'isRead': isRead,
     };
   }
