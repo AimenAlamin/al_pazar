@@ -15,7 +15,7 @@ class PostEntity {
   String? phoneNumber;
   String? condition;
   final DateTime timestamp;
-  final String sellerId;
+  final String userId;
   final String sellerName;
 
   PostEntity({
@@ -24,7 +24,7 @@ class PostEntity {
     required this.price,
     required this.currency,
     required this.timestamp,
-    required this.sellerId,
+    required this.userId,
     required this.sellerName,
     this.description,
     this.category,

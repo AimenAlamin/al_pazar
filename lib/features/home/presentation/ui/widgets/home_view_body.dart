@@ -46,7 +46,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           const ExploreCategoriesListView(),
           verticalSpace(18),
           SizedBox(
-            height: 160.h,
+            height: 180.h,
             width: double.infinity,
             child: const ImageSlider(),
           ),

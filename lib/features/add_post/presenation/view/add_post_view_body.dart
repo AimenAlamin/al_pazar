@@ -366,7 +366,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               price: price,
                               category: widget.selectedCategory,
                               currency: currency,
-                              sellerId: getUserSavedData().uId,
+                              userId: getUserSavedData().uId,
                               sellerName: getUserSavedData().name,
                               image: image!,
                               timestamp: DateTime.now(),

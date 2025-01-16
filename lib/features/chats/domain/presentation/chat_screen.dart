@@ -33,7 +33,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // Create chatroom ID using buyerID, sellerID, and postID
     List<String> ids = [
       currentUserID,
-      widget.postDetails.sellerId,
+      widget.postDetails.userId,
     ];
     ids.sort();
     uniqueUsers = ids.join('_');
@@ -72,11 +72,12 @@ class _ChatScreenState extends State<ChatScreen> {
                     final messageText = _messageController.text.trim();
                     if (messageText.isNotEmpty) {
                       final String currentUserID = getUserSavedData().uId;
-                      final String receiverID = widget.postDetails
-                          .sellerId; // Replace with actual seller ID
+                      final String receiverID = widget
+                          .postDetails.userId; // Replace with actual seller ID
                       MessageEntity message = MessageEntity(
                         conversationId: conversationId,
-                        postId: "postID",
+                        postId:
+                            "//write down the postid which is the document id of the post where a conversation is happening",
                         message: messageText,
                         userId: currentUserID,
                         recipientId: receiverID,

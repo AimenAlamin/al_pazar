@@ -17,7 +17,7 @@ class PostModel {
   String? phoneNumber;
   String? condition;
   final DateTime timestamp;
-  final String sellerId;
+  final String userId;
   final String sellerName;
 
   PostModel({
@@ -26,7 +26,7 @@ class PostModel {
     required this.price,
     required this.currency,
     required this.timestamp,
-    required this.sellerId,
+    required this.userId,
     required this.sellerName,
     this.description,
     this.category,
@@ -51,7 +51,7 @@ class PostModel {
       image: postEntity.image,
       imageUrl: postEntity.imageUrl,
       timestamp: postEntity.timestamp,
-      sellerId: postEntity.sellerId,
+      userId: postEntity.userId,
       sellerName: postEntity.sellerName,
       paymentOptions: postEntity.paymentOptions,
       contactMethod: postEntity.contactMethod,
@@ -69,7 +69,7 @@ class PostModel {
       category: json['category'],
       subCategory: json['subCategory'],
       currency: json['currency'],
-      sellerId: json['sellerId'],
+      userId: json['userId'],
       sellerName: json['sellerName'],
       phoneNumber: json['phoneNumber'],
       condition: json['condition'],
@@ -97,7 +97,7 @@ class PostModel {
       'currency': currency,
       'category': category,
       'subCategory': subCategory,
-      'sellerId': sellerId,
+      'userId': userId,
       'sellerName': sellerName,
       'imageUrl': imageUrl,
       'paymentOptions': paymentOptions,
@@ -119,7 +119,7 @@ class PostModel {
       category: category,
       currency: currency,
       subCategory: subCategory,
-      sellerId: sellerId,
+      userId: userId,
       sellerName: sellerName,
       imageUrl: imageUrl,
       timestamp: timestamp,
