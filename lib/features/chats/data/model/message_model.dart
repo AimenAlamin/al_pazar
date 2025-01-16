@@ -1,42 +1,54 @@
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 
 class MessageModel {
-  final String senderID;
-  final String receiverID;
-
-  final String message;
-  final DateTime timestamp;
-  final bool isRead;
+  final String? conversationId;
+  final String? userId;
+  final String? recipientId;
+  final String? postId;
+  final String? message;
+  final DateTime? timestamp;
+  final bool? isRead;
 
   MessageModel({
-    required this.senderID,
-    required this.receiverID,
-    required this.message,
-    required this.timestamp,
-    required this.isRead,
+    this.conversationId,
+    this.userId,
+    this.recipientId,
+    this.postId,
+    this.message,
+    this.timestamp,
+    this.isRead,
   });
+
   factory MessageModel.fromEntity(MessageEntity messageEntity) {
     return MessageModel(
-      senderID: messageEntity.senderID,
-      receiverID: messageEntity.receiverID,
+      conversationId: messageEntity.conversationId,
+      userId: messageEntity.userId,
+      recipientId: messageEntity.recipientId,
+      postId: messageEntity.postId,
       message: messageEntity.message,
       timestamp: messageEntity.timestamp,
       isRead: messageEntity.isRead,
     );
   }
+
   factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
-      senderID: json['senderID'],
-      receiverID: json['receiverID'],
+      conversationId: json['conversationId'],
+      userId: json['userId'],
+      recipientId: json['recipientId'],
+      postId: json['postId'],
       message: json['message'],
       timestamp: json['timestamp'],
       isRead: json['isRead'],
     );
   }
+
   toJson() {
     return {
-      'senderID': senderID,
-      'receiverID': receiverID,
+      'conversationId': conversationId,
+      'userId': userId,
+      'recipientId': recipientId,
+      'postId': postId,
       'message': message,
       'timestamp': timestamp,
       'isRead': isRead,
@@ -45,8 +57,10 @@ class MessageModel {
 
   MessageEntity toEntity() {
     return MessageEntity(
-      senderID: senderID,
-      receiverID: receiverID,
+      conversationId: conversationId,
+      userId: userId,
+      recipientId: recipientId,
+      postId: postId,
       message: message,
       timestamp: timestamp,
       isRead: isRead,

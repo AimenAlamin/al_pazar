@@ -1,7 +1,6 @@
 import 'dart:io';
 
 class PostEntity {
-  final String postID;
   final String title;
   String? description;
   final String location;
@@ -20,7 +19,6 @@ class PostEntity {
   final String sellerName;
 
   PostEntity({
-    required this.postID,
     required this.title,
     required this.location,
     required this.price,

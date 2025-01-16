@@ -1,16 +1,19 @@
 class MessageEntity {
-  final String senderID;
-  final String receiverID;
-
-  final String message;
-  final DateTime timestamp;
-  final bool isRead;
+  final String? conversationId;
+  final String? userId;
+  final String? recipientId;
+  final String? postId;
+  final String? message;
+  final DateTime? timestamp;
+  final bool? isRead;
 
   MessageEntity({
-    required this.senderID,
-    required this.receiverID,
-    required this.message,
-    required this.timestamp,
-    required this.isRead,
+    this.message,
+    this.timestamp,
+    this.isRead,
+    this.conversationId,
+    this.userId,
+    this.recipientId,
+    this.postId,
   });
 }

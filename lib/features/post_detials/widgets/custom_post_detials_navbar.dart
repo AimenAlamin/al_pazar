@@ -1,15 +1,9 @@
-import 'dart:io';
-
 import 'package:al_pazar/core/helpers/extensions.dart';
-import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
-import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
-import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,8 +20,6 @@ class CustomPostDetialsNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String userID =
-        getUserSavedData().uId; // Replace with actual logged-in user ID
     return Container(
       height: 90.h,
       decoration: BoxDecoration(
@@ -62,20 +54,10 @@ class CustomPostDetialsNavbar extends StatelessWidget {
               color: ColorsManager.mediumRed,
               shape: BoxShape.circle,
             ),
-            //chat button
+            //kibzar chat button
             child: IconButton(
               onPressed: () {
-                ChatRoomEntity chatRoomEntity = ChatRoomEntity(
-                  postID: postDetails.postID,
-                  buyerID: userID,
-                  sellerID: postDetails.sellerId,
-                  postTitle: postDetails.title,
-                  postPhotoUrl: postDetails.imageUrl![0],
-                  recipientName: postDetails.sellerName,
-                );
-                context.read<ChatCubit>().createChatRoom(chatRoomEntity);
-
-                context.pushNamed(Routes.chatScreen, arguments: chatRoomEntity);
+                context.pushNamed(Routes.chatScreen, arguments: postDetails);
               },
               icon: const Icon(Icons.message_outlined),
             ),
@@ -122,24 +104,6 @@ class CustomPostDetialsNavbar extends StatelessWidget {
               final String androidUrl =
                   "whatsapp://send?phone=$phone&text=${Uri.encodeComponent(text)}";
 
-              // final String webUrl =
-              //     "https://web.whatsapp.com/send?phone=$phone&text=${Uri.encodeComponent(text)}";
-              // try {
-              //   if (Platform.isAndroid) {
-              //     if (await canLaunchUrl(Uri.parse(androidUrl))) {
-              //       await launchUrl(Uri.parse(androidUrl),
-              //           mode: LaunchMode.externalApplication);
-              //     }
-              //   } else {
-              //     // Fallback to web for unsupported platforms or if app is not installed
-              //     await launchUrl(Uri.parse(webUrl),
-              //         mode: LaunchMode.externalApplication);
-              //   }
-              // } catch (e) {
-              //   ScaffoldMessenger.of(context).showSnackBar(
-              //     SnackBar(content: Text('Failed to open WhatsApp: $e')),
-              //   );
-              // }
               try {
                 await launchUrl(Uri.parse(androidUrl),
                     mode: LaunchMode.externalApplication);

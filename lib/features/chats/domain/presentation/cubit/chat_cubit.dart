@@ -2,8 +2,6 @@ import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 import 'package:al_pazar/features/chats/domain/repo/chat_repo.dart';
 import 'package:bloc/bloc.dart';
 
-import '../../entity/chatroom_entity.dart';
-
 part 'chat_state.dart';
 
 class ChatCubit extends Cubit<ChatState> {
@@ -11,24 +9,9 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.chatRepo) : super(ChatInitial());
 
-  Future<void> createChatRoom(ChatRoomEntity chatroomEntity) async {
+  Future<void> sendMessage(MessageEntity messageEntity) async {
     emit(ChatLoading());
-    var result = await chatRepo.createChatRoom(chatroomEntity);
-    result.fold((failure) {
-      emit(
-        ChatRoomFailure(failure.message),
-      );
-    }, (success) {
-      emit(
-        ChatRoomCreated(),
-      );
-    });
-  }
-
-  Future<void> sendMessage(
-      MessageEntity messageEntity, String chatroomID) async {
-    emit(ChatLoading());
-    var result = await chatRepo.sendMessage(messageEntity, chatroomID);
+    var result = await chatRepo.sendMessage(messageEntity);
     result.fold((failure) {
       emit(
         MessageSentFaliure(failure.message),
