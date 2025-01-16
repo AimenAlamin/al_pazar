@@ -17,6 +17,7 @@ class PostEntity {
   final DateTime timestamp;
   final String userId;
   final String sellerName;
+  String? postId; //to store the document id of the post in the firestore
 
   PostEntity({
     required this.title,
@@ -35,5 +36,6 @@ class PostEntity {
     this.contactMethod,
     this.phoneNumber,
     this.condition,
+    this.postId,
   });
 }

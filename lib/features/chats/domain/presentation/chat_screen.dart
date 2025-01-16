@@ -1,6 +1,5 @@
 import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,23 +20,13 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  late final String conversationId;
-  late final String uniqueUsers;
-  final String currentUserID =
-      getUserSavedData().uId; // Replace with actual logged-in user ID
-  final String currentUserName =
-      getUserSavedData().name; // Replace with actual logged-in user name
-  @override
-  void initState() {
-    super.initState();
-    // Create chatroom ID using buyerID, sellerID, and postID
-    List<String> ids = [
-      currentUserID,
-      widget.postDetails.userId,
-    ];
+
+  // Lazy initialization
+  String get conversationId {
+    final String currentUserID = getUserSavedData().uId;
+    List<String> ids = [currentUserID, widget.postDetails.userId];
     ids.sort();
-    uniqueUsers = ids.join('_');
-    //conversationId = uniqueUsers + '_' + //postID
+    return '${ids.join('_')}_${widget.postDetails.postId}';
   }
 
   @override
@@ -72,12 +61,10 @@ class _ChatScreenState extends State<ChatScreen> {
                     final messageText = _messageController.text.trim();
                     if (messageText.isNotEmpty) {
                       final String currentUserID = getUserSavedData().uId;
-                      final String receiverID = widget
-                          .postDetails.userId; // Replace with actual seller ID
+                      final String receiverID = widget.postDetails.userId;
                       MessageEntity message = MessageEntity(
-                        conversationId: conversationId,
-                        postId:
-                            "//write down the postid which is the document id of the post where a conversation is happening",
+                        conversationId: conversationId, // Accessed here
+                        postId: widget.postDetails.postId,
                         message: messageText,
                         userId: currentUserID,
                         recipientId: receiverID,
@@ -89,7 +76,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     }
                   },
                   icon: const Icon(Icons.send),
-                )
+                ),
               ],
             ),
           ),

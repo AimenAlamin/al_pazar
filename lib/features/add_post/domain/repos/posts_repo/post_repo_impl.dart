@@ -28,76 +28,74 @@ class PostRepoImpl implements PostRepo {
   @override
   Future<Either<Failure, List<PostEntity>>> getPosts() async {
     try {
-      // Prepare the filter for Firestore
-
-      // Call Firestore's getData method with the filter
-      var getpostData = await databaseService.getData(
+      // Fetch posts with document IDs
+      List<Map<String, dynamic>> rawPostData =
+          await databaseService.getDataWithIds(
         path: BackEndpoint.postsCollection,
         query: {
+          'orderBy': 'timestamp',
           'limit': 10,
-          "orderBy": "timestamp",
-          "descending": true,
+          'descending': true,
         },
-      ) as List<Map<String, dynamic>>;
+      );
 
-      // Map the result to PostEntity
-      List<PostEntity> posts =
-          getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
+      // Map raw data to PostEntity
+      List<PostEntity> posts = rawPostData.map((data) {
+        final String postId = data['postId']; // Extract the document ID
+        return PostModel.fromJson(data, postId).toEntity();
+      }).toList();
 
       return Right(posts);
     } catch (e) {
-      return Left(ServerFailure("Failed to get posts"));
+      return Left(ServerFailure("Failed to fetch posts: $e"));
     }
   }
 
-  //here we get the posts based on the category
+//here we filter the posts based on the search text, category, subcategory and location
   @override
-  Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
-      String categoryName) async {
+  Future<Either<Failure, List<PostEntity>>> filterPosts({
+    String? searchText,
+    String? category,
+    String? subcategory,
+    String? location,
+  }) async {
     try {
-      // Prepare the filter for Firestore
+      // Initialize query filters
+      Map<String, dynamic> query = {
+        'orderBy': 'timestamp',
+        'descending': true,
+      };
 
-      // Call Firestore's getData method with the filter
-      var getpostData = await databaseService.getData(
+      // Add optional filters
+      if (searchText != null && searchText.isNotEmpty) {
+        query['searchFields'] = searchText; // Placeholder for full-text search
+      }
+      if (category != null && category.isNotEmpty) {
+        query['category'] = category;
+      }
+      if (subcategory != null && subcategory.isNotEmpty) {
+        query['subCategory'] = subcategory;
+      }
+      if (location != null && location.isNotEmpty) {
+        query['location'] = location;
+      }
+
+      // Fetch filtered posts with document IDs
+      List<Map<String, dynamic>> rawPostData =
+          await databaseService.getDataWithIds(
         path: BackEndpoint.postsCollection,
-        query: {
-          'category': categoryName,
-        },
-      ) as List<Map<String, dynamic>>;
+        query: query,
+      );
 
-      // Map the result to PostEntity
-      List<PostEntity> posts =
-          getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
+      // Map raw data to PostEntity
+      List<PostEntity> posts = rawPostData.map((data) {
+        final String postId = data['postId']; // Extract the document ID
+        return PostModel.fromJson(data, postId).toEntity();
+      }).toList();
 
       return Right(posts);
     } catch (e) {
-      return Left(ServerFailure("Failed to get posts"));
-    }
-  }
-
-  //here we get the posts based on the subcategory
-  @override
-  @override
-  Future<Either<Failure, List<PostEntity>>> getSubCategoryFilteredPosts(
-      String subCategoryName) async {
-    try {
-      // Prepare the filter for Firestore
-
-      // Call Firestore's getData method with the filter
-      var getpostData = await databaseService.getData(
-        path: BackEndpoint.postsCollection,
-        query: {
-          'subCategory': subCategoryName,
-        },
-      ) as List<Map<String, dynamic>>;
-
-      // Map the result to PostEntity
-      List<PostEntity> posts =
-          getpostData.map((e) => PostModel.fromJson(e).toEntity()).toList();
-
-      return Right(posts);
-    } catch (e) {
-      return Left(ServerFailure("Failed to get posts"));
+      return Left(ServerFailure("Failed to fetch filtered posts: $e"));
     }
   }
 }

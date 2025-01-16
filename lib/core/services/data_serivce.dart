@@ -11,4 +11,10 @@ abstract class DatabaseService {
     String? documentID,
     Map<String, dynamic>? query,
   }); //general method that fetch data from the path(endpoint/collection/document) and user identifier(token/firebaseUID) and return it
+
+  // New method to fetch documents with their document IDs
+  Future<List<Map<String, dynamic>>> getDataWithIds({
+    required String path,
+    Map<String, dynamic>? query,
+  });
 }

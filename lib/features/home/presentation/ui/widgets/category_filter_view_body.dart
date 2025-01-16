@@ -20,7 +20,7 @@ class CategoryFilterViewBody extends StatefulWidget {
 class _CategoryFilterViewBodyState extends State<CategoryFilterViewBody> {
   @override
   void initState() {
-    context.read<FetchPostCubit>().fetchPostsByCategory(widget.categoryName);
+    context.read<FetchPostCubit>().filterPosts(category: widget.categoryName);
     super.initState();
   }
 

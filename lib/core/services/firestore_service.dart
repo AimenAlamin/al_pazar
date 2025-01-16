@@ -66,4 +66,39 @@ class FireStoreService implements DatabaseService {
       return result.docs.map((e) => e.data()).toList();
     }
   }
+
+  //here we get the posts with documentID
+  @override
+  Future<List<Map<String, dynamic>>> getDataWithIds({
+    required String path,
+    Map<String, dynamic>? query,
+  }) async {
+    Query<Map<String, dynamic>> querySnapshot = firestore.collection(path);
+
+    if (query != null) {
+      if (query['orderBy'] != null) {
+        querySnapshot = querySnapshot.orderBy(query['orderBy'],
+            descending: query['descending'] ?? false);
+      }
+      if (query['limit'] != null) {
+        querySnapshot = querySnapshot.limit(query['limit']);
+      }
+      if (query['category'] != null) {
+        querySnapshot =
+            querySnapshot.where('category', isEqualTo: query['category']);
+      }
+      if (query['subCategory'] != null) {
+        querySnapshot =
+            querySnapshot.where('subCategory', isEqualTo: query['subCategory']);
+      }
+    }
+
+    // Fetch the data and include document IDs
+    var result = await querySnapshot.get();
+    return result.docs.map((doc) {
+      var data = doc.data();
+      data['postId'] = doc.id; // Dynamically add document ID
+      return data;
+    }).toList();
+  }
 }

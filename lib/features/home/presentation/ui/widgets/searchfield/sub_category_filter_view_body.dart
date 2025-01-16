@@ -23,17 +23,13 @@ class _CategoryFilterViewBodyState extends State<SubCategoryFilterViewBody> {
   void initState() {
     context
         .read<FetchPostCubit>()
-        .fetchPostsBySubCategory(widget.subCategoryName);
+        .filterPosts(subcategory: widget.subCategoryName);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.subCategoryName),
-      //   centerTitle: true,
-      // ),
       appBar: buildAppBar(context,
           title: widget.subCategoryName, showFilterButton: true),
       backgroundColor: Colors.white,

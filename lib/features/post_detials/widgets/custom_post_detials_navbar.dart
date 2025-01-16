@@ -54,6 +54,7 @@ class CustomPostDetialsNavbar extends StatelessWidget {
               color: ColorsManager.mediumRed,
               shape: BoxShape.circle,
             ),
+
             //kibzar chat button
             child: IconButton(
               onPressed: () {

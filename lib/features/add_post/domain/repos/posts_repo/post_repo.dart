@@ -7,8 +7,10 @@ import 'package:dartz/dartz.dart';
 abstract class PostRepo {
   Future<Either<Failure, void>> addPosts(PostEntity postEntity);
   Future<Either<Failure, List<PostEntity>>> getPosts();
-  Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
-      String categoryName);
-  Future<Either<Failure, List<PostEntity>>> getSubCategoryFilteredPosts(
-      String subCategoryName);
+  Future<Either<Failure, List<PostEntity>>> filterPosts({
+    String? searchText,
+    String? category,
+    String? subcategory,
+    String? location,
+  });
 }

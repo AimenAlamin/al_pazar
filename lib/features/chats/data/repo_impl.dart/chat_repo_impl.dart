@@ -11,29 +11,6 @@ class ChatRepoImpl implements ChatRepo {
 
   ChatRepoImpl(this.dataService);
 
-  // @override
-  // Future<Either<Failure, void>> createChatRoom(
-  //     ChatRoomEntity chatroomEntity) async {
-  //   try {
-  //     List<String> ids = [
-  //       chatroomEntity.buyerID,
-  //       chatroomEntity.sellerID,
-  //       chatroomEntity.postID
-  //     ];
-  //     ids.sort();
-  //     final chatroomID = ids.join('_');
-
-  //     await dataService.addData(
-  //       path: BackEndpoint.chatroomsCollection,
-  //       data: ChatRoomModel.fromEntity(chatroomEntity).toJson(),
-  //       documentId: chatroomID,
-  //     );
-  //     return Right(null);
-  //   } catch (e) {
-  //     return Left(ServerFailure("Failed to create chatroom"));
-  //   }
-  // }
-
   @override
   Future<Either<Failure, void>> sendMessage(MessageEntity messageEntity) async {
     try {

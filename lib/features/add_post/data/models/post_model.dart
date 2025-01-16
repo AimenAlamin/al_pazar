@@ -19,6 +19,7 @@ class PostModel {
   final DateTime timestamp;
   final String userId;
   final String sellerName;
+  String? postId; //to store the document id of the post in the firestore
 
   PostModel({
     required this.title,
@@ -37,6 +38,7 @@ class PostModel {
     this.contactMethod,
     this.phoneNumber,
     this.condition,
+    this.postId,
   });
 //this is a factory constructor that takes a postEntity and returns a postModel, needed when we want to send the postEntity to the database
   factory PostModel.fromEntity(PostEntity postEntity) {
@@ -60,8 +62,9 @@ class PostModel {
     );
   }
 //this is a factory constructor that takes a map of strings and dynamic and returns a postModel, needed when we want to get the postModel from the database
-  factory PostModel.fromJson(Map<String, dynamic> json) {
+  factory PostModel.fromJson(Map<String, dynamic> json, String postId) {
     return PostModel(
+      postId: postId, // Use the document ID,
       title: json['title'],
       description: json['description'],
       location: json['location'],
@@ -127,6 +130,7 @@ class PostModel {
       contactMethod: contactMethod,
       phoneNumber: phoneNumber,
       condition: condition,
+      postId: postId, // Include postId
     );
   }
 }
