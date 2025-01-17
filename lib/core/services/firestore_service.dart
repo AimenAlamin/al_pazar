@@ -73,28 +73,32 @@ class FireStoreService implements DatabaseService {
     required String path,
     Map<String, dynamic>? query,
   }) async {
-    Query<Map<String, dynamic>> querySnapshot = firestore.collection(path);
+    Query<Map<String, dynamic>> querySnapshotList = firestore.collection(path);
 
     if (query != null) {
-      if (query['orderBy'] != null) {
-        querySnapshot = querySnapshot.orderBy(query['orderBy'],
-            descending: query['descending'] ?? false);
-      }
-      if (query['limit'] != null) {
-        querySnapshot = querySnapshot.limit(query['limit']);
-      }
+      // if (query['category'] != null && query['location'] != null) {
+      //   querySnapshotList = querySnapshotList
+      //       .where('category', isEqualTo: query['category'])
+      //       .where('location', isEqualTo: query['location']);
+      // }
       if (query['category'] != null) {
-        querySnapshot =
-            querySnapshot.where('category', isEqualTo: query['category']);
+        querySnapshotList =
+            querySnapshotList.where('category', isEqualTo: query['category']);
       }
-      if (query['subCategory'] != null) {
-        querySnapshot =
-            querySnapshot.where('subCategory', isEqualTo: query['subCategory']);
+
+      if (query['subCategory'] != null && query['location'] != null) {
+        querySnapshotList = querySnapshotList
+            .where('subCategory', isEqualTo: query['subCategory'])
+            .where('location', isEqualTo: query['location']);
+      } else if (query['subCategory'] != null) {
+        querySnapshotList = querySnapshotList.where('subCategory',
+            isEqualTo: query['subCategory']);
       }
+      // Add filter based on search text
     }
 
     // Fetch the data and include document IDs
-    var result = await querySnapshot.get();
+    var result = await querySnapshotList.get();
     return result.docs.map((doc) {
       var data = doc.data();
       data['postId'] = doc.id; // Dynamically add document ID

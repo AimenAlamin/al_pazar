@@ -51,51 +51,29 @@ class PostRepoImpl implements PostRepo {
     }
   }
 
-//here we filter the posts based on the search text, category, subcategory and location
+  // Filter by 'category' only
   @override
-  Future<Either<Failure, List<PostEntity>>> filterPosts({
-    String? searchText,
-    String? category,
-    String? subcategory,
-    String? location,
-  }) async {
+  Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
+    String categoryName,
+  ) async {
     try {
-      // Initialize query filters
-      Map<String, dynamic> query = {
-        'orderBy': 'timestamp',
-        'descending': true,
-      };
-
-      // Add optional filters
-      if (searchText != null && searchText.isNotEmpty) {
-        query['searchFields'] = searchText; // Placeholder for full-text search
-      }
-      if (category != null && category.isNotEmpty) {
-        query['category'] = category;
-      }
-      if (subcategory != null && subcategory.isNotEmpty) {
-        query['subCategory'] = subcategory;
-      }
-      if (location != null && location.isNotEmpty) {
-        query['location'] = location;
-      }
-
-      // Fetch filtered posts with document IDs
-      List<Map<String, dynamic>> rawPostData =
-          await databaseService.getDataWithIds(
+      // Fetch from Firestore
+      var getpostData = await databaseService.getDataWithIds(
         path: BackEndpoint.postsCollection,
-        query: query,
+        query: {
+          'category': categoryName,
+        },
       );
 
-      // Map raw data to PostEntity
-      List<PostEntity> posts = rawPostData.map((data) {
+      // Map the result to PostEntity
+      List<PostEntity> posts = getpostData.map((data) {
         final String postId = data['postId']; // Extract the document ID
         return PostModel.fromJson(data, postId).toEntity();
       }).toList();
 
       return Right(posts);
     } catch (e) {
-      return Left(ServerFailure("Failed to fetch filtered posts: $e"));
+      return Left(ServerFailure("Failed to get posts: $e"));
     }
   }
 }

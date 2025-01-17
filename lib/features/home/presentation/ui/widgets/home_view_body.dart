@@ -27,34 +27,41 @@ class HomeViewBody extends StatefulWidget {
 class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   void initState() {
-    context.read<FetchPostCubit>().fetchPosts();
     super.initState();
+    context.read<FetchPostCubit>().fetchPosts();
+  }
+
+  Future<void> _refreshPosts() async {
+    context.read<FetchPostCubit>().fetchPosts();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const HomeTopBar(),
-          verticalSpace(8),
-          const SearchTextfield(),
-          verticalSpace(23),
-          const SeeAll(text: "Explore Categories"),
-          verticalSpace(18),
-          const ExploreCategoriesListView(),
-          verticalSpace(18),
-          SizedBox(
-            height: 180.h,
-            width: double.infinity,
-            child: const ImageSlider(),
-          ),
-          verticalSpace(38),
-          const SeeAll(text: "Featured Listings"),
-          verticalSpace(15),
-          const PopularListViewBlocBuilder(),
-        ],
+    return RefreshIndicator(
+      onRefresh: _refreshPosts,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const HomeTopBar(),
+            verticalSpace(8),
+            const SearchTextfield(),
+            verticalSpace(23),
+            const SeeAll(text: "Explore Categories"),
+            verticalSpace(18),
+            const ExploreCategoriesListView(),
+            verticalSpace(18),
+            SizedBox(
+              height: 180.h,
+              width: double.infinity,
+              child: const ImageSlider(),
+            ),
+            verticalSpace(38),
+            const SeeAll(text: "Featured Listings"),
+            verticalSpace(15),
+            const PopularListViewBlocBuilder(),
+          ],
+        ),
       ),
     );
   }
