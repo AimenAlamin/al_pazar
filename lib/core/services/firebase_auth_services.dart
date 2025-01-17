@@ -100,16 +100,16 @@ class FirebaseAuthService {
   }
 
   //SIGN OUT invalid-credential
-  // Future<void> signOut() async {
-  //   try {
-  //     await FirebaseAuth.instance.signOut();
-  //   } catch (e) {
-  //     log("Exception in FirebaseAuthService.signOut: ${e.toString()}");
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      log("Exception in FirebaseAuthService.signOut: ${e.toString()}");
 
-  //     throw CustomException(
-  //         message: 'An error occurred please try again later.');
-  //   }
-  // }
+      throw CustomException(
+          message: 'An error occurred please try again later.');
+    }
+  }
   //SIGN UP PHONE
   // Future<User> signInWithPhoneNumber(
   //     //here I used the firebase signInWithPhoneNumber method to sign in a user with phone number

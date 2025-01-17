@@ -55,13 +55,6 @@ class _CustomBottomNavbarState extends State<CustomBottomNavbar> {
             ),
           );
         }).toList(),
-        // children: bottomNavigationBarItems.map((e) {
-        //   //accessing the list of bottomNavigationBarItems and converting them to a list
-        //   return NavbarItem(
-        //     isSelected: true,
-        //     bottomNavbarEntity: e, //here e represents each item/entity in the list
-        //   );
-        // }).toList(),
       ),
     );
   }

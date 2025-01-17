@@ -13,20 +13,16 @@ class HomeTopBar extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              getUserSavedData().name,
-              style: TextStyles.font18DarkBlueBold,
-            ),
-            // Text(
-            //   ' ',
-            //   style: TextStyles.font14GrayRegular,
-            // ),
             SizedBox(
               height: 70.0,
               width: 70.0,
               child: Image.asset("assets/images/splashImg.png"),
             ),
           ],
+        ),
+        Text(
+          "Hello :) ${getUserSavedData().name}",
+          style: TextStyles.font16DarkBlueBold,
         ),
         const Spacer(),
         CircleAvatar(

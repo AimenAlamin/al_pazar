@@ -32,7 +32,7 @@ class ChatRepoImpl implements ChatRepo {
         data: messageModel.toJson(),
       );
 
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure("Failed to send message: $e"));
     }

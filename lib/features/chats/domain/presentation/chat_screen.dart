@@ -10,9 +10,9 @@ class ChatScreen extends StatefulWidget {
   final PostEntity postDetails;
 
   const ChatScreen({
-    Key? key,
+    super.key,
     required this.postDetails,
-  }) : super(key: key);
+  });
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();

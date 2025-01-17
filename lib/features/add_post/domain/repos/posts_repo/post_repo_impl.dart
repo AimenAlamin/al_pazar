@@ -19,7 +19,7 @@ class PostRepoImpl implements PostRepo {
       await databaseService.addData(
           path: BackEndpoint.postsCollection,
           data: PostModel.fromEntity(postEntity).toJson());
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return Left(ServerFailure("Failed to add post"));
     }

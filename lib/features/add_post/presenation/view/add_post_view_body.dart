@@ -84,7 +84,8 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
         return ListView(
           children: currencies.map((currency) {
             return ListTile(
-              leading: Text(currency['flag'], style: TextStyle(fontSize: 24)),
+              leading:
+                  Text(currency['flag'], style: const TextStyle(fontSize: 24)),
               title: Text(currency['name']),
               onTap: () {
                 setState(() {

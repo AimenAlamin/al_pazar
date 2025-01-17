@@ -4,7 +4,7 @@ import 'package:al_pazar/features/home/presentation/ui/widgets/account_view.dart
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../chats/domain/presentation/chat_view.dart';
-import 'widgets/favorites_view.dart';
+import 'widgets/myads_view.dart';
 import 'widgets/home_view.dart';
 import 'widgets/navigationbar/custom_bottom_navbar.dart';
 
@@ -50,7 +50,7 @@ class _MainViewState extends State<MainView> {
             index: currentViewIndex,
             children: [
               const HomeView(),
-              const FavoritesView(),
+              const MyAdsView(),
               AddCategoryScreen(),
               const ChatView(),
               const AccountView(),

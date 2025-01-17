@@ -19,7 +19,7 @@ List<BottomNavigationBarEntity> get bottomNavigationBarItems => [
       BottomNavigationBarEntity(
           activeImage: Assets.favoritesFilled,
           inActiveImage: Assets.favoritesOutlined,
-          name: "Favorites"),
+          name: "My Ads"),
       BottomNavigationBarEntity(
           activeImage: Assets.sell,
           inActiveImage: Assets.sell,

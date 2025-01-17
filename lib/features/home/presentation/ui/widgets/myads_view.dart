@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class FavoritesView extends StatelessWidget {
-  const FavoritesView({super.key});
+class MyAdsView extends StatelessWidget {
+  const MyAdsView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text("No favorites yet"),
+      child: Text("No Ads yet"),
     );
   }
 }
