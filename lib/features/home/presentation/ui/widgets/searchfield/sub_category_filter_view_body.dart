@@ -21,7 +21,9 @@ class SubCategoryFilterViewBody extends StatefulWidget {
 class _CategoryFilterViewBodyState extends State<SubCategoryFilterViewBody> {
   @override
   void initState() {
-    context.read<FetchPostCubit>().fetchPostsByCategory(widget.subCategoryName);
+    context
+        .read<FetchPostCubit>()
+        .fetchPostsBySubCategory(widget.subCategoryName);
     super.initState();
   }
 

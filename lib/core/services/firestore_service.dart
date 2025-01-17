@@ -86,11 +86,12 @@ class FireStoreService implements DatabaseService {
             querySnapshotList.where('category', isEqualTo: query['category']);
       }
 
-      if (query['subCategory'] != null && query['location'] != null) {
-        querySnapshotList = querySnapshotList
-            .where('subCategory', isEqualTo: query['subCategory'])
-            .where('location', isEqualTo: query['location']);
-      } else if (query['subCategory'] != null) {
+      // if (query['subCategory'] != null && query['location'] != null) {
+      //   querySnapshotList = querySnapshotList
+      //       .where('subCategory', isEqualTo: query['subCategory'])
+      //       .where('location', isEqualTo: query['location']);
+      // }
+      if (query['subCategory'] != null) {
         querySnapshotList = querySnapshotList.where('subCategory',
             isEqualTo: query['subCategory']);
       }

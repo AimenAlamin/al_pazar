@@ -17,6 +17,7 @@ class SearchTextfield extends StatelessWidget {
         controller: searchController,
         onFieldSubmitted: (value) {
           context.pushNamed(Routes.subCategoryFilterView, arguments: value);
+          searchController.clear(); // Clear the text field after submitting
         });
   }
 }

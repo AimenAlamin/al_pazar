@@ -20,10 +20,21 @@ class FetchPostCubit extends Cubit<FetchPostState> {
     });
   }
 
-  //Filtered fetching
+  //Filtered by categoy fetching
   Future<void> fetchPostsByCategory(String categoryName) async {
     emit(FetchPostLoading());
     final posts = await postRepo.getFilteredPosts(categoryName);
+    posts.fold((failure) => emit(FetchPostFailure(failure.message)), (posts) {
+      //noOfPosts = posts.length;
+      //if using pagination do  noOfPosts += posts.length;
+      emit(FetchPostSuccess(posts));
+    });
+  }
+
+  //Filtered by subcategory
+  Future<void> fetchPostsBySubCategory(String subCategoryName) async {
+    emit(FetchPostLoading());
+    final posts = await postRepo.getSubCategoryFilteredPosts(subCategoryName);
     posts.fold((failure) => emit(FetchPostFailure(failure.message)), (posts) {
       //noOfPosts = posts.length;
       //if using pagination do  noOfPosts += posts.length;

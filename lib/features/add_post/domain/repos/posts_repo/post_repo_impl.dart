@@ -76,4 +76,29 @@ class PostRepoImpl implements PostRepo {
       return Left(ServerFailure("Failed to get posts: $e"));
     }
   }
+
+  @override
+  Future<Either<Failure, List<PostEntity>>> getSubCategoryFilteredPosts(
+    String subCategoryName,
+  ) async {
+    try {
+      // Fetch from Firestore
+      var getpostData = await databaseService.getDataWithIds(
+        path: BackEndpoint.postsCollection,
+        query: {
+          'subCategory': subCategoryName,
+        },
+      );
+
+      // Map the result to PostEntity
+      List<PostEntity> posts = getpostData.map((data) {
+        final String postId = data['postId']; // Extract the document ID
+        return PostModel.fromJson(data, postId).toEntity();
+      }).toList();
+
+      return Right(posts);
+    } catch (e) {
+      return Left(ServerFailure("Failed to get posts: $e"));
+    }
+  }
 }

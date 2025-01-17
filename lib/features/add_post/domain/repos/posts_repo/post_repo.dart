@@ -10,4 +10,7 @@ abstract class PostRepo {
   Future<Either<Failure, List<PostEntity>>> getFilteredPosts(
     String categoryName,
   );
+  Future<Either<Failure, List<PostEntity>>> getSubCategoryFilteredPosts(
+    String subCategoryName,
+  );
 }
