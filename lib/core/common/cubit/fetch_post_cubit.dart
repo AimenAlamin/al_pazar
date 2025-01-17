@@ -31,7 +31,7 @@ class FetchPostCubit extends Cubit<FetchPostState> {
     });
   }
 
-  //Filtered by subcategory
+  // Filtered by subcategory
   Future<void> fetchPostsBySubCategory(String subCategoryName) async {
     emit(FetchPostLoading());
     final posts = await postRepo.getSubCategoryFilteredPosts(subCategoryName);
