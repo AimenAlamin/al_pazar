@@ -1,19 +1,18 @@
 import 'package:al_pazar/core/helpers/get_user.dart';
-import 'package:al_pazar/features/add_post/domain/entities/post_entity.dart';
+import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../entity/message_entity.dart';
-import 'cubit/chat_cubit.dart';
 import 'package:intl/intl.dart';
+import '../../../add_post/domain/entities/post_entity.dart';
+import 'cubit/chat_cubit.dart';
 
 class ChatScreen extends StatefulWidget {
   final PostEntity postDetails;
 
   const ChatScreen({
-    super.key,
+    Key? key,
     required this.postDetails,
-  });
+  }) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -21,9 +20,10 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final ScrollController _scrollController =
-      ScrollController(); // Add ScrollController
-  // Lazy initialization of conversation ID
+  final ScrollController _scrollController = ScrollController();
+
+  /// Build a conversation ID in the same way your code shows
+  /// e.g. (user1, user2)_postId
   String get conversationId {
     final String currentUserID = getUserSavedData().uId;
     List<String> ids = [currentUserID, widget.postDetails.userId];
@@ -32,18 +32,51 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // You might not need initState if you're only using StreamBuilder below.
+  }
+
+  @override
   void dispose() {
     _messageController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
-  // **Method to Scroll to the Bottom**
+  /// Helper to auto-scroll to bottom after new messages
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       }
     });
+  }
+
+  /// Invokes the ChatCubit to send a message
+  void _onSendPressed() {
+    final messageText = _messageController.text.trim();
+    if (messageText.isNotEmpty) {
+      final currentUserID = getUserSavedData().uId;
+      final String receiverID = widget.postDetails.userId;
+
+      final messageEntity = MessageEntity(
+        conversationId: conversationId,
+        postId: widget.postDetails.postId,
+        message: messageText, // plaintext here
+        userId: currentUserID,
+        recipientId: receiverID,
+        timestamp: DateTime.now(),
+        isRead: false,
+      );
+
+      // Call our ChatCubit -> ChatRepo -> ChatRepoImpl -> encrypt & store
+      context.read<ChatCubit>().sendMessage(messageEntity);
+
+      _messageController.clear();
+      // Optionally scroll to bottom
+      _scrollToBottom();
+    }
   }
 
   @override
@@ -54,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Column(
         children: [
-          // Display messages in a ListView
+          // Display messages in a ListView with a StreamBuilder
           Expanded(
             child: StreamBuilder<List<MessageEntity>>(
               stream: context.read<ChatCubit>().getMessages(conversationId),
@@ -63,14 +96,17 @@ class _ChatScreenState extends State<ChatScreen> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Error: ${snapshot.error}"),
-                  );
+                  return Center(child: Text("Error: ${snapshot.error}"));
                 }
                 final messages = snapshot.data ?? [];
                 if (messages.isEmpty) {
                   return const Center(child: Text("No messages yet."));
                 }
+
+                // Auto-scroll after messages load
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _scrollToBottom();
+                });
 
                 return ListView.builder(
                   controller: _scrollController,
@@ -105,6 +141,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               : CrossAxisAlignment.start,
                           children: [
                             Text(
+                              // This is the **decrypted** message now
                               message.message ?? "",
                               style: const TextStyle(fontSize: 16),
                             ),
@@ -112,7 +149,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             Text(
                               formattedTime,
                               style: const TextStyle(
-                                  fontSize: 12, color: Colors.grey),
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
                             ),
                           ],
                         ),
@@ -123,7 +162,8 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
-          // Message input field
+
+          // Message input field + Send button
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -138,26 +178,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
-                    final messageText = _messageController.text.trim();
-                    if (messageText.isNotEmpty) {
-                      final String currentUserID = getUserSavedData().uId;
-                      final String receiverID = widget.postDetails.userId;
-                      MessageEntity message = MessageEntity(
-                        conversationId: conversationId,
-                        postId: widget.postDetails.postId,
-                        message: messageText,
-                        userId: currentUserID,
-                        recipientId: receiverID,
-                        timestamp: DateTime.now(),
-                        isRead: false,
-                      );
-                      context.read<ChatCubit>().sendMessage(message);
-                      _messageController.clear();
-                      // **Scroll to Bottom after sending a message**
-                      _scrollToBottom();
-                    }
-                  },
+                  onPressed: _onSendPressed,
                   icon: const Icon(Icons.send),
                 ),
               ],

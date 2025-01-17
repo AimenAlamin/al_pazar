@@ -26,15 +26,20 @@ class ChatCubit extends Cubit<ChatState> {
     });
   }
 
-  // Stream messages for a specific conversationId
+  /// Listen to messages for a given conversationId in Firestore
+  /// (They’ll be decrypted automatically in MessageModel.fromJson.)
   Stream<List<MessageEntity>> getMessages(String conversationId) {
     return FirebaseFirestore.instance
         .collection(BackEndpoint.messagesCollection)
         .where('conversationId', isEqualTo: conversationId)
         .orderBy('timestamp', descending: false)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) {
-              return MessageModel.fromJson(doc.data()).toEntity();
-            }).toList());
+        .map((snapshot) {
+      return snapshot.docs.map((doc) {
+        // Decryption happens inside MessageModel.fromJson
+        // (Which returns the final plaintext in the entity)
+        return MessageModel.fromJson(doc.data()).toEntity();
+      }).toList();
+    });
   }
 }

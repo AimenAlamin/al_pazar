@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:al_pazar/core/helpers/encryption.dart';
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -6,7 +9,7 @@ class MessageModel {
   final String? userId;
   final String? recipientId;
   final String? postId;
-  final String? message;
+  String? message;
   final DateTime? timestamp;
   final bool? isRead;
 
@@ -33,12 +36,24 @@ class MessageModel {
   }
 
   factory MessageModel.fromJson(Map<String, dynamic> json) {
+    String? rawMessage = json['message'];
+
+    // If the stored message looks like a CryptoJS-based ciphertext, decrypt it
+    if (rawMessage != null && rawMessage.startsWith('U2FsdGVkX1')) {
+      try {
+        rawMessage = CryptoJSHelper.decryptFromBase64(rawMessage);
+      } catch (e) {
+        log('Failed to decrypt message: $e');
+        // Fallback: keep rawMessage as-is or handle accordingly
+      }
+    }
+
     return MessageModel(
       conversationId: json['conversationId'],
       userId: json['userId'],
       recipientId: json['recipientId'],
       postId: json['postId'],
-      message: json['message'],
+      message: rawMessage,
       timestamp: (json['timestamp'] as Timestamp).toDate(),
       isRead: json['isRead'],
     );
