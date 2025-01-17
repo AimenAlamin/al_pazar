@@ -20,11 +20,6 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   int currentViewIndex = 0;
-  // void onItemTapped(int index) {
-  //   setState(() {
-  //     currentViewIndex = index;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
