@@ -73,7 +73,7 @@ class SignUpEmailBlocListener extends StatelessWidget {
           size: 32,
         ),
         content: Text(
-          "A verification email has been sent to your email address. Please verify your email before logging in.",
+          "A verification email has been sent to your email address",
           style: TextStyles.font15DarkBlueMedium,
         ),
         actions: [

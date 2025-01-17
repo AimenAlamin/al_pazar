@@ -121,6 +121,79 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
     );
   }
 
+  void _showPaymentOptionsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView(
+          children: paymentOptionsList.map((option) {
+            return CheckboxListTile(
+              title: Text(option),
+              value: paymentOptions.contains(option),
+              onChanged: (bool? value) {
+                setState(() {
+                  if (value == true) {
+                    paymentOptions.add(option);
+                  } else {
+                    paymentOptions.remove(option);
+                  }
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  void _showConditionBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView(
+          children: ['New', 'Used', 'Other'].map((cond) {
+            return ListTile(
+              title: Text(cond),
+              onTap: () {
+                setState(() {
+                  condition = cond;
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  void _showContactMethodsBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return ListView(
+          children: contactMethodsList.map((method) {
+            return CheckboxListTile(
+              title: Text(method),
+              value: contactMethods.contains(method),
+              onChanged: (bool? value) {
+                setState(() {
+                  if (value == true) {
+                    contactMethods.add(method);
+                  } else {
+                    contactMethods.remove(method);
+                  }
+                });
+                Navigator.pop(context);
+              },
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,8 +313,6 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       ),
                     ),
                     verticalSpace(18),
-
-                    // Phone Number Field
                     AppTextFormField(
                       controller: _phoneNumberController,
                       hintText: 'Mobile Phone Number',
@@ -256,101 +327,49 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       },
                     ),
                     verticalSpace(18),
-
-                    // Payment Options Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Payment Options',
-                            style: TextStyles.font12DarkBlueBold),
-                        verticalSpace(8),
-                        Row(
-                          children: paymentOptionsList.map((option) {
-                            return Flexible(
-                              child: CheckboxListTile(
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(option,
-                                    style: TextStyles.font12DarkBlueMedium),
-                                value: paymentOptions.contains(option),
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    if (value == true) {
-                                      paymentOptions.add(option);
-                                    } else {
-                                      paymentOptions.remove(option);
-                                    }
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        )
-                      ],
-                    ),
-                    verticalSpace(18),
-
-                    // Condition Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Condition', style: TextStyles.font12DarkBlueBold),
-                        verticalSpace(8),
-                        Row(
-                          children: ['New', 'Used', 'Other'].map((cond) {
-                            return Expanded(
-                              child: RadioListTile<String>(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(cond),
-                                value: cond,
-                                groupValue: condition,
-                                onChanged: (value) {
-                                  setState(() {
-                                    condition = value!;
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList(),
+                    GestureDetector(
+                      onTap: _showPaymentOptionsBottomSheet,
+                      child: AbsorbPointer(
+                        child: AppTextFormField(
+                          hintText: 'Payment Options',
+                          validator: (value) {
+                            if (paymentOptions.isEmpty) {
+                              return 'Please select at least one payment option';
+                            }
+                          },
                         ),
-                      ],
+                      ),
                     ),
                     verticalSpace(18),
-
-                    // Contact Methods Section
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Contact Method',
-                            style: TextStyles.font12DarkBlueBold),
-                        verticalSpace(8),
-                        Row(
-                          children: contactMethodsList.map((method) {
-                            return Expanded(
-                              child: CheckboxListTile(
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(method),
-                                value: contactMethods.contains(method),
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    if (value == true) {
-                                      contactMethods.add(method);
-                                    } else {
-                                      contactMethods.remove(method);
-                                    }
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList(),
+                    GestureDetector(
+                      onTap: _showConditionBottomSheet,
+                      child: AbsorbPointer(
+                        child: AppTextFormField(
+                          hintText: 'Condition',
+                          controller: TextEditingController(text: condition),
+                          validator: (value) {
+                            if (condition.isEmpty) {
+                              return 'Please select a condition';
+                            }
+                          },
                         ),
-                      ],
+                      ),
                     ),
                     verticalSpace(18),
-
+                    GestureDetector(
+                      onTap: _showContactMethodsBottomSheet,
+                      child: AbsorbPointer(
+                        child: AppTextFormField(
+                          hintText: 'Contact Methods',
+                          validator: (value) {
+                            if (contactMethods.isEmpty) {
+                              return 'Please select at least one contact method';
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+                    verticalSpace(18),
                     AppTextButton(
                       buttonText: "Post Ad",
                       textStyle: TextStyles.font16WhiteSemiBold,

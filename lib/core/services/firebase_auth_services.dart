@@ -90,7 +90,7 @@ class FirebaseAuthService {
       log("Exception in FirebaseAuthService.signInWithEmailAndPassword: ${e.toString()}");
 
       throw CustomException(
-          message: 'An error occurred please try again later.');
+          message: 'Please verify your email before logging in.');
     }
   }
 
@@ -107,7 +107,7 @@ class FirebaseAuthService {
       log("Exception in FirebaseAuthService.signOut: ${e.toString()}");
 
       throw CustomException(
-          message: 'An error occurred please try again later.');
+          message: 'Please verify your email before logging in.');
     }
   }
   //SIGN UP PHONE
