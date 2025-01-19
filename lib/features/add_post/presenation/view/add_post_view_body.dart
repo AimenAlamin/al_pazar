@@ -12,6 +12,9 @@ import '../manager/cubit/add_post_cubit.dart';
 import 'add_post_listener.dart';
 import 'image_field.dart';
 
+// ADD THIS import:
+import 'package:intl_phone_field/intl_phone_field.dart';
+
 class AddPostViewBody extends StatefulWidget {
   const AddPostViewBody({
     super.key,
@@ -60,9 +63,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
     "Lefke"
   ];
 
-  final TextEditingController _currencyController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
+  // Removed _phoneNumberController since we'll be using IntlPhoneField
 
   @override
   void initState() {
@@ -71,9 +72,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
 
   @override
   void dispose() {
-    _currencyController.dispose();
-    _locationController.dispose();
-    _phoneNumberController.dispose();
+    // No more _phoneNumberController to dispose
     super.dispose();
   }
 
@@ -89,7 +88,8 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
               title: Text(currency['name']),
               onTap: () {
                 setState(() {
-                  _currencyController.text = currency['name'];
+                  // set the text field's value
+                  this.currency = currency['name'];
                 });
                 Navigator.pop(context);
               },
@@ -110,7 +110,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
               title: Text(city),
               onTap: () {
                 setState(() {
-                  _locationController.text = city;
+                  location = city;
                 });
                 Navigator.pop(context);
               },
@@ -245,6 +245,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
                         }
+                        return null;
                       },
                       onSaved: (value) {
                         title = value!;
@@ -258,26 +259,29 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
                         }
+                        return null;
                       },
                       onSaved: (value) {
                         price = int.parse(value!);
                       },
                     ),
                     verticalSpace(18),
+                    // Currency selection
                     GestureDetector(
                       onTap: _showCurrencyBottomSheet,
                       child: AbsorbPointer(
                         child: AppTextFormField(
-                          controller: _currencyController,
                           hintText: 'Currency',
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
+                            if (currency.isEmpty) {
                               return 'This field is required';
                             }
+                            return null;
                           },
                           onSaved: (value) {
-                            currency = value!;
+                            // We'll store the selected currency from the state
                           },
+                          controller: TextEditingController(text: currency),
                         ),
                       ),
                     ),
@@ -289,6 +293,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                         if (value == null || value.isEmpty) {
                           return 'This field is required';
                         }
+                        return null;
                       },
                       onSaved: (value) {
                         description = value!;
@@ -299,33 +304,49 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                       onTap: _showLocationBottomSheet,
                       child: AbsorbPointer(
                         child: AppTextFormField(
-                          controller: _locationController,
                           hintText: 'Location',
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
+                            if (location.isEmpty) {
                               return 'This field is required';
                             }
+                            return null;
                           },
                           onSaved: (value) {
-                            location = value!;
+                            // We'll store the selected location from the state
                           },
+                          controller: TextEditingController(text: location),
                         ),
                       ),
                     ),
                     verticalSpace(18),
-                    AppTextFormField(
-                      controller: _phoneNumberController,
-                      hintText: 'Mobile Phone Number',
-                      keyboardType: TextInputType.phone,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
+
+                    // REPLACED PHONE NUMBER FIELD WITH IntlPhoneField
+                    IntlPhoneField(
+                      decoration: const InputDecoration(
+                        labelText: 'Mobile Phone Number',
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(),
+                        ),
+                      ),
+                      initialCountryCode: 'US',
+                      onChanged: (phone) {
+                        // This fires every time the user changes the input
+                        // You can store partial changes if you want:
+                        phoneNumber = phone.completeNumber;
+                      },
+                      validator: (phone) {
+                        if (phone == null || phone.number.isEmpty) {
                           return 'This field is required';
                         }
+                        return null;
                       },
-                      onSaved: (value) {
-                        phoneNumber = value!;
+                      onSaved: (phone) {
+                        // This fires when the form is saved (submit):
+                        phoneNumber =
+                            phone!.completeNumber; // e.g. +905338567220
                       },
                     ),
+
                     verticalSpace(18),
                     GestureDetector(
                       onTap: _showPaymentOptionsBottomSheet,
@@ -336,6 +357,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                             if (paymentOptions.isEmpty) {
                               return 'Please select at least one payment option';
                             }
+                            return null;
                           },
                         ),
                       ),
@@ -351,6 +373,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                             if (condition.isEmpty) {
                               return 'Please select a condition';
                             }
+                            return null;
                           },
                         ),
                       ),
@@ -365,7 +388,11 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                             if (contactMethods.isEmpty) {
                               return 'Please select at least one contact method';
                             }
+                            return null;
                           },
+                          controller: TextEditingController(
+                            text: contactMethods.join(', '),
+                          ),
                         ),
                       ),
                     ),
@@ -391,7 +418,7 @@ class _AddPostViewBodyState extends State<AddPostViewBody> {
                               image: image!,
                               timestamp: DateTime.now(),
                               condition: condition,
-                              phoneNumber: phoneNumber,
+                              phoneNumber: phoneNumber, // e.g. +905338567220
                               paymentOptions: paymentOptions,
                               contactMethod: contactMethods,
                             );
