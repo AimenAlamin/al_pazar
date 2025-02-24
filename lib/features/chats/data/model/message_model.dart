@@ -1,85 +1,86 @@
-import 'dart:developer';
-
-import 'package:al_pazar/core/helpers/encryption.dart';
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// A model class representing a message in Firestore.
+/// This model is used to convert between Firestore data and `MessageEntity`.
 class MessageModel {
-  final String? conversationId;
-  final String? userId;
-  final String? recipientId;
-  final String? postId;
-  String? message;
-  final DateTime? timestamp;
-  final bool? isRead;
+  /// Unique ID for this message.
+  final String messageId;
 
+  /// ID of the user who sent the message.
+  final String senderId;
+
+  /// ID of the user receiving the message.
+  final String recipientId;
+
+  /// Text content of the message (nullable if it's an image/video).
+  final String? message;
+
+  /// If the recipient has opened the chatroom, this is `true`.
+  final bool isRead;
+
+  /// Timestamp of when the message was sent.
+  final DateTime timestamp;
+
+  /// Constructor for creating a `MessageModel` instance.
   MessageModel({
-    this.conversationId,
-    this.userId,
-    this.recipientId,
-    this.postId,
+    required this.messageId,
+    required this.senderId,
+    required this.recipientId,
     this.message,
-    this.timestamp,
-    this.isRead,
+    required this.isRead,
+    required this.timestamp,
   });
 
+  /// Converts a `MessageEntity` into a `MessageModel`.
+  /// Used when sending message data to Firestore.
   factory MessageModel.fromEntity(MessageEntity messageEntity) {
     return MessageModel(
-      conversationId: messageEntity.conversationId,
-      userId: messageEntity.userId,
+      messageId: messageEntity.messageId,
+      senderId: messageEntity.senderId,
       recipientId: messageEntity.recipientId,
-      postId: messageEntity.postId,
       message: messageEntity.message,
-      timestamp: messageEntity.timestamp,
       isRead: messageEntity.isRead,
+      timestamp: messageEntity.timestamp,
     );
   }
 
+  /// Converts Firestore JSON data into a `MessageModel`.
+  /// Used when fetching messages from Firestore.
   factory MessageModel.fromJson(Map<String, dynamic> json) {
-    String? rawMessage = json['message'];
-
-    // If the stored message looks like a CryptoJS-based ciphertext, decrypt it
-    if (rawMessage != null && rawMessage.startsWith('U2FsdGVkX1')) {
-      try {
-        rawMessage = CryptoJSHelper.decryptFromBase64(rawMessage);
-      } catch (e) {
-        log('Failed to decrypt message: $e');
-        // Fallback: keep rawMessage as-is or handle accordingly
-      }
-    }
-
     return MessageModel(
-      conversationId: json['conversationId'],
-      userId: json['userId'],
+      messageId: json['messageId'],
+      senderId: json['senderId'],
       recipientId: json['recipientId'],
-      postId: json['postId'],
-      message: rawMessage,
-      timestamp: (json['timestamp'] as Timestamp).toDate(),
-      isRead: json['isRead'],
+      message: json['message'],
+
+      isRead: json['isRead'] ?? false, // Default false if missing
+      timestamp: json['timestamp'],
     );
   }
 
-  toJson() {
+  /// Converts the `MessageModel` into a Firestore-compatible JSON object.
+  /// Used when saving messages to Firestore.
+  Map<String, dynamic> toJson() {
     return {
-      'conversationId': conversationId,
-      'userId': userId,
+      'messageId': messageId,
+      'senderId': senderId,
       'recipientId': recipientId,
-      'postId': postId,
       'message': message,
-      'timestamp': timestamp != null ? Timestamp.fromDate(timestamp!) : null,
       'isRead': isRead,
+      'timestamp': timestamp,
     };
   }
 
+  /// Converts the `MessageModel` into a `MessageEntity`.
+  /// Used when retrieving messages from Firestore and displaying them in the UI.
   MessageEntity toEntity() {
     return MessageEntity(
-      conversationId: conversationId,
-      userId: userId,
+      messageId: messageId,
+      senderId: senderId,
       recipientId: recipientId,
-      postId: postId,
       message: message,
-      timestamp: timestamp,
       isRead: isRead,
+      timestamp: timestamp,
     );
   }
 }
