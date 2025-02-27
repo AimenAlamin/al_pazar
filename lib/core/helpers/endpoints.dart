@@ -6,5 +6,5 @@ class BackEndpoint {
   static const postsCollection = 'posts';
   static const getPostsCollection = 'posts';
   static const chatroomsCollection = 'chatrooms';
-  static const messagesCollection = 'chats';
+  static const dmsCollection = 'dms';
 }
