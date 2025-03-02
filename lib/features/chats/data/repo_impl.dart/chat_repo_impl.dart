@@ -24,16 +24,8 @@ class ChatRepoImpl implements ChatRepo {
   Future<Either<Failure, void>> createChatRoom(
       ChatRoomEntity chatroomEntity) async {
     try {
-      // Generate chatroomID based on post, buyer, seller
-      List<String> ids = [
-        chatroomEntity.buyerID!,
-        chatroomEntity.sellerID!,
-        chatroomEntity.postID!,
-      ];
-      ids.sort();
-      final chatRoomID = ids.join('_');
-
-      final chatRoomRef = firestore.collection('chats').doc(chatRoomID);
+      final chatRoomRef =
+          firestore.collection(chatpath).doc(chatroomEntity.chatRoomID);
       final doc = await chatRoomRef.get();
 
       if (!doc.exists) {

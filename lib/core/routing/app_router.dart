@@ -5,8 +5,9 @@ import 'package:al_pazar/features/add_post/presenation/view/add_post_view_body.d
 import 'package:al_pazar/features/add_post/presenation/view/add_subcategory_screen.dart';
 import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.dart';
 
-import 'package:al_pazar/features/chats/domain/presentation/cubit/chat_cubit.dart';
+import 'package:al_pazar/features/chats/presentation/cubit/chat_cubit.dart';
 import 'package:al_pazar/features/chats/domain/repo/chat_repo.dart';
+import 'package:al_pazar/features/chats/presentation/dm_screen.dart';
 import 'package:al_pazar/features/home/presentation/ui/widgets/categories_see_all.dart';
 import 'package:al_pazar/features/home/presentation/ui/widgets/category_filter_view.dart';
 
@@ -17,7 +18,7 @@ import 'package:al_pazar/features/post_detials/post_detials_screen.dart';
 
 import '../../features/add_post/domain/entities/post_entity.dart';
 
-import '../../features/chats/domain/presentation/chat_screen.dart';
+import '../../features/chats/domain/entity/chatroom_entity.dart';
 import '../../features/home/presentation/ui/widgets/searchfield/sub_category_filter_view.dart';
 import 'routes.dart';
 
@@ -123,12 +124,12 @@ class AppRouter {
           },
         );
 
-      case Routes.chatScreen:
+      case Routes.dmScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatCubit(getIt<ChatRepo>()),
-            child: ChatScreen(
-              postDetails: settings.arguments as PostEntity,
+            child: DmScreen(
+              chatRoomEntity: settings.arguments as ChatRoomEntity,
             ),
           ),
         );

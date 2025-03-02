@@ -1,8 +1,6 @@
 class Routes {
   static const String loginEmailScreen = '/loginEmailScreen';
-
   static const String signUpEmailScreen = '/signUpEmailScreen';
-
   static const String mainView = '/mainView';
   static const String collectionAllList = '/collectionAllList';
   static const String subCollectionAllList = '/subCollectionAllList';
@@ -15,5 +13,5 @@ class Routes {
   static const String categoryFilterView = '/categoryFilterView';
   static const String subCategoryFilterView = '/subCategoryFilterView';
   static const String chatroomListScreen = '/chatroomList';
-  static const String chatScreen = '/chat';
+  static const String dmScreen = '/dmScreen';
 }

@@ -1,7 +1,7 @@
+import 'package:al_pazar/features/chats/data/repo_impl.dart/chat_repo_impl.dart';
 import 'package:al_pazar/features/chats/domain/repo/chat_repo.dart';
-
-import '../../features/chats/data/repo_impl.dart/chat_repo_impl.dart';
-import '../../features/chats/domain/presentation/cubit/chat_cubit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../features/chats/presentation/cubit/chat_cubit.dart';
 import 'firebase_auth_services.dart';
 import '../../features/add_post/domain/repos/images_repo/images_repo.dart';
 import '../../features/add_post/domain/repos/images_repo/images_repo_impl.dart';
@@ -22,6 +22,7 @@ void setuGetIt() {
   getIt.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
   getIt.registerSingleton<DatabaseService>(FireStoreService());
   getIt.registerSingleton<StoargeService>(FirebaseStorageService());
+  getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
   getIt.registerSingleton<ImagesRepo>(
       ImagesRepoImpl(getIt.get<StoargeService>()));
 
@@ -34,11 +35,13 @@ void setuGetIt() {
           DatabaseService>(), //because its required we didn't use ".get"getIt.get<DatabaseService>()
     ),
   );
+  //create for chat repo
   getIt.registerSingleton<ChatRepo>(
     ChatRepoImpl(
-      getIt.get<DatabaseService>(),
+      firestore: getIt<FirebaseFirestore>(),
     ),
   );
+
   getIt.registerFactory<ChatCubit>(() => ChatCubit(getIt<ChatRepo>()));
   // getIt.registerSingleton<PostRepo>(
   //   PostRepoImpl(

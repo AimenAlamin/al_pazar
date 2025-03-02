@@ -3,11 +3,12 @@ import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/routing/routes.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
+import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import '../../../core/helpers/get_user.dart';
 import '../../add_post/domain/entities/post_entity.dart';
 
 class CustomPostDetialsNavbar extends StatelessWidget {
@@ -58,13 +59,34 @@ class CustomPostDetialsNavbar extends StatelessWidget {
             //kibzar chat button
             child: IconButton(
               onPressed: () {
-                context.pushNamed(Routes.chatScreen, arguments: postDetails);
+                // Generate chatroomID based on post, buyer(current_user), seller ids
+                List<String> ids = [
+                  getUserSavedData().uId,
+                  postDetails.userId, //seller id
+                  postDetails.postId!,
+                ];
+                ids.sort();
+                final chatRoomID = ids.join('_');
+                ChatRoomEntity chatroomentity = ChatRoomEntity(
+                  chatRoomID: chatRoomID,
+                  buyerID: getUserSavedData().uId,
+                  sellerID: postDetails.userId,
+                  postID: postDetails.postId,
+                  postTitle: postDetails.title,
+                  postPhotoUrl: postDetails.imageUrl!.first,
+                  recipientName: postDetails.sellerName,
+                  unreadCount: {getUserSavedData().uId: 0}, //current user
+                  lastMessage: '',
+                  lastMessageTime: '',
+                );
+
+                context.pushNamed(Routes.dmScreen, arguments: chatroomentity);
               },
               icon: const Icon(Icons.message_outlined),
             ),
           ),
-          //phone call button
 
+          //phone call button
           Container(
             decoration: const BoxDecoration(
               color: ColorsManager.mediumRed,
@@ -84,7 +106,8 @@ class CustomPostDetialsNavbar extends StatelessWidget {
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Could not launch phone dialer')),
+                      const SnackBar(
+                          content: Text('Could not launch phone dialer')),
                     );
                   }
                 } catch (e) {

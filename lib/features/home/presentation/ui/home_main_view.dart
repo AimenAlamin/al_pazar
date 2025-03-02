@@ -3,7 +3,7 @@ import 'package:al_pazar/features/add_post/presenation/view/add_category_screen.
 import 'package:al_pazar/features/home/presentation/ui/widgets/account_view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../chats/domain/presentation/chat_view.dart';
+import '../../../chats/presentation/chat_view.dart';
 import 'widgets/myads_view.dart';
 import 'widgets/home_view.dart';
 import 'widgets/navigationbar/custom_bottom_navbar.dart';
