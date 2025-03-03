@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entity/chatroom_entity.dart';
 
 /// A model class representing a chatroom in Firestore.
@@ -25,7 +27,7 @@ class ChatRoomModel {
   final String lastMessage;
 
   /// Timestamp of the last message sent.
-  final String lastMessageTime;
+  final DateTime lastMessageTime;
 
   /// The name of the recipient, used to display in the UI.
   final String recipientName;
@@ -82,7 +84,7 @@ class ChatRoomModel {
       postTitle: json['postTitle'],
       postPhotoUrl: json['postPhotoUrl'],
       lastMessage: json['lastMessage'],
-      lastMessageTime: json['lastMessageTime'],
+      lastMessageTime: (json['lastMessageTime'] as Timestamp).toDate(),
       recipientName: json['recipientName'],
       unreadCount: Map<String, int>.from(json['unreadCount'] ?? {}),
       price: json['price'],

@@ -57,6 +57,7 @@ class ChatRepoImpl implements ChatRepo {
         'lastMessage': messageEntity.message ?? "",
         'lastMessageTime': FieldValue
             .serverTimestamp(), //  Timestamp of server time not client time
+        'unreadCount.${messageEntity.senderId}': FieldValue.increment(0),
         'unreadCount.${messageEntity.recipientId}': FieldValue.increment(1),
       });
 
@@ -107,7 +108,7 @@ class ChatRepoImpl implements ChatRepo {
           .where(Filter.or(
             Filter("buyerID", isEqualTo: userId),
             Filter("sellerID", isEqualTo: userId),
-          ))
+          )) // ✅ Fetch chatrooms where user is either buyer or seller
           .orderBy("lastMessageTime", descending: true)
           .snapshots()
           .map((snapshot) {
@@ -120,6 +121,22 @@ class ChatRepoImpl implements ChatRepo {
       return Stream.value(Left(ServerFailure(e.toString())));
     }
   }
+  // Stream<Either<Failure, List<ChatRoomEntity>>> getChatRooms(String userId) {
+  //   try {
+  //     return firestore
+  //         .collection(chatpath)
+  //         .where("buyerID", isEqualTo: userId) // ✅ Simpler Query
+  //         .snapshots()
+  //         .map((snapshot) {
+  //       final chatRooms = snapshot.docs.map((doc) {
+  //         return ChatRoomModel.fromJson(doc.data()).toEntity();
+  //       }).toList();
+  //       return Right(chatRooms);
+  //     });
+  //   } catch (e) {
+  //     return Stream.value(Left(ServerFailure(e.toString())));
+  //   }
+  // }
 
   ///  Fetch messages inside a specific chatroom (Real-time)
   @override

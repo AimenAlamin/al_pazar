@@ -6,7 +6,7 @@ class ChatRoomEntity {
   final String? postTitle;
   final String? postPhotoUrl;
   final String? lastMessage;
-  final String? lastMessageTime;
+  final DateTime? lastMessageTime;
   String? recipientName;
   final Map<String, int> unreadCount; // Tracks unread messages per user
   final String? price;

@@ -77,7 +77,7 @@ class CustomPostDetialsNavbar extends StatelessWidget {
                   recipientName: postDetails.sellerName,
                   unreadCount: {getUserSavedData().uId: 0}, //current user
                   lastMessage: 'Is it avaialbe',
-                  lastMessageTime: DateTime.now().toString(),
+                  lastMessageTime: DateTime.now(),
                   price: postDetails.price.toString(),
                   currency: postDetails.currency,
                 );

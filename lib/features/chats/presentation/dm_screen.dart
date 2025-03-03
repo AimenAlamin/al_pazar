@@ -42,6 +42,8 @@ class _DmScreenState extends State<DmScreen> {
 
     /// Fetch messages from Firestore (Real-Time)
     context.read<ChatCubit>().fetchMessages(chatRoomId);
+    //mark messages as read
+    context.read<ChatCubit>().markMessagesAsRead(chatRoomId, recipientID);
   }
 
   /// ✅ Sends a message & ensures the chatroom is created
