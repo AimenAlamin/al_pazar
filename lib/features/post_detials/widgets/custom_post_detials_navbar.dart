@@ -76,8 +76,10 @@ class CustomPostDetialsNavbar extends StatelessWidget {
                   postPhotoUrl: postDetails.imageUrl!.first,
                   recipientName: postDetails.sellerName,
                   unreadCount: {getUserSavedData().uId: 0}, //current user
-                  lastMessage: '',
-                  lastMessageTime: '',
+                  lastMessage: 'Is it avaialbe',
+                  lastMessageTime: DateTime.now().toString(),
+                  price: postDetails.price.toString(),
+                  currency: postDetails.currency,
                 );
 
                 context.pushNamed(Routes.dmScreen, arguments: chatroomentity);

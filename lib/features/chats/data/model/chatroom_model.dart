@@ -33,6 +33,9 @@ class ChatRoomModel {
   /// Tracks the number of unread messages for each participant.
   final Map<String, int> unreadCount;
 
+  final String price;
+  final String currency;
+
   /// Constructor to initialize a `ChatRoomModel` with required fields.
   ChatRoomModel({
     required this.chatRoomID,
@@ -45,6 +48,8 @@ class ChatRoomModel {
     required this.lastMessageTime,
     required this.recipientName,
     required this.unreadCount,
+    required this.price,
+    required this.currency,
   });
 
   /// Converts a `ChatRoomEntity` into a `ChatRoomModel`.
@@ -61,6 +66,8 @@ class ChatRoomModel {
       lastMessageTime: chatroomEntity.lastMessageTime!,
       recipientName: chatroomEntity.recipientName!,
       unreadCount: chatroomEntity.unreadCount,
+      price: chatroomEntity.price!,
+      currency: chatroomEntity.currency!,
     );
   }
 
@@ -78,6 +85,8 @@ class ChatRoomModel {
       lastMessageTime: json['lastMessageTime'],
       recipientName: json['recipientName'],
       unreadCount: Map<String, int>.from(json['unreadCount'] ?? {}),
+      price: json['price'],
+      currency: json['currency'],
     );
   }
 
@@ -95,6 +104,8 @@ class ChatRoomModel {
       'lastMessageTime': lastMessageTime,
       'recipientName': recipientName,
       'unreadCount': unreadCount,
+      'price': price,
+      'currency': currency,
     };
   }
 
@@ -112,6 +123,8 @@ class ChatRoomModel {
       lastMessageTime: lastMessageTime,
       recipientName: recipientName,
       unreadCount: unreadCount,
+      price: price,
+      currency: currency,
     );
   }
 }

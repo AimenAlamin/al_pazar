@@ -1,4 +1,5 @@
 import 'package:al_pazar/features/chats/domain/entity/message_entity.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// A model class representing a message in Firestore.
 /// This model is used to convert between Firestore data and `MessageEntity`.
@@ -54,7 +55,7 @@ class MessageModel {
       message: json['message'],
 
       isRead: json['isRead'] ?? false, // Default false if missing
-      timestamp: json['timestamp'],
+      timestamp: (json['timestamp'] as Timestamp).toDate(),
     );
   }
 

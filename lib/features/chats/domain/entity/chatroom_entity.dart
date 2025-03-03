@@ -9,6 +9,8 @@ class ChatRoomEntity {
   final String? lastMessageTime;
   String? recipientName;
   final Map<String, int> unreadCount; // Tracks unread messages per user
+  final String? price;
+  final String? currency;
 
   ChatRoomEntity({
     this.postID,
@@ -20,6 +22,8 @@ class ChatRoomEntity {
     this.postTitle,
     this.postPhotoUrl,
     this.recipientName,
+    this.price,
+    this.currency,
     required this.unreadCount,
   });
 }
