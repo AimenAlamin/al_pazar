@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
@@ -95,10 +93,10 @@ class AccountView extends StatelessWidget {
                       await FirebaseAuth.instance.signOut();
                       //clear stored user
 
+                      await Prefs.clear();
+
                       // Navigate to the login screen
                       context.pushReplacementNamed(Routes.loginEmailScreen);
-                      log('current after clearing user data must be empty: ${getUserSavedData().toString()}');
-                      await Prefs.clear();
                     } catch (e) {
                       // Show error message if logout fails
                       ScaffoldMessenger.of(context).showSnackBar(

@@ -54,7 +54,7 @@ class _ChatroomListScreenState extends State<ChatroomListScreen> {
 
   /// ✅ Builds each chatroom list tile
   Widget _buildChatRoomTile(ChatRoomEntity chatRoom) {
-    String formattedTime = DateFormat.jm().format(chatRoom.lastMessageTime!);
+    String formattedTime = DateFormat.jm().format(chatRoom.lastMessageTime);
 
     // ✅ Determine the correct recipient name dynamically
     String recipientName = (userId == chatRoom.sellerID)

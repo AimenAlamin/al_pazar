@@ -66,7 +66,7 @@ class ChatRoomModel {
       postTitle: chatroomEntity.postTitle!,
       postPhotoUrl: chatroomEntity.postPhotoUrl!,
       lastMessage: chatroomEntity.lastMessage!,
-      lastMessageTime: chatroomEntity.lastMessageTime!,
+      lastMessageTime: chatroomEntity.lastMessageTime,
       sellerName: chatroomEntity.sellerName!,
       buyerName: chatroomEntity.buyerName!,
       unreadCount: chatroomEntity.unreadCount,
@@ -79,19 +79,19 @@ class ChatRoomModel {
   /// Used when fetching chatroom data from Firestore.
   factory ChatRoomModel.fromJson(Map<String, dynamic> json) {
     return ChatRoomModel(
-      chatRoomID: json['chatRoomID'],
-      postID: json['postID'],
-      buyerID: json['buyerID'],
-      sellerID: json['sellerID'],
-      postTitle: json['postTitle'],
-      postPhotoUrl: json['postPhotoUrl'],
-      lastMessage: json['lastMessage'],
+      chatRoomID: json['chatRoomID'] ?? "",
+      postID: json['postID'] ?? "",
+      buyerID: json['buyerID'] ?? "",
+      sellerID: json['sellerID'] ?? "",
+      postTitle: json['postTitle'] ?? "",
+      postPhotoUrl: json['postPhotoUrl'] ?? "",
+      lastMessage: json['lastMessage'] ?? "",
       lastMessageTime: (json['lastMessageTime'] as Timestamp).toDate(),
-      sellerName: json['sellerName'],
-      buyerName: json['buyerName'],
+      sellerName: json['sellerName'] ?? "",
+      buyerName: json['buyerName'] ?? "",
       unreadCount: Map<String, int>.from(json['unreadCount'] ?? {}),
-      price: json['price'],
-      currency: json['currency'],
+      price: json['price'] ?? "",
+      currency: json['currency'] ?? "",
     );
   }
 
