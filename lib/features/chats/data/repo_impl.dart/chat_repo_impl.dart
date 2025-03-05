@@ -42,12 +42,18 @@ class ChatRepoImpl implements ChatRepo {
   ///  Sends a message and updates chatroom metadata atomically
   @override
   Future<Either<Failure, void>> sendMessage(
-      MessageEntity messageEntity, String chatroomID) async {
+      MessageEntity messageEntity, ChatRoomEntity chatroomEntity) async {
     try {
-      final chatRoomRef = firestore.collection(chatpath).doc(chatroomID);
+      final chatRoomRef =
+          firestore.collection(chatpath).doc(chatroomEntity.chatRoomID);
       final messageRef = chatRoomRef.collection(dmpath).doc();
 
       final batch = firestore.batch(); //  Use batch writes for consistency
+
+      // determine the recipient
+      final recipientId = messageEntity.senderId == chatroomEntity.buyerID
+          ? chatroomEntity.sellerID
+          : chatroomEntity.buyerID;
 
       //  Add the new message
       batch.set(messageRef, MessageModel.fromEntity(messageEntity).toJson());
@@ -57,8 +63,7 @@ class ChatRepoImpl implements ChatRepo {
         'lastMessage': messageEntity.message ?? "",
         'lastMessageTime': FieldValue
             .serverTimestamp(), //  Timestamp of server time not client time
-        'unreadCount.${messageEntity.senderId}': FieldValue.increment(0),
-        'unreadCount.${messageEntity.recipientId}': FieldValue.increment(1),
+        'unreadCount.$recipientId': FieldValue.increment(1),
       });
 
       await batch
@@ -72,21 +77,23 @@ class ChatRepoImpl implements ChatRepo {
   ///  Marks messages as read when the user opens the chat
   @override
   Future<Either<Failure, void>> markMessagesAsRead(
-      String chatRoomId, String recipientId) async {
+      String chatRoomId, String currentUserId) async {
     try {
       final chatRoomRef = firestore.collection(chatpath).doc(chatRoomId);
       final batch = firestore.batch();
 
-      //  Reset unread count for the current user
-      batch.update(chatRoomRef, {'unreadCount.$recipientId': 0});
+      // ✅ Reset unread count ONLY for the current user opening the chat
+      batch.update(chatRoomRef, {'unreadCount.$currentUserId': 0});
 
-      //  Mark unread messages as read
+      // ✅ Find and mark messages as read (only messages sent to the current user)
       final unreadMessages = await chatRoomRef
           .collection(dmpath)
-          .where('recipientId', isEqualTo: recipientId)
-          .where('isRead', isEqualTo: false)
+          .where('recipientId',
+              isEqualTo: currentUserId) // ✅ Only messages for this user
+          .where('isRead', isEqualTo: false) // ✅ Unread messages only
           .get();
 
+      // ✅ Batch update all unread messages to "isRead: true"
       for (var doc in unreadMessages.docs) {
         batch.update(doc.reference, {'isRead': true});
       }

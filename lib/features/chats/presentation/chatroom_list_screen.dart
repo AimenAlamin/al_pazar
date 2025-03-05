@@ -56,12 +56,31 @@ class _ChatroomListScreenState extends State<ChatroomListScreen> {
   Widget _buildChatRoomTile(ChatRoomEntity chatRoom) {
     String formattedTime = DateFormat.jm().format(chatRoom.lastMessageTime!);
 
+    // ✅ Determine the correct recipient name dynamically
+    String recipientName = (userId == chatRoom.sellerID)
+        ? chatRoom.buyerName!
+        : chatRoom.sellerName!;
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(chatRoom.postPhotoUrl ?? ""),
       ),
-      title: Text(chatRoom.postTitle ?? "No Title"),
-      subtitle: Text(chatRoom.lastMessage ?? "No messages yet"),
+
+      /// ✅ Show the correct recipient's name dynamically
+      title: Text(recipientName,
+          style: const TextStyle(fontWeight: FontWeight.bold)),
+
+      /// ✅ Show the post title below recipient name
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(chatRoom.postTitle ?? "No Title",
+              style:
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+          Text(chatRoom.lastMessage ?? "No messages yet",
+              style: const TextStyle(fontSize: 12, color: Colors.grey)),
+        ],
+      ),
+
       trailing: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

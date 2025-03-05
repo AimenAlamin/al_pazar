@@ -43,8 +43,8 @@ class ChatCubit extends Cubit<ChatState> {
 
   ///  Send Message
   Future<void> sendMessage(
-      MessageEntity messageEntity, String chatRoomId) async {
-    final result = await chatRepo.sendMessage(messageEntity, chatRoomId);
+      MessageEntity messageEntity, ChatRoomEntity chatroomEntity) async {
+    final result = await chatRepo.sendMessage(messageEntity, chatroomEntity);
     result.fold(
       (failure) => emit(ChatError(failure.message)),
       (_) => null, // No need to emit a new state, messages update in real-time
@@ -52,8 +52,9 @@ class ChatCubit extends Cubit<ChatState> {
   }
 
   ///  Mark Messages as Read
-  Future<void> markMessagesAsRead(String chatRoomId, String recipientId) async {
-    final result = await chatRepo.markMessagesAsRead(chatRoomId, recipientId);
+  Future<void> markMessagesAsRead(
+      String chatRoomId, String currentUserId) async {
+    final result = await chatRepo.markMessagesAsRead(chatRoomId, currentUserId);
     result.fold(
       (failure) => emit(ChatError(failure.message)),
       (_) => null, // No need to emit a new state, messages update in real-time

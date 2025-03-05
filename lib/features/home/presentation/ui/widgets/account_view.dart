@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_pazar/core/helpers/extensions.dart';
 import 'package:al_pazar/core/helpers/get_user.dart';
 import 'package:al_pazar/core/helpers/spacing.dart';
@@ -7,6 +9,8 @@ import 'package:al_pazar/core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../../core/helpers/shared_preferences.dart';
 
 class AccountView extends StatelessWidget {
   const AccountView({super.key});
@@ -89,9 +93,12 @@ class AccountView extends StatelessWidget {
                     try {
                       // Sign out the user
                       await FirebaseAuth.instance.signOut();
+                      //clear stored user
 
                       // Navigate to the login screen
                       context.pushReplacementNamed(Routes.loginEmailScreen);
+                      log('current after clearing user data must be empty: ${getUserSavedData().toString()}');
+                      await Prefs.clear();
                     } catch (e) {
                       // Show error message if logout fails
                       ScaffoldMessenger.of(context).showSnackBar(

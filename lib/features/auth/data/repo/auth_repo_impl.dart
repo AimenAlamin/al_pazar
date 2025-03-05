@@ -82,9 +82,9 @@ class AuthRepoImpl extends AuthRepo {
           userId: user
               .uid); //getting(retrieving) the data coming from me/user not the firebase authenction
       log('Fetched user data: ${userEntity.toString()}');
-      await saveUserData(
-          user:
-              userEntity); //after getting the data, Im locally saving it in the shared preferences
+
+      //after getting the new data, Im locally saving it in the shared preferences
+      await saveUserData(user: userEntity);
       return right(
           // UserModel.fromFirebaseUser(user),
           userEntity);

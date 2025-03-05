@@ -14,4 +14,8 @@ class Prefs {
   static String? getString(String key) {
     return _instance.getString(key);
   }
+
+  static Future<void> clear() async {
+    await _instance.clear();
+  }
 }

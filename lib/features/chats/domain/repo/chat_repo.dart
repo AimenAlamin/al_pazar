@@ -6,10 +6,10 @@ import '../entity/chatroom_entity.dart';
 
 abstract class ChatRepo {
   Future<Either<Failure, void>> sendMessage(
-      MessageEntity messageEntity, String chatroomID);
+      MessageEntity messageEntity, ChatRoomEntity chatroomEntity);
   Future<Either<Failure, void>> createChatRoom(ChatRoomEntity chatroomEntity);
   Stream<Either<Failure, List<MessageEntity>>> getMessages(String chatRoomId);
   Stream<Either<Failure, List<ChatRoomEntity>>> getChatRooms(String userId);
   Future<Either<Failure, void>> markMessagesAsRead(
-      String chatRoomId, String recipientId);
+      String chatRoomId, String currentUserId);
 }

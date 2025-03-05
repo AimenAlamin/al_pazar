@@ -1,4 +1,5 @@
 import 'package:al_pazar/core/helpers/get_user.dart';
+import 'package:al_pazar/core/helpers/spacing.dart';
 import 'package:al_pazar/core/theming/colors.dart';
 import 'package:al_pazar/core/theming/styles.dart';
 import 'package:al_pazar/features/chats/domain/entity/chatroom_entity.dart';
@@ -27,7 +28,7 @@ class _DmScreenState extends State<DmScreen> {
 
   late final String chatRoomId;
   late final String recipientID;
-  late final String senderID;
+  late final String currentUserId;
 
   bool chatRoomCreated = false;
 
@@ -38,12 +39,10 @@ class _DmScreenState extends State<DmScreen> {
     /// ✅ Extract IDs from ChatRoomEntity
     chatRoomId = widget.chatRoomEntity.chatRoomID!;
     recipientID = widget.chatRoomEntity.sellerID!;
-    senderID = getUserSavedData().uId;
+    currentUserId = getUserSavedData().uId;
 
     /// Fetch messages from Firestore (Real-Time)
     context.read<ChatCubit>().fetchMessages(chatRoomId);
-    //mark messages as read
-    context.read<ChatCubit>().markMessagesAsRead(chatRoomId, recipientID);
   }
 
   /// ✅ Sends a message & ensures the chatroom is created
@@ -52,7 +51,7 @@ class _DmScreenState extends State<DmScreen> {
 
     final messageEntity = MessageEntity(
       messageId: DateTime.now().millisecondsSinceEpoch.toString(),
-      senderId: senderID,
+      senderId: currentUserId,
       recipientId: recipientID,
       message: _messageController.text.trim(),
       timestamp: DateTime.now(),
@@ -65,11 +64,15 @@ class _DmScreenState extends State<DmScreen> {
         setState(() {
           chatRoomCreated = true;
         });
-        context.read<ChatCubit>().sendMessage(messageEntity, chatRoomId);
+        context
+            .read<ChatCubit>()
+            .sendMessage(messageEntity, widget.chatRoomEntity);
       });
     } else {
       /// ✅ If Chatroom Already Exists, Just Send Message
-      context.read<ChatCubit>().sendMessage(messageEntity, chatRoomId);
+      context
+          .read<ChatCubit>()
+          .sendMessage(messageEntity, widget.chatRoomEntity);
     }
 
     _messageController.clear();
@@ -77,8 +80,13 @@ class _DmScreenState extends State<DmScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String reciptName = widget.chatRoomEntity.recipientName!;
-    final String firstLetter = reciptName[0].toUpperCase();
+    //determine the recipient name
+    final currentUserName = getUserSavedData().name;
+    final recipientName = currentUserName == widget.chatRoomEntity.buyerName
+        ? widget.chatRoomEntity.sellerName!
+        : widget.chatRoomEntity.buyerName!;
+
+    final String firstLetter = recipientName[0].toUpperCase();
     return Scaffold(
       /// ✅ Displays seller
       appBar: AppBar(
@@ -98,7 +106,7 @@ class _DmScreenState extends State<DmScreen> {
               ),
             ),
             const SizedBox(width: 10),
-            Text(widget.chatRoomEntity.recipientName!,
+            Text(recipientName,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
@@ -124,8 +132,9 @@ class _DmScreenState extends State<DmScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.chatRoomEntity.recipientName!,
+                      Text(widget.chatRoomEntity.postTitle!,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
+                      verticalSpace(5),
                       Row(
                         children: [
                           Text(widget.chatRoomEntity.price!,
@@ -150,12 +159,16 @@ class _DmScreenState extends State<DmScreen> {
                   if (state.messages.isEmpty) {
                     return const Center(child: Text("No messages yet."));
                   }
+                  //Messages exist, so mark them as read
+                  context
+                      .read<ChatCubit>()
+                      .markMessagesAsRead(chatRoomId, currentUserId);
                   return ListView.builder(
                     reverse: true,
                     itemCount: state.messages.length,
                     itemBuilder: (context, index) {
                       final message = state.messages.reversed.toList()[index];
-                      final isMe = message.senderId == senderID;
+                      final isMe = message.senderId == currentUserId;
 
                       return Align(
                         alignment:

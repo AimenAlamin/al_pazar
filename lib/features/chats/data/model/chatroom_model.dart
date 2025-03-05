@@ -29,8 +29,8 @@ class ChatRoomModel {
   /// Timestamp of the last message sent.
   final DateTime lastMessageTime;
 
-  /// The name of the recipient, used to display in the UI.
-  final String recipientName;
+  final String sellerName;
+  final String buyerName;
 
   /// Tracks the number of unread messages for each participant.
   final Map<String, int> unreadCount;
@@ -48,7 +48,8 @@ class ChatRoomModel {
     required this.postPhotoUrl,
     required this.lastMessage,
     required this.lastMessageTime,
-    required this.recipientName,
+    required this.sellerName,
+    required this.buyerName,
     required this.unreadCount,
     required this.price,
     required this.currency,
@@ -66,7 +67,8 @@ class ChatRoomModel {
       postPhotoUrl: chatroomEntity.postPhotoUrl!,
       lastMessage: chatroomEntity.lastMessage!,
       lastMessageTime: chatroomEntity.lastMessageTime!,
-      recipientName: chatroomEntity.recipientName!,
+      sellerName: chatroomEntity.sellerName!,
+      buyerName: chatroomEntity.buyerName!,
       unreadCount: chatroomEntity.unreadCount,
       price: chatroomEntity.price!,
       currency: chatroomEntity.currency!,
@@ -85,7 +87,8 @@ class ChatRoomModel {
       postPhotoUrl: json['postPhotoUrl'],
       lastMessage: json['lastMessage'],
       lastMessageTime: (json['lastMessageTime'] as Timestamp).toDate(),
-      recipientName: json['recipientName'],
+      sellerName: json['sellerName'],
+      buyerName: json['buyerName'],
       unreadCount: Map<String, int>.from(json['unreadCount'] ?? {}),
       price: json['price'],
       currency: json['currency'],
@@ -104,7 +107,8 @@ class ChatRoomModel {
       'postPhotoUrl': postPhotoUrl,
       'lastMessage': lastMessage,
       'lastMessageTime': lastMessageTime,
-      'recipientName': recipientName,
+      'sellerName': sellerName,
+      'buyerName': buyerName,
       'unreadCount': unreadCount,
       'price': price,
       'currency': currency,
@@ -123,7 +127,8 @@ class ChatRoomModel {
       postPhotoUrl: postPhotoUrl,
       lastMessage: lastMessage,
       lastMessageTime: lastMessageTime,
-      recipientName: recipientName,
+      sellerName: sellerName,
+      buyerName: buyerName,
       unreadCount: unreadCount,
       price: price,
       currency: currency,

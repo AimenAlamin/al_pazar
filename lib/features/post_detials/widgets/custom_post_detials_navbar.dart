@@ -59,7 +59,16 @@ class CustomPostDetialsNavbar extends StatelessWidget {
             //kibzar chat button
             child: IconButton(
               onPressed: () {
+                if (postDetails.userId == getUserSavedData().uId) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('You can not chat with yourself'),
+                    ),
+                  );
+                  return;
+                }
                 // Generate chatroomID based on post, buyer(current_user), seller ids
+
                 List<String> ids = [
                   getUserSavedData().uId,
                   postDetails.userId, //seller id
@@ -74,7 +83,8 @@ class CustomPostDetialsNavbar extends StatelessWidget {
                   postID: postDetails.postId,
                   postTitle: postDetails.title,
                   postPhotoUrl: postDetails.imageUrl!.first,
-                  recipientName: postDetails.sellerName,
+                  sellerName: postDetails.sellerName,
+                  buyerName: getUserSavedData().name,
                   unreadCount: {getUserSavedData().uId: 0}, //current user
                   lastMessage: 'Is it avaialbe',
                   lastMessageTime: DateTime.now(),
