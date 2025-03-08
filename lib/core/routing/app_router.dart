@@ -22,7 +22,7 @@ import '../../features/chats/domain/entity/chatroom_entity.dart';
 import '../../features/home/presentation/ui/widgets/searchfield/sub_category_filter_view.dart';
 import 'routes.dart';
 
-import '../../features/home/presentation/ui/home_main_view.dart';
+import '../../home_main_view.dart';
 import '../../features/auth/presentation/login/cubit/login_email_cubit.dart';
 import '../../features/auth/presentation/login/ui/loginEmail/login_email_screen.dart';
 
